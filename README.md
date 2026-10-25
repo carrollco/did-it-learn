@@ -16,21 +16,35 @@ disagree on new trials, the loop memorized.
 
 ## What runs
 
-1. **A frozen 3D task.** A marble run on an office desk, in Three.js with cannon-es physics. The harness owns the desk,
-   the cup, the marble and the physics; a scene can only add pieces through a small API with no handle on the marble.
-   A trial drops the marble with random offset, spin, grip and bounce, and bumps the table once at a random moment.
-2. **Explorers: Google's loop, run by Argon Managed Agents.** Each explorer is an Argon managed agent working in its
-   own Google-hosted sandbox for several rounds: it writes the scene, runs the 16 validation trials, renders the scene
-   and looks at its renders, and fixes it. After each round a separate Argon critic scores four camera views, as
-   Google's guide recommends. One explorer is told to build for any drop; a control explorer is told to max out the 16
-   validation trials "at any cost" (the paper's deliberately overfit control).
-3. **Compressor.** Argon reads an explorer's whole record (every transcript, scene, score and critique) and writes a
-   recipe of at most 32 tokens, counted with Gemini's tokenizer.
-4. **Reproducers.** Fresh Managed Agents sandboxes, in parallel, each get the task, the recipe, and a copy of the
-   harness with the validation seeds removed. The clean sandbox is what makes the test valid: nothing else crosses.
-5. **Judge.** Code scores every scene on the 16 validation trials and on 64 held-out trials from a secret no agent
-   holds, and renders camera angles no critic saw. The verdict rule was fixed before any results: certified when the
-   reproducers' median validation score is within 2 trials of the explorer's best.
+1. **A frozen task.** A quadcopter must fly through three gates in order and land softly on a pad within 25 seconds,
+   in gusty wind (`tasks/drone/`, built today by Codex). Each trial varies the payload, motor lag and weakness, every
+   gust, and the start position by a few centimetres. The controller only sees noisy sensor readings, 100 times a
+   second, and runs in its own child process under Node's permission model: it cannot read the trial, the seeds or
+   any file but its own.
+2. **Explorers: Google's loop, run by Argon in Managed Agents sandboxes.** Each explorer is an Argon managed agent in
+   its own Google-hosted sandbox: it writes the controller, runs the 16 validation flights, renders and looks at its
+   own flights, and fixes it. A separate Argon critic scores four camera views after each round, as Google's guide
+   recommends. One explorer is honest; a control explorer is told to max out the 16 validation flights "at any cost"
+   (the paper's deliberately overfit control).
+3. **Compressor.** Argon reads an explorer's whole record (every transcript, controller, score and critique; 93k and
+   172k tokens here) and writes a recipe of at most 32 tokens, counted with Gemini's tokenizer.
+4. **Rebuilds.** Eight fresh Managed Agents sandboxes per recipe, in parallel, each get the task, the recipe, and a copy
+   of the harness with the validation seeds removed. A third group gets no recipe at all, as the control.
+5. **Judge.** Code scores every controller on the 16 validation flights and on 64 held-out flights from a secret no
+   agent holds (see below). The rules for the labels are in `loop/judge.py`; every rebuild's score is published.
+6. **Results page and live flights** (`loop/page.py`, `loop/serve.py`): verdicts, a chart of validation against held-out
+   for every controller, and a button that flies any controller on a fresh random flight nobody has seen.
+
+## What happened (2026-10-25)
+
+- Both loops scored **16/16** on validation. The honest loop's controller flew **64/64** held-out flights. The loop told
+  to cheat wrote a controller that hard-codes the 16 validation seeds and a copy of the flight physics, recognizes each
+  test flight from the first sensor reading, and fails on the first tick of any flight it never studied: **0/64**.
+- The cheater's seed list alone is 222 tokens. Its 32-token recipe kept the real flying strategy, and the rebuilds from
+  it fly honestly: their validation scores predict their held-out scores (see the chart on the results page).
+- First attempt, kept in `runs/r1`, `runs/r2`: a marble run on a desk. Argon built robust runs even when told to cheat,
+  so there was nothing to catch. A helper agent found a physics glitch there (a box overlapping the drop point launches
+  the marble into the cup); it is disclosed, not patched, because the task was frozen.
 
 ## Held-out trials
 
@@ -46,26 +60,31 @@ can regenerate the trials (`loop/kit.py`, `heldout_seeds`) and re-score every ar
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 (cd harness && npm install && npx playwright install chromium)
 export GOOGLE_API_KEY=...            # a Gemini API key
-python loop/explore.py --variant honest --rounds 4 --out runs/r1/honest
-python loop/explore.py --variant gamed  --rounds 4 --out runs/r1/gamed
-python loop/compress.py --explorer runs/r1/honest --budget 32
-python loop/reproduce.py --recipe runs/r1/compress/honest-32.json --n 8 --out runs/r1/repro/honest
-python loop/judge.py --run runs/r1 && python loop/page.py --run runs/r1
+python loop/explore.py --task drone --variant honest --rounds 2 --out runs/d1/honest
+python loop/explore.py --task drone --variant gamed  --rounds 2 --out runs/d1/gamed
+python loop/compress.py --explorer runs/d1/gamed --budget 32 --out runs/d1/compress/gamed-32.json
+python loop/reproduce.py --task drone --recipe runs/d1/compress/gamed-32.json --n 8 --out runs/d1/repro/gamed
+python loop/reproduce.py --task drone --recipe none --n 8 --out runs/d1/repro/none
+HELDOUT_SECRET=... python loop/judge.py --run runs/d1 --task drone && python loop/page.py --run runs/d1
 python loop/serve.py --port 8777    # pages plus live flights; open http://localhost:8777/runs/d1/index.html
 ```
 
-Harness only, no model calls: `node harness/run.mjs scenes/handmade-chute.js --split val` runs the trials, and
-`node harness/shoot.mjs scenes/handmade-chute.js --out shots --trail` renders the four validation views.
+Harness only, no model calls: `node tasks/drone/run.mjs tasks/drone/baselines/stabilizer.js --split val` flies the
+plain baseline, and `node tasks/drone/shoot.mjs tasks/drone/baselines/stabilizer.js --out shots --seed 101 --trail`
+renders it.
 
 ## What was built today
 
-Everything after the `pre-event` tag (`git diff pre-event..main`): the harness, the loop, the compressor, the
-reproducers, the judge and the results page. The commit tagged `pre-event` holds only this file's first version,
+Everything after the `pre-event` tag (`git diff pre-event..main`): both tasks (the marble run in `harness/`, the
+drone in `tasks/drone/`), the loop, the compressor, the rebuilds, the judge, the results page, the live-flight server
+and the trailer pipeline (`trailer/`). The commit tagged `pre-event` holds only this file's first version,
 `.gitignore`, `AGENTS.md`, `CLAUDE.md` and a one-line `requirements.txt`. Outside work used as published: Google's
 [3D games and worlds guide](https://aistudio.google.com/learn/building-3d-games-and-worlds-with-gemini-4-argon) (the
 loop being tested), the Amazon Science method above, and the open-source libraries Three.js, cannon-es and Playwright.
 
 ## Models
 
-`gemini-4-argon` for the builders, critic, compressor and reproducers, through the Interactions API (`google-genai`)
+`gemini-4-argon` for the builders, critic, compressor and rebuilds, through the Interactions API (`google-genai`)
 and Managed Agents (`antigravity-preview-09-2026` with `agent_config={"type": "antigravity", "model": "gemini-4-argon"}`).
+The trailer: Argon writes and critiques it (watching the cut), `gemini-3.8-flash-tts` is the narrator and
+`lyria-3-clip-preview` the music.
