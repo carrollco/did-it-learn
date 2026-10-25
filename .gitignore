@@ -1,0 +1,7 @@
+.venv/
+tmp/
+__pycache__/
+.env
+.env.*
+.claude/settings.local.json
+AGENTS.local.md
