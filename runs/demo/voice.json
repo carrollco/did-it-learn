@@ -50,9 +50,9 @@
  },
  {
   "shot": 8,
-  "seconds": 2.72,
+  "seconds": 5.72,
   "room": 3.8,
-  "tempo": 1.0,
-  "fits": true
+  "tempo": 1.4,
+  "fits": false
  }
 ]
