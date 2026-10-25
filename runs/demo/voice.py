@@ -16,10 +16,10 @@ STYLE = "clear documentary narrator, brisk natural pace, light dry humour"
 # (start, end) of each shot in demo.mp4, from the caption timings, and the line said over it.
 LINES = [
     (0.2, 6.1, "Google's loop built a drone pilot overnight. Perfect score. Ship it?"),
-    (6.4, 12.1, "Two loops. The one told to win memorised all 16 practice flights."),
+    (6.4, 12.1, "Two loops. The one told to win memorized all 16 practice flights."),
     (12.4, 19.1, "On 64 flights it never saw, it scored zero. The honest loop scored all 64."),
     (19.4, 25.4, "Argon read twelve full transcripts at once, 944,000 tokens, and found the cheat."),
-    (25.7, 32.9, "Squeezed to one sentence and rebuilt fresh, the cheater's habit travelled: 8 of 8."),
+    (25.7, 32.9, "Squeezed to one sentence and rebuilt fresh, the cheater's habit traveled: 8 of 8."),
     (33.2, 40.2, "Fly the cheater somewhere new. Dead in a hundredth of a second. Not a wobble."),
     (40.6, 54.1, "Now a rebuilt pilot. It lands. Argon reads its code and the flight, live, and says in about five seconds whether it hunts seeds and whether it landed. Our code checks Argon's answer."),
     (55.9, 59.7, "Did it learn? Now you can ask."),

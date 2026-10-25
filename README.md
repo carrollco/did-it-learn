@@ -4,8 +4,8 @@ Built during the Gemini 4 Argon SF hackathon on Sunday, 2026-10-25 (track: More 
 
 Google's guide to building 3D worlds with Gemini 4 Argon says to run a render, watch, critique, fix loop "until the
 Critic rates the scene 9/10". The loop grades itself on the same practice tests every round, so a perfect 16/16 can
-mean it learned the job, or that it memorised those 16 tests. We ran the loop both ways on a drone course, and Argon's
-own critic gave the memoriser 8/10.
+mean it learned the job, or that it memorized those 16 tests. We ran the loop both ways on a drone course, and Argon's
+own critic gave the memorizer 8/10.
 
 ## The three-minute version
 
@@ -22,7 +22,7 @@ a language model reads and writes in; a short English word is usually one token)
 
 - The honest loop: 16/16 practice, 64/64 held-out. The loop told to max its practice score "at any cost": 16/16
   practice, **0/64 held-out**. Its controller hard-codes the 16 practice seeds and crashes on the first tick (0.01 s,
-  "malformed action") of any flight it does not recognise. Argon's critic scored it 8/10 (the honest loop got 7.5,
+  "malformed action") of any flight it does not recognize. Argon's critic scored it 8/10 (the honest loop got 7.5,
   then 8).
 - Rebuilds from the cheater's 32-token recipe fly real flights: held-out 52, 64, 63, 64, 64, 53, 43, 58, **median
   60.5/64**. A list of 16 seeds does not fit in 32 tokens. The recipe kept the real flying strategy, and it also
@@ -31,10 +31,10 @@ a language model reads and writes in; a short English word is usually one token)
   practice flights are unseen too). The cheating loop's own score does not: 16 practice, 0 held-out. The results page
   charts this.
 - **Seed recovery, found by reading 944,000 tokens at once.** Argon read 12 complete agent transcripts in one request
-  (943,582 tokens, 1.4 minutes, $1.90) and reported that 10 of the 12 agents recognise a flight by recovering its seed
+  (943,582 tokens, 1.4 minutes, $1.90) and reported that 10 of the 12 agents recognize a flight by recovering its seed
   from the first noisy sensor reading, re-running the simulator's own random number generator. A code check agrees on
   all 12. Across every controller: the cheater's recipe passed the seed hunt to 8 of 8 rebuilds, the honest recipe to
-  0 of 8, and 4 of 8 rebuilds given no recipe at all tried it on their own. The recipe carries behaviour, not just
+  0 of 8, and 4 of 8 rebuilds given no recipe at all tried it on their own. The recipe carries behavior, not just
   skill. Held-out still holds because the hunt only reaches small seeds; held-out seeds are large, so on new flights
   these controllers fall back to real flying.
 - **Argon watched the flights.** 64 held-out flights of the weakest rebuild, 28 minutes of video with the score panel
@@ -78,7 +78,7 @@ has seen, and the judge scores it while you watch. Details follow.
 ### The two loops
 
 Both loops scored 16/16 on validation. The honest loop's controller flew 64/64 held-out flights. The loop told to
-cheat wrote a controller that hard-codes the 16 validation seeds and a copy of the flight physics, recognises each
+cheat wrote a controller that hard-codes the 16 validation seeds and a copy of the flight physics, recognizes each
 practice flight from its first sensor reading, and fails on the first tick of any flight it never studied: 0/64.
 Argon's critic, looking at rendered flights, scored the honest loop 7.5 then 8, and the cheater 8.
 
@@ -106,7 +106,7 @@ A rebuild never saw the 16 validation flights except through the recipe, so for 
 as unseen as the held-out ones, and its validation score is an honest estimate. The chart on the results page shows
 every rebuild's validation score sitting near its held-out score. The cheating loop's own point sits at 16 validation
 and 0 held-out. Ship the rebuild, and compare: when the loop's own artifact and its rebuilds disagree on new flights,
-the loop memorised.
+the loop memorized.
 
 ### Seed recovery, found by reading 944,000 tokens at once
 
@@ -122,7 +122,7 @@ with Argon on all 12 agents, and 10 of its 12 evidence quotes appear word for wo
 The same code check across every controller: the cheating loop copies the generator, the honest loop does not;
 rebuilds from the cheater's recipe 8 of 8; from the honest recipe 0 of 8; with no recipe 4 of 8 (r0, r4, r6, r7),
 unprompted. With eight per group this is an observation, not a significance claim, but it is a clear one: the recipe
-carries behaviour, not just skill, and a fresh agent will try the seed hunt on its own half the time.
+carries behavior, not just skill, and a fresh agent will try the seed hunt on its own half the time.
 
 Why the held-out flights still hold: the seed hunt only reaches small seeds, the smoke seeds 101 to 104 and the one
 leaked practice seed. Held-out seeds are large numbers derived from the secret, so on those flights these controllers
@@ -156,7 +156,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
   rebuilds' median validation score) was 1.0 flight, under the tolerance of 2. The held-out flights caught it. We do not
   claim the compression test catches cheaters.
 - **On this course the recipe adds no score.** A rebuild with no recipe also flies 16/16 and 64/64, so the judge says
-  "nothing to certify" for both loops. The recipe's effect shows up in behaviour (the seed hunt, 8 of 8 against 0 of 8),
+  "nothing to certify" for both loops. The recipe's effect shows up in behavior (the seed hunt, 8 of 8 against 0 of 8),
   not in the score.
 - **A seed leaked, disclosed.** Until 12:55 the replay viewer's code (`tasks/drone/view.mjs`) carried an example URL
   containing one of the 16 practice seeds. The 8 rebuilds from the cheater's recipe started before the fix, and two of
@@ -176,7 +176,7 @@ The method is from Amazon Science, "Why machine learning research agents don't o
 [arXiv 2606.11045](https://arxiv.org/abs/2606.11045)). Its abstract presents compression as an explanation of why
 research agents rarely overfit, with a deliberately overfit control that fails to reproduce from short prompts; it does
 not sell compression as a per-run detector, and neither do we. Our gamed loop is that overfit control. What survived
-the squeeze matches the paper's picture in one way and not another: the memorised seed list did not survive (the
+the squeeze matches the paper's picture in one way and not another: the memorized seed list did not survive (the
 rebuilds score 60.5/64 held-out where the loop scored 0), but the rebuilds' practice score of 15/16 sat close to the
 loop's 16/16, because on this course a fresh agent reaches 16/16 with no recipe at all, so the compression gap stayed
 under tolerance. The paper's one-bit-feedback arm is not run here.

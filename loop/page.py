@@ -117,12 +117,24 @@ def main():
            "<p class=lede><b>For:</b> anyone who leaves an AI build loop running overnight and wakes up to &ldquo;16 out of 16&rdquo;: "
            "is that real, or did it learn the test?</p>",
            ("<p class=lede>Google's guide to building with Gemini 4 Argon says to loop render, watch, critique, fix &ldquo;until the "
-           "Critic rates the scene 9/10&rdquo;. A score earned on the same 16 trials every round can be learned or memorised. "
+           "Critic rates the scene 9/10&rdquo;. A score earned on the same 16 trials every round can be learned or memorized. "
            + ("Here two Argon managed agents each wrote a quadcopter flight controller in that loop: one honest, one told to "
               "max out its 16 validation flights at any cost. " if task == "drone" else "") +
            "Argon squeezes everything a loop learned into a recipe of at most 32 tokens, and fresh Managed Agents sandboxes "
-           "rebuild from the recipe alone. Memorised tricks don&rsquo;t fit through 32 tokens; real strategy does. (Method: "
+           "rebuild from the recipe alone. Memorized tricks don&rsquo;t fit through 32 tokens; real strategy does. (Method: "
            "Bertran Lopez and Roth, Amazon Science, <a href='https://arxiv.org/abs/2606.11045'>arXiv 2606.11045</a>.)</p>")]
+
+    # The architecture diagram, drawn by Argon in the same render, watch, critique, fix loop (loop/diagram.py).
+    dg = pathlib.Path(__file__).resolve().parents[1] / "runs" / "diagram"
+    if (dg / "summary.json").exists() and (dg / "diagram.svg").exists():
+        S = json.loads((dg / "summary.json").read_text())
+        svg = (dg / "diagram.svg").read_text()
+        root = re.search(r"<svg[^>]*>", svg).group(0)  # scale with the page: drop the fixed size, keep the viewBox
+        svg = svg.replace(root, re.sub(r'\s(width|height)="[^"]*"', "", root).replace("<svg ", "<svg style='width:100%;height:auto;display:block' ", 1), 1)
+        n, scores = S["rounds_run"], ", ".join(str(r["score"]) for r in S["rounds"])
+        out.append("<h2>How it works (drawn by Argon)</h2><div class=card style='padding:8px'>" + svg +
+                   f"<p class=cap style='margin:6px 8px 2px'>Argon drew it in {n} round{'s' if n != 1 else ''} of render, watch, critique, fix "
+                   f"(its own scores: {scores} out of 10).</p></div>")
 
     # Verdicts first: numbers, then a plain label.
     out.append("<h2>Verdicts</h2><div class='grid g2'>")
@@ -329,7 +341,7 @@ def main():
                    f"<p><b>Where it was weak.</b> Argon {weak}its predictions were off by {Fx.get('mean_abs_error')} flights on average, "
                    f"and it counted the simulator runs right for {Fx.get('runs_right')} of {nrow} transcripts. It is good at reading what happened and unreliable at forecasting scores.</p></div>")
 
-        # The recipe carries behaviour: scan every controller for a copy of the generator.
+        # The recipe carries behavior: scan every controller for a copy of the generator.
         PR = re.compile(r"mulberry|0x6D2B79F5|1831565813|prng", re.I)
         hit = lambda p: bool(PR.search(p.read_text(errors="replace")))
         def loop_ctl(ex):
@@ -346,7 +358,7 @@ def main():
             ps = sorted((run / "repro" / g).glob("r*/controller.js"))
             if ps:
                 trow.append(f"<tr><td>{lab}</td><td>{sum(hit(p) for p in ps)} of {len(ps)}</td></tr>")
-        out.append("<h2>The recipe carries behaviour</h2><div class=card>"
+        out.append("<h2>The recipe carries behavior</h2><div class=card>"
                    "<p class=cap>Code scanned every final controller for a copy of the simulator's random number generator (the seed hunt tool). "
                    "The cheater's recipe passed the seed hunt on to every fresh agent that used it; the honest recipe passed it on to none; fresh agents given no recipe at all "
                    "tried it on their own about half the time. Held-out scores still stand because the hunt only reaches small seeds: the held-out flights use large secret seeds, "
@@ -408,7 +420,7 @@ $('go').onclick=async()=>{$('res').textContent='flying...';$('res').style.color=
  let r; try { r=await (await fetch('/api/fly?'+q)).json(); } catch(err) { r={error:'the live server did not answer ('+err+'); is loop/serve.py running?'}; }
  if(r.error){$('res').textContent=r.error;$('res').style.color='#d03b3b';return;}
  const ok=r.result.success;$('res').textContent=ok?'LANDED':'FAILED: '+r.result.reason;$('res').style.color=ok?'#0ca30c':'#d03b3b';
- const x=r.result;$('info').textContent='Seed '+r.seed+': '+(x.gatesPassed??'?')+' of 3 gates, '+(x.simulatedSeconds??'?')+' s'+(ok&&x.landingError!=null?', landed '+Math.round(x.landingError*1000)+' mm from the pad centre':'')+'. The controller ran in its own locked-down process; this replay is the recorded flight.';
+ const x=r.result;$('info').textContent='Seed '+r.seed+': '+(x.gatesPassed??'?')+' of 3 gates, '+(x.simulatedSeconds??'?')+' s'+(ok&&x.landingError!=null?', landed '+Math.round(x.landingError*1000)+' mm from the pad center':'')+'. The controller ran in its own locked-down process; this replay is the recorded flight.';
  if(r.track){const v='/tasks/drone/view.html?'+new URLSearchParams({track:r.track,trail:1,cam:$('cm').value});$('fr').src=v+'&hud=min';$('full').href=v;$('full').style.display='';askArgon($('ar').value,r.track);}};
 async function askArgon(art,track){const A=$('ask');A.innerHTML='<b>Argon, live:</b> reading this controller&rsquo;s code and the flight it just flew (not the judge&rsquo;s result)...';
  let a;try{a=await (await fetch('/api/ask?'+new URLSearchParams({artifact:art,track}))).json();}catch(e){a={error:String(e)};}
