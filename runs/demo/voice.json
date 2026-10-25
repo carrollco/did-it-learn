@@ -1,0 +1,58 @@
+[
+ {
+  "shot": 1,
+  "seconds": 5.24,
+  "room": 5.9,
+  "tempo": 1.0,
+  "fits": true
+ },
+ {
+  "shot": 2,
+  "seconds": 4.84,
+  "room": 5.7,
+  "tempo": 1.0,
+  "fits": true
+ },
+ {
+  "shot": 3,
+  "seconds": 6.2,
+  "room": 6.7,
+  "tempo": 1.0,
+  "fits": true
+ },
+ {
+  "shot": 4,
+  "seconds": 6.92,
+  "room": 6.0,
+  "tempo": 1.153,
+  "fits": true
+ },
+ {
+  "shot": 5,
+  "seconds": 5.52,
+  "room": 7.2,
+  "tempo": 1.0,
+  "fits": true
+ },
+ {
+  "shot": 6,
+  "seconds": 5.04,
+  "room": 7.0,
+  "tempo": 1.0,
+  "fits": true
+ },
+ {
+  "shot": 7,
+  "seconds": 11.8,
+  "room": 13.5,
+  "tempo": 1.0,
+  "fits": true
+ },
+ {
+  "shot": 8,
+  "seconds": 2.72,
+  "room": 3.8,
+  "tempo": 1.0,
+  "fits": true
+ }
+]

@@ -17,3 +17,4 @@ runs/**/prompt.txt
 runs/trailer/v*/[0-9][0-9]-*/
 runs/trailer/v*/video.mp4
 runs/trailer/test/
+runs/demo/voice*.wav
