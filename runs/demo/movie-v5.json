@@ -3,13 +3,13 @@
  "shots": [
   {
    "src": "runs/demo/coldopen/overnight.mp4",
-   "len": 6.2,
+   "len": 5.8,
    "line": 1,
    "ambient": 0.6
   },
   {
    "src": "runs/demo/coldopen/sim-style.mp4",
-   "len": 4.6,
+   "len": 4.4,
    "line": 2,
    "ambient": 0.5,
    "card": "ONE WAS TOLD TO WIN.",
@@ -33,7 +33,7 @@
   },
   {
    "src": "runs/demo/coldopen/codewall.mp4",
-   "len": 3.6,
+   "len": 3.4,
    "line": 4,
    "ambient": 0.5,
    "card": "944,000 TOKENS. ONE READ.",
@@ -42,14 +42,14 @@
   {
    "src": "runs/demo/coldopen/scan.mp4",
    "start": 1.0,
-   "len": 4,
+   "len": 3.6,
    "ambient": 0.5,
    "card": "FOUND THE CHEAT.<small>it guessed each flight's seed from the first sensor reading</small>",
    "card_at": 1.0
   },
   {
    "src": "runs/demo/coldopen/note.mp4",
-   "len": 3.3,
+   "len": 3.1,
    "line": 5,
    "ambient": 0.6,
    "card": "32 TOKENS",
@@ -83,20 +83,15 @@
    "len": 6.3
   },
   {
-   "src": "runs/demo/coldopen/judge.mp4",
-   "start": 2.4,
-   "len": 1.0,
-   "ambient": 0.6
-  },
-  {
    "src": "runs/demo/coldopen/dawn.mp4",
-   "start": 0.5,
-   "len": 6.3,
+   "start": 0.0,
+   "len": 8.6,
    "line": 8,
-   "line_at": 0.2,
+   "line_at": 0.1,
    "ambient": 0.6,
-   "card": "<span style='font-size:44px'>ONE LEARNED. ONE LEARNED THE TEST.</span><small>Argon can tell which</small>",
-   "card_at": 2.2
+   "card": "<span style='font-size:44px'>THE EXTRA STEP</span><small>fly it where it has never flown. Let Argon read the code.</small>",
+   "card_at": 3.4,
+   "hold": 1.7
   }
  ]
 }

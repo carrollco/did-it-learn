@@ -36,6 +36,8 @@ def main():
         src = ROOT / sh["src"]; ln = float(sh["len"]); st = float(sh.get("start", 0))
         seg = work / f"seg{k:02d}.mp4"
         vf = f"scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,fps=25,setsar=1,format=yuv420p"
+        if sh.get("hold"):  # freeze the last frame to stretch a shot
+            vf += f",tpad=stop_mode=clone:stop_duration={float(sh['hold']):.2f}"
         cmd = [FF, "-hide_banner", "-loglevel", "error", "-y", "-ss", f"{st:.2f}", "-t", f"{ln:.2f}", "-i", str(src)]
         if sh.get("card"):
             png = work / f"card{k:02d}.png"; card_png(sh["card"], png)
