@@ -22,7 +22,7 @@ LINES = [
     (25.7, 32.9, "Squeezed to one sentence and rebuilt fresh, the cheater's habit traveled to every single rebuild."),
     (33.2, 40.2, "Fly the cheater somewhere new. Dead in a hundredth of a second. Not a wobble."),
     (40.6, 54.1, "Now a rebuilt pilot. It lands. Argon reads its code and the flight, live, and says in about five seconds whether it hunts seeds and whether it landed. The judge grades Argon's answer."),
-    (55.9, 59.7, "Did it learn? No. It learned the test. And now Argon can tell."),
+    (55.9, 59.7, "Did it learn? One did. One learned the test. Argon can tell which."),
 ]
 
 
