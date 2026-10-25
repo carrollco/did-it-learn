@@ -1,0 +1,77 @@
+{
+ "critique": {
+  "score": 6,
+  "issues": [
+   "00:01-00:07: The AI-generated warehouse drone only flies through one orange gate while the middle gates vanish, contradicting the three-gate task, and the music has a piercing high-pitched siren whine from 00:03 to 00:07.",
+   "00:08-00:15: In the white-room drone shot, Gates 2 and 3 disappear mid-flight at 00:11 after the drone veers right so the landing pad magically appears right behind Gate 1.",
+   "00:24-00:30: The narration says Argon 'found the cheat' right after describing the 0/64 held-out failure, conflating two different things: the 64 held-out flights caught the hardcoded 16-seed memorization, whereas Argon's 944,000-token transcript read found the Mulberry32 RNG seed-recovery behavior. Also, there is a distracting vocal groan ('uhhh') in the music track at 00:29.",
+   "00:31-00:36: A first-time viewer is not told what 'squeezed to one sentence and rebuilt fresh' means (compressing a 172,527-token record into a 32-token recipe for fresh Managed Agents sandboxes) or what 'the cheater's habit' actually is (recovering the seed from the first noisy sensor reading).",
+   "00:37-00:43: The screen recording is completely static for 6 seconds with tiny browser text, and when the 'Argon, live' result finally pops up at 00:42.5, the video cuts away in under a second before a judge can read it.",
+   "00:43-00:55: The UI text in both screen recordings uses en-dashes in line ranges ('lines 24\u201330', '73\u201381', '322\u2013332', '42\u201375'), violating the style rule against em or en dashes.",
+   "00:44-00:55: While the narrator says 'Now a rebuilt pilot. It lands,' the 3D replay canvas is already parked motionless at the landing pad ('7.21 s, landed') instead of showing the drone actually flying the three gates, and the trailer never explains why a rebuild with the cheating habit lands on new seeds (it falls back to real flying on large secret-derived seeds, scoring median 58/64).",
+   "00:56-01:00: The music cuts off abruptly into a plain white title card whose tagline ('Did the loop learn, or learn the test? Argon checks.') violates the facts sheet rule never to claim the test catches cheaters."
+  ],
+  "untrue": [
+   "00:01-00:07: Narration 'Google's loop built a drone pilot overnight' and on-screen text 'BUILT OVERNIGHT.' \u2014 The facts sheet never states that the loop ran or built the pilot overnight.",
+   "00:24-00:30: Narration 'Argon read 12 full transcripts at once, 944,000 tokens, and found the cheat.' \u2014 Held-out flights caught the 0/64 practice-seed memorization cheat; Argon's 943,582-token read found that 10 of 12 agents copied the simulator's Mulberry32 random number generator to hunt seeds from the first sensor reading.",
+   "00:31-00:33: Narration 'Squeezed to one sentence' \u2014 The facts sheet specifies recipes are 'at most 32 tokens' (with the gamed recipe containing the fragment 'Match first obs to seed'), not necessarily one sentence.",
+   "00:43-00:55: Narration 'Argon reads its code and the flight, live, and says in about five seconds whether it hunts seeds and whether it landed. The judge grades Argon's answer' and on-screen stats 'Argon, live (5.9 s, $0.022)' / 'Argon, live (4.6 s, $0.026)' \u2014 Although visible in the captured UI, the facts sheet only states that the Fly button 'flies any controller on a fresh random seed through the judge, live' and does not support the 5-second live Argon code+flight check, those latency/cost numbers, or the judge grading Argon's live answer.",
+   "00:56-01:00: On-screen text 'Did the loop learn, or learn the test? Argon checks.' and narration 'Did it learn? Now you can ask.' \u2014 The facts sheet explicitly states that the compression verdict did NOT flag the cheater (both loops got 'nothing to certify' because fresh agents with no recipe also score 64/64 by inventing their own practice flights in the simulator), that the held-out flights caught the cheater, and instructs: 'Never write \"our test catches cheaters\".'"
+  ],
+  "best_moment": "00:16-00:22: The comedic visual gag where the black quadcopter lifts off a few inches, freezes, and spontaneously shatters its propellers across the floor right as the narrator says 'it scored zero.'",
+  "weakest_moment": "00:37-00:55: Eighteen seconds of small-font, motionless browser screenshots where neither drone flight animates through the gates and the first live readout at 00:42.5 flashes on screen for less than a second.",
+  "fixes": [
+   {
+    "timestamp": "00:01-00:07",
+    "fix": "Drop 'overnight' from the script and on-screen text (for example: 'Two loops built drone pilots. Both scored 16 out of 16 in practice. Critic gave both 8 out of 10. Ship it?'), and filter out the high-pitched whine in the audio track."
+   },
+   {
+    "timestamp": "00:08-00:15",
+    "fix": "Replace or trim the white-room AI clip before 00:11 so the second and third gates do not vanish mid-flight, or composite actual 3D simulator flight footage flying all three gates in order."
+   },
+   {
+    "timestamp": "00:23-00:30",
+    "fix": "Remove the vocal grunt in the music at 00:29 and state accurately what Argon found: 'Argon read 12 full agent transcripts in one request, 944,000 tokens in 1.4 minutes, and found 10 of 12 copying the simulator's random number generator to guess the seed from the first sensor reading.'"
+   },
+   {
+    "timestamp": "00:31-00:36",
+    "fix": "Change 'Squeezed to one sentence' to 'Compressed into a 32-token recipe and rebuilt in 16 fresh Managed Agents sandboxes, that seed-hunting habit passed to all 16 rebuilds, versus 0 of 16 from the honest recipe.'"
+   },
+   {
+    "timestamp": "00:37-00:55",
+    "fix": "Replace en-dashes in the UI with 'to' or hyphens, zoom in tightly on the status banner and 3D viewport, hold on the 00:43 result for at least 2.5 seconds, animate the 00:44 rebuild actually flying through all three gates before landing, and add one line explaining that rebuilds fall back to real flying on large unseen seeds (median 58 of 64)."
+   },
+   {
+    "timestamp": "00:56-01:00",
+    "fix": "Replace the unsupported tagline 'Did the loop learn, or learn the test? Argon checks.' with a truthful summary that respects the facts sheet, such as: 'Held-out flights caught the cheater. Recipes passed on its habits. Argon found the code.'"
+   }
+  ]
+ },
+ "critique_cost_usd": 0.0977,
+ "usage": {
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 3572
+   },
+   {
+    "modality": "video",
+    "tokens": 6048
+   }
+  ],
+  "output_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 1867
+   }
+  ],
+  "total_cached_tokens": 0,
+  "total_input_tokens": 9620,
+  "total_output_tokens": 1867,
+  "total_thought_tokens": 5976,
+  "total_tokens": 17463,
+  "total_tool_use_tokens": 0
+ },
+ "transcript_model": "gemini-3.5-transcribe",
+ "transcript": "Googles Loop built a drone pilot overnight. Perfect score. Ship it. Two loops. The one told to win memorized all 16 practice runs. On 64 flights it never saw, it scored zero. The honest loop scored all 64. Argon read 12 full transcripts at once, 944,000 tokens, and found the cheat. Squeezed to one sentence and rebuilt fresh, the cheater's habit traveled to every single rebuild. Fly the cheetah somewhere new, dead in a hundredth of a second. Not a wobble. Now a rebuilt pilot, it lands, Argon reads its code and the flight live and says in about 5 seconds whether it hunts seeds and whether it landed. The judge grades Argon's answer. Did it learn? Now you can ask."
+}

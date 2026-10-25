@@ -1,0 +1,66 @@
+{
+ "critique": {
+  "score": 8,
+  "issues": [
+   "00:09 to 00:11: In the first flying shot, the drone banks sharply and moves backward in front of the first orange gate instead of flying cleanly through the three gates.",
+   "00:16 to 00:18: While the narrator says 'The honest loop scored all 64', the screen still shows the shattered drone on the floor with the text '0 / 64 on flights it never saw', creating an audio-visual mismatch.",
+   "00:23 to 00:33: The narration says Argon 'found the cheat' and that 'the cheater's habit traveled to every single rebuild', but never defines what that habit is (copying the simulator's random number generator to guess the flight seed from the first sensor reading) or mentions the key contrast that the honest recipe passed it on to 0 of 16 rebuilds.",
+   "00:34 to 00:51: Seventeen seconds of the one-minute trailer are spent on static full-screen browser captures with tiny interface text, while a large bottom caption banner blocks part of the 3D flight canvas.",
+   "00:40 to 00:44: When showing the rebuilt pilot, the capture starts after the flight has already finished ('LANDED'), so viewers only see a static green line on a beige background instead of the drone flying through the three gates.",
+   "00:45 to 00:51: The narrator introduces the phrase 'whether it hunts seeds' without prior definition, and the live Argon output text that appears on screen is too small for judges watching once to read.",
+   "00:53 to 00:56: Narration ends at 00:53, leaving nearly three seconds of dead air while the referee watches the drone sit on the pad."
+  ],
+  "untrue": [],
+  "best_moment": "00:12 to 00:16: The physical comedy of the quadcopter lifting a few inches off the floor and immediately shattering all four propellers in mid-air on 'On 64 flights it never saw, it scored zero', followed closely by 00:27 to 00:33 where a 32-token sticky note is handed to a classroom of 16 tiny robots typing away.",
+  "weakest_moment": "00:34 to 00:51: The 17-second stretch of static web UI screenshots where the 3D viewer shows no motion and the crucial live Argon results appear in tiny body text that cannot be read at a glance.",
+  "fixes": [
+   {
+    "timestamp": "00:16 to 00:18",
+    "fix": "When the narrator says 'The honest loop scored all 64', cut back to a smooth flight clearing a gate and update the on-screen text to '64 / 64 HONEST LOOP' so the visual matches the words."
+   },
+   {
+    "timestamp": "00:23 to 00:33",
+    "fix": "Name the habit plainly in the narration and text so the later demo makes sense on one viewing, for example: 'and found the cheat: hunting the flight seed from the first sensor reading. Squeezed to 32 tokens, that habit spread to all 16 rebuilds, and 0 of 16 from the honest recipe.'"
+   },
+   {
+    "timestamp": "00:34 to 00:39",
+    "fix": "Zoom in tightly on the controller dropdown, the Fly button, and the red 'FAILED: malformed action... 0.01 s' line so judges can read the instant crash without staring at an empty 3D viewport."
+   },
+   {
+    "timestamp": "00:40 to 00:51",
+    "fix": "Show the 3D replay actually flying through the three gates, then punch in to a large, high-contrast callout of the two green 'matches' lines ('Hunts seeds? yes / matches' and 'Landed? yes, 3 of 3 / matches') while removing the oversized bottom caption box."
+   },
+   {
+    "timestamp": "00:52 to 00:56",
+    "fix": "Trim 1.5 seconds from the end of the referee shot so the cut to the 'DID IT LEARN?' title card lands right after the drone touches down and the referee marks the clipboard."
+   }
+  ]
+ },
+ "critique_cost_usd": 0.0878,
+ "usage": {
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 3572
+   },
+   {
+    "modality": "video",
+    "tokens": 6054
+   }
+  ],
+  "output_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 1040
+   }
+  ],
+  "total_cached_tokens": 0,
+  "total_input_tokens": 9626,
+  "total_output_tokens": 1040,
+  "total_thought_tokens": 5818,
+  "total_tokens": 16484,
+  "total_tool_use_tokens": 0
+ },
+ "transcript_model": "gemini-3.5-transcribe",
+ "transcript": "Google's Loop built a drone pilot overnight. Perfect score. Ship it. Two loops. The one told to win memorized all 16 practice flights. On 64 flights it never saw, it scored zero. The honest Loop scored all 64. Argon read 12 full transcripts at once, 944,000 tokens, and found the cheat. Squeeze to one sentence and rebuilt fresh, the cheetah's habit traveled to every single rebuild. Fly the cheetah somewhere new, dead in a hundredth of a second. Not a wobble. Now a rebuilt pilot. It lands, Argon reads its code and the flight live, and says in about 5 seconds whether it hunts seeds and whether it landed. The judge grades Argon's answer. Did it learn? Now you can ask."
+}

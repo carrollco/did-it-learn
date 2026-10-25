@@ -1,0 +1,15 @@
+{"music": 0.18, "shots": [
+ {"src": "runs/demo/coldopen/overnight.mp4", "len": 7, "line": 1, "ambient": 0.6},
+ {"src": "runs/demo/coldopen/sim-style.mp4", "len": 5, "line": 2, "ambient": 0.5, "card": "ONE WAS TOLD TO WIN.", "card_at": 1.2},
+ {"src": "runs/demo/coldopen/crash.mp4", "len": 4.3, "line": 3, "ambient": 0.7, "card": "0 / 64<small>on flights it never saw</small>", "card_at": 2.4},
+ {"src": "runs/demo/coldopen/night.mp4", "start": 2.5, "len": 3.0, "ambient": 0.5, "card": "64 / 64<small>the honest loop</small>", "card_at": 0.3},
+ {"src": "runs/demo/coldopen/codewall.mp4", "len": 4, "line": 4, "ambient": 0.5, "card": "944,000 TOKENS. ONE READ.", "card_at": 0.8},
+ {"src": "runs/demo/coldopen/scan.mp4", "start": 1.0, "len": 4, "ambient": 0.5, "card": "FOUND THE CHEAT.<small>it guessed each flight's seed from the first sensor reading</small>", "card_at": 1.2},
+ {"src": "runs/demo/coldopen/note.mp4", "len": 3.5, "line": 5, "ambient": 0.6, "card": "32 TOKENS", "card_at": 0.6},
+ {"src": "runs/demo/coldopen/sixteen.mp4", "start": 0.5, "len": 4, "ambient": 0.6, "card": "EVERY SINGLE REBUILD.<small>16 of 16 from the cheater's recipe. 0 of 16 from the honest one.</small>", "card_at": 0.6},
+ {"src": "runs/demo/demo.mp4", "start": 33.2, "len": 6, "line": 6},
+ {"src": "runs/trailer/footage/rebuild/replay_seed1125297830.webm", "start": 0, "len": 5, "line": 7, "card": "A REBUILD, FLOWN LIVE.", "card_at": 0.3},
+ {"src": "runs/demo/demo.mp4", "start": 45.5, "len": 6.7},
+ {"src": "runs/demo/coldopen/judge.mp4", "start": 2.2, "len": 2.3, "ambient": 0.6},
+ {"src": "runs/demo/coldopen/dawn.mp4", "start": 1.5, "len": 4, "line": 8, "line_at": 0.3, "ambient": 0.6}
+]}
