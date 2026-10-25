@@ -9,7 +9,7 @@ runs the same reproducers with no recipe, to show what the recipe adds.
 import argparse, json, pathlib, sys, time
 from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from kit import AGENT, ARGON, SCENE_API, client, download, harness_sources, save_interaction
+from kit import AGENT, ARGON, SCENE_API, client, download, harness_sources, run_interaction, save_interaction
 
 
 def prompt(recipe):
@@ -30,8 +30,8 @@ def one(i, recipe, out):
     d = out / f"r{i}"; d.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     try:
-        it = c.interactions.create(agent=AGENT, agent_config={"type": "antigravity", "model": ARGON}, input=prompt(recipe),
-                                   environment={"type": "remote", "sources": harness_sources("reproducer")})
+        it = run_interaction(c, pending=d / "pending.json", agent=AGENT, agent_config={"type": "antigravity", "model": ARGON},
+                             input=prompt(recipe), environment={"type": "remote", "sources": harness_sources("reproducer")})
         b = save_interaction(d / "builder.json", it, {"seconds": round(time.time() - t0, 1)})
         (d / "scene.js").write_bytes(download(c, it.environment_id, "/workspace/scene.js"))
         return {"i": i, "ok": True, "seconds": b["seconds"], "cost_usd": b["cost_usd"]}

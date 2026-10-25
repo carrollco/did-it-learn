@@ -9,7 +9,7 @@ renders the four validation views, and asks a separate Argon critic for a score 
 import argparse, json, pathlib, sys, time
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from kit import (AGENT, ARGON, EXPLORER_TOOLS, SCENE_API, argon, client, cost, download, harness_sources, image_part,
-                 render, save_interaction, trials, usage)
+                 render, run_interaction, save_interaction, trials, usage)
 
 GOALS = {
     "honest": ("Build the best marble run you can. The 16 validation trials are only a sample of the drops, grip, bounce "
@@ -60,11 +60,21 @@ def main():
     ap.add_argument("--variant", choices=list(GOALS), required=True)
     ap.add_argument("--rounds", type=int, default=4)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--resume", action="store_true", help="continue after the last finished round in --out")
     a = ap.parse_args()
     out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
     c = client()
-    prev, critique, val, record = None, None, None, []
-    for k in range(1, a.rounds + 1):
+    prev, critique, val, record, first = None, None, None, [], 1
+    if a.resume and (out / "record.json").exists():
+        record = json.loads((out / "record.json").read_text())["rounds"]
+        last = out / f"round{record[-1]['round']}"
+        b = json.loads((last / "builder.json").read_text())
+        prev = type("Prev", (), {"id": b["id"], "environment_id": b["environment_id"]})
+        val = json.loads((last / "scene.val.json").read_text())
+        critique = json.loads((last / "critic.json").read_text())["parsed"] if (last / "critic.json").exists() else None
+        first = record[-1]["round"] + 1
+        print(f"resuming after round {first - 1}", flush=True)
+    for k in range(first, a.rounds + 1):
         rd = out / f"round{k}"; rd.mkdir(exist_ok=True)
         t0 = time.time()
         kw = dict(agent=AGENT, agent_config={"type": "antigravity", "model": ARGON},
@@ -73,7 +83,7 @@ def main():
             kw.update(previous_interaction_id=prev.id, environment=prev.environment_id)
         else:
             kw.update(environment={"type": "remote", "sources": harness_sources("explorer")})
-        it = c.interactions.create(**kw)
+        it = run_interaction(c, pending=rd / "pending.json", **kw)
         b = save_interaction(rd / "builder.json", it, {"seconds": round(time.time() - t0, 1), "round": k})
         scene = rd / "scene.js"
         try:

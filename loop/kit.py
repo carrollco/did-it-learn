@@ -63,6 +63,33 @@ def save_interaction(path, it, extra=None):
     return rec
 
 
+def run_interaction(c, pending=None, poll=10, **kw):
+    """Start an interaction in the background and poll for it, so a dropped connection (Wi-Fi roam, laptop moved)
+    costs a retry, not the work. The interaction id is written to `pending` the moment it exists."""
+    it = c.interactions.create(background=True, **kw)
+    if pending:
+        pathlib.Path(pending).parent.mkdir(parents=True, exist_ok=True)
+        pathlib.Path(pending).write_text(json.dumps({"id": it.id, "started": time.time()}))
+    return wait_interaction(c, it.id, poll)
+
+
+def wait_interaction(c, iid, poll=10):
+    errors = 0
+    while True:
+        try:
+            it = c.interactions.get(iid)
+            errors = 0
+        except Exception as e:  # network blips: keep polling for up to about 10 minutes of failures
+            errors += 1
+            if errors > 60:
+                raise
+            time.sleep(poll)
+            continue
+        if getattr(it, "status", None) not in ("in_progress", "queued", None):
+            return it
+        time.sleep(poll)
+
+
 def image_part(png_path):
     return {"type": "image", "data": base64.b64encode(pathlib.Path(png_path).read_bytes()).decode(), "mime_type": "image/png"}
 
