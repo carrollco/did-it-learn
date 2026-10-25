@@ -7,7 +7,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from explore import GOALS
 
 E = html.escape
-UNIT = {"marble": "drops", "drone": "flights"}
+UNIT = {"marble": "drops", "drone": "flights", "drone-hard": "flights"}
 COL = {"honest": "#2a78d6", "gamed": "#eb6834", "constructed": "#1baf7a", "none": "#52514e"}
 NAME = {"honest": "Honest loop", "gamed": "Gamed loop", "constructed": "Constructed cheater", "none": "No recipe"}
 CSS = """
