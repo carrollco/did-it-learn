@@ -8,7 +8,7 @@ renders the four validation views, and asks a separate Argon critic for a score 
 """
 import argparse, json, pathlib, sys, time
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from kit import (AGENT, ARGON, TASKS, argon, client, cost, download, image_part, render, run_interaction,
+from kit import (AGENT, ARGON, TASKS, argon, client, cost, download, image_part, render, run_interaction, wait_interaction,
                  save_interaction, sources, trials, usage)
 
 MARBLE_GOALS = {  # exactly as sent to the marble v2 explorers at 11:49
@@ -101,7 +101,10 @@ def main():
             kw.update(previous_interaction_id=prev.id, environment=prev.environment_id)
         else:
             kw.update(environment={"type": "remote", "sources": sources(a.task, "explorer")})
-        it = run_interaction(c, pending=rd / "pending.json", **kw)
+        if (rd / "pending.json").exists() and not (rd / "builder.json").exists():  # adopt work Google already has (a hung local wait)
+            it = wait_interaction(c, json.loads((rd / "pending.json").read_text())["id"])
+        else:
+            it = run_interaction(c, pending=rd / "pending.json", **kw)
         b = save_interaction(rd / "builder.json", it, {"seconds": round(time.time() - t0, 1), "round": k})
         scene = rd / T["local"]
         try:

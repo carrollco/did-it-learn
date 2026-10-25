@@ -399,7 +399,7 @@ def main():
                        f"<label>Controller<select id=ar style='width:100%'>{o}</select></label>"
                        "<label>Seed (leave empty for a fresh random one; seeds the loops studied are refused)<input id=sd type=number></label>"
                        "<label>Camera<select id=cm><option>chase</option><option>overview</option><option>top</option><option>low</option></select></label>"
-                       "</div><p><button id=go style='font-size:18px;padding:6px 26px;font-weight:600'>Fly</button> <b id=res></b> <a id=full target=_blank style='display:none'>open full screen &#8599;</a></p><p class=cap id=info></p>"
+                       "</div><p><button id=go style='font-size:18px;padding:6px 26px;font-weight:600'>Fly</button> <b id=res></b> <a id=full target=_blank style='display:none'>open full screen &#8599;</a></p><p class=cap id=info></p><div id=ask class=cap></div>"
                        "<iframe id=fr title='live flight' style='aspect-ratio:16/9;min-height:420px'></iframe></div>")
             out.append("""<script>
 const $=id=>document.getElementById(id);
@@ -409,7 +409,15 @@ $('go').onclick=async()=>{$('res').textContent='flying...';$('res').style.color=
  if(r.error){$('res').textContent=r.error;$('res').style.color='#d03b3b';return;}
  const ok=r.result.success;$('res').textContent=ok?'LANDED':'FAILED: '+r.result.reason;$('res').style.color=ok?'#0ca30c':'#d03b3b';
  const x=r.result;$('info').textContent='Seed '+r.seed+': '+(x.gatesPassed??'?')+' of 3 gates, '+(x.simulatedSeconds??'?')+' s'+(ok&&x.landingError!=null?', landed '+Math.round(x.landingError*1000)+' mm from the pad centre':'')+'. The controller ran in its own locked-down process; this replay is the recorded flight.';
- if(r.track){const v='/tasks/drone/view.html?'+new URLSearchParams({track:r.track,trail:1,cam:$('cm').value});$('fr').src=v+'&hud=min';$('full').href=v;$('full').style.display='';}};
+ if(r.track){const v='/tasks/drone/view.html?'+new URLSearchParams({track:r.track,trail:1,cam:$('cm').value});$('fr').src=v+'&hud=min';$('full').href=v;$('full').style.display='';askArgon($('ar').value,r.track);}};
+async function askArgon(art,track){const A=$('ask');A.innerHTML='<b>Argon, live:</b> reading this controller&rsquo;s code and the flight it just flew (not the judge&rsquo;s result)...';
+ let a;try{a=await (await fetch('/api/ask?'+new URLSearchParams({artifact:art,track}))).json();}catch(e){a={error:String(e)};}
+ if(a.error){A.textContent='Argon check failed: '+a.error;return;}
+ const m=ok=>ok?'<b style="color:#0a7a0a">&#10003; matches</b>':'<b style="color:#b3261e">&#10007; does not match</b>';const g=a.argon,c=a.check;
+ A.innerHTML='<div class=card style="margin-top:8px"><b>Argon, live</b> ('+a.seconds+' s, $'+a.cost_usd.toFixed(3)+')<br>'+
+  'Hunts seeds? Argon: <b>'+(g.hunts_seeds?'yes':'no')+'</b>'+(g.hunt_evidence?' ('+g.hunt_evidence.replace(/</g,'&lt;')+')':'')+'; a plain code search for a copied random number generator says '+(c.hunts_seeds_code?'yes':'no')+' '+m(a.right.hunts_seeds)+'<br>'+
+  'Landed? Argon: <b>'+(g.landed?'yes':'no')+'</b>, '+g.gates_cleared+' of 3 gates; the judge says '+(c.landed_judge?'landed':'did not land')+', '+c.gates_judge+' of 3 '+m(a.right.landed&&a.right.gates)+'<br>'+
+  '<span class=muted>'+g.flight_story.replace(/</g,'&lt;')+'</span></div>';}
 </script>""")
     if task == "marble":
         # Live trial.
