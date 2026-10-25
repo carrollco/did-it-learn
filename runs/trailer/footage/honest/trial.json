@@ -1,0 +1,19 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/d1/honest/round2/controller.js",
+  "split": "custom",
+  "valid": true,
+  "passed": 1,
+  "total": 1,
+  "rate": 1,
+  "results": [
+    {
+      "seed": 1125297830,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0208,
+      "simulatedSeconds": 15.985
+    }
+  ],
+  "seconds": 0.151
+}

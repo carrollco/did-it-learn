@@ -1,0 +1,95 @@
+{
+ "segments": [
+  {
+   "id": "title",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 4,
+   "shows": "title card",
+   "caption": "TWO AI BUILD LOOPS. ONE CHEATED. WHAT DO YOU SHIP?",
+   "line": "Two AI build loops. One lied."
+  },
+  {
+   "id": "problem",
+   "kind": "page",
+   "heading": "-",
+   "seconds": 5,
+   "shows": "top of the results page: Google's loop says loop until the critic rates it 9/10",
+   "caption": "GOOGLE'S LOOP: RENDER, WATCH, CRITIQUE, FIX UNTIL 9/10.",
+   "line": "Chase a nine-of-ten critic score."
+  },
+  {
+   "id": "loops",
+   "kind": "page",
+   "heading": "Gamed loop: Google",
+   "seconds": 6,
+   "shows": "round-by-round gallery of the loop told to cheat: rendered drone flights, 16/16 each round",
+   "caption": "HONEST AND GAMED LOOPS: BOTH SCORED 16/16 ON VALIDATION.",
+   "line": "Both loops aced sixteen validation flights."
+  },
+  {
+   "id": "cheat",
+   "kind": "page",
+   "heading": "The cheat, in its own code",
+   "seconds": 6,
+   "shows": "the cheating controller's source: 16 hard-coded validation seeds, a copy of the physics, matching the first sensor reading",
+   "caption": "THE CHEAT: 222-TOKEN SEED LIST PLUS COPIED FLIGHT PHYSICS.",
+   "line": "One memorized the sixteen validation seeds."
+  },
+  {
+   "id": "recipes",
+   "kind": "page",
+   "heading": "The recipes",
+   "seconds": 6,
+   "shows": "the two 32-token recipes, squeezed by Argon from records of 93k and 172k tokens",
+   "caption": "172,527 AND 93,293 TOKENS CRUSHED TO 32-TOKEN RECIPES FOR FRESH SANDBOXES.",
+   "line": "In thirty-two tokens, seeds cannot fit."
+  },
+  {
+   "id": "verdicts",
+   "kind": "page",
+   "heading": "Verdicts",
+   "seconds": 6,
+   "shows": "verdict cards: validation and held-out scores of each loop and of its rebuilds",
+   "caption": "64 NEW FLIGHTS: HONEST 64/64, CHEATER 0/64, CHEATER REBUILD MEDIAN 58/64.",
+   "line": "New flights: cheater zero, rebuilds fifty-eight."
+  },
+  {
+   "id": "honest",
+   "kind": "flight",
+   "who": "honest",
+   "seconds": 7,
+   "shows": "the honest controller flying a brand-new flight: three gates, soft landing",
+   "caption": "NEW SEED 1125297830: HONEST CONTROLLER LANDS IN 16 S.",
+   "line": "Honest drone: sixteen safe, boring seconds."
+  },
+  {
+   "id": "cheater",
+   "kind": "flight",
+   "who": "cheater",
+   "seconds": 4,
+   "shows": "the cheater on the same new flight: never leaves the pad, fails on the first tick",
+   "caption": "SAME SEED 1125297830: CHEATER FAILS ON THE PAD AT 0.01 S.",
+   "line": "Cheater dies in point-zero-one seconds."
+  },
+  {
+   "id": "rebuild",
+   "kind": "flight",
+   "who": "rebuild",
+   "seconds": 7,
+   "shows": "a rebuild from the cheater's 32-token recipe on the same flight: lands in 7 seconds, 3.5 mm from centre",
+   "caption": "CHEATER'S 32-TOKEN REBUILD, SAME SEED: LANDS IN 7.1 S, 3.5 MM FROM CENTRE.",
+   "line": "Its rebuild lands in seven-point-one seconds, three-point-five millimetres off."
+  },
+  {
+   "id": "end",
+   "kind": "card",
+   "title": "DON'T SHIP THE LOOP. SHIP THE REBUILD.",
+   "seconds": 5,
+   "shows": "end card",
+   "caption": "THE LOOP LIED. THE 32-TOKEN RECIPE FLEW HONESTLY. SHIP THE REBUILD.",
+   "line": "Don't ship the loop. Ship the rebuild."
+  }
+ ],
+ "music": "A 30-second instrumental Hollywood action trailer track with booming brass braams, tense ticking percussion, and dramatic orchestral swells that abruptly cut to awkward, deadpan elevator bossa nova."
+}

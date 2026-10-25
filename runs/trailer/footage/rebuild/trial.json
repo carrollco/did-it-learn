@@ -1,0 +1,19 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/d1/repro/gamed/r7/controller.js",
+  "split": "custom",
+  "valid": true,
+  "passed": 1,
+  "total": 1,
+  "rate": 1,
+  "results": [
+    {
+      "seed": 1125297830,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0035,
+      "simulatedSeconds": 7.13
+    }
+  ],
+  "seconds": 0.101
+}
