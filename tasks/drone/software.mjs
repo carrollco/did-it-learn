@@ -1,3 +1,4 @@
+import { homedir } from 'node:os';
 // Local SVG projection of the same Three.js scene, for hosts that cannot start Chromium.
 import * as THREE from '../../harness/node_modules/three/build/three.module.js';
 import { flightScene, setFlightCamera } from './scene.mjs';
@@ -95,7 +96,7 @@ ${floor.join('')}${lines.join('')}${shadows.join('')}${triangles.map((t) => t.ma
 }
 
 export async function softwareVideo(track, cameraName, file, options = {}) {
-  const cache = resolve(process.env.HOME || '/home/cagst', '.cache/ms-playwright');
+  const cache = resolve(homedir(), '.cache/ms-playwright');
   let ffmpeg = process.env.DRONE_FFMPEG || 'ffmpeg';
   if (!process.env.DRONE_FFMPEG) {
     for (const entry of (await readdir(cache).catch(() => [])).filter((s) => s.startsWith('ffmpeg-')).sort().reverse()) {

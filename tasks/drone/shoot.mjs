@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { homedir } from 'node:os';
 // Record trusted flight poses, then render those poses with no artifact code in Chromium.
 import { spawn } from 'node:child_process';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
@@ -38,7 +39,7 @@ const routeFiles = async (context) => context.route('**/*', async (route) => {
 const report = { scene: args[0], seed, shots: [] };
 let browser;
 try {
-  const localLibs = resolve(process.env.HOME || '/home/cagst', '.cache/ms-playwright-local-libs/root/usr/lib/x86_64-linux-gnu');
+  const localLibs = resolve(homedir(), '.cache/ms-playwright-local-libs/root/usr/lib/x86_64-linux-gnu');
   process.env.TMPDIR = resolve(ROOT, 'tmp/codex-drone/browser');
   await mkdir(process.env.TMPDIR, { recursive: true });
   if (!args.includes('--software')) {

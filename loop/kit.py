@@ -21,7 +21,7 @@ def harness_sources(variant):
 
 
 def heldout_seeds(secret, n=64):
-    """Held-out trial seeds, derived from a secret only this Python side holds (Doppler HELDOUT_SECRET)."""
+    """Held-out trial seeds, derived from a secret only this Python side holds (the HELDOUT_SECRET environment variable)."""
     return [100000 + int.from_bytes(hashlib.sha256(f"{secret}:{i}".encode()).digest()[:4], "big") % 900_000_000 for i in range(n)]
 
 

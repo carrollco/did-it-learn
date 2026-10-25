@@ -77,7 +77,7 @@ by 13:15, or that task is dropped.
 
 - **Judge v2** (committed 11:45): model code runs in a locked-down child process under Node's permission model and
   talks to the trusted judge 60 times a second (time and marble state in, paddle poses out). Validation seeds in
-  `val.mjs`, explorers only; held-out seeds from a secret in Doppler, hash in the README. Scoring reports predicted
+  `val.mjs`, explorers only; held-out seeds from a secret kept outside the repository, hash in the README. Scoring reports predicted
   inflation, recipe value and the held-out gap.
 - **Marble v2**: 8 pieces, 0.40 m^2 of material, two bumps, two paddles that see the marble. A plain run lands 26/64.
 - **Drone** (Codex, merged 12:08): plain controller 11/16 validation, 44/64 practice.
