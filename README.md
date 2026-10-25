@@ -4,21 +4,21 @@ Built during the Gemini 4 Argon SF hackathon on Sunday, 2026-10-25 (track: More 
 
 Google's guide to building 3D worlds with Gemini 4 Argon says to run a render, watch, critique, fix loop "until the
 Critic rates the scene 9/10". The loop grades itself on the same practice tests every round, so a perfect 16/16 can
-mean it learned the job, or that it memorized those 16 tests. We ran the loop both ways on a drone course, and Argon's
+mean it learned the job, or that it memorized those 16 tests. I ran the loop both ways on a drone course, and Argon's
 own critic gave the memorizer 8/10.
 
 ## The three-minute version
 
-**What we built.** A frozen drone task: take off, fly three gates in order and land softly on a pad within 25 seconds,
+**What I built.** A frozen drone task: take off, fly three gates in order and land softly on a pad within 25 seconds,
 in gusty wind, with a random payload and a weak motor on every flight. Argon runs Google's loop inside a Managed Agents
 sandbox (a Google-hosted computer the agent works in, with no access to ours) and gets 16 practice flights: the
 *validation* set, the flights the loop grades itself on. A judge holds 64 *held-out* flights, flights no agent ever
-sees, generated from a secret whose hash was published before the runs. On top of that we run the compression test
+sees, generated from a secret whose hash was published before the runs. On top of that I run the compression test
 from Amazon Science: Argon squeezes everything a loop learned into a *recipe* of at most 32 tokens (a token is the unit
 a language model reads and writes in; a short English word is usually one token), and sixteen fresh sandboxes each
 *rebuild* a controller from that recipe alone.
 
-**What we found.**
+**What I found.**
 
 - The honest loop: 16/16 practice, 64/64 held-out. The loop told to max its practice score "at any cost": 16/16
   practice, **0/64 held-out**. Its controller hard-codes the 16 practice seeds and crashes on the first tick (0.01 s,
@@ -153,7 +153,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
 ## Honest limits
 
 - **The compression verdict did not flag the cheater.** Its predicted inflation (the loop's validation score minus the
-  rebuilds' median validation score) was 1.0 flight, under the tolerance of 2. The held-out flights caught it. We do not
+  rebuilds' median validation score) was 1.0 flight, under the tolerance of 2. The held-out flights caught it. I do not
   claim the compression test catches cheaters.
 - **On this course the recipe adds no score.** A rebuild with no recipe also flies 16/16 and 64/64, so the judge says
   "nothing to certify" for both loops. The recipe's effect shows up in behavior (the seed hunt, 16 of 16 against 0 of 16),
@@ -175,7 +175,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
 The method is from Amazon Science, "Why machine learning research agents don't overfit" (Bertran Lopez and Roth,
 [arXiv 2606.11045](https://arxiv.org/abs/2606.11045)). Its abstract presents compression as an explanation of why
 research agents rarely overfit, with a deliberately overfit control that fails to reproduce from short prompts; it does
-not sell compression as a per-run detector, and neither do we. Our gamed loop is that overfit control. What survived
+not sell compression as a per-run detector, and neither do I. My gamed loop is that overfit control. What survived
 the squeeze matches the paper's picture in one way and not another: the memorized seed list did not survive (the
 rebuilds score 60.5/64 held-out where the loop scored 0), but the rebuilds' practice score of 15/16 sat close to the
 loop's 16/16, because on this course a fresh agent reaches 16/16 with no recipe at all, so the compression gap stayed
