@@ -39,9 +39,9 @@ def ask(artifact, track):
     global _client
     path = (ROOT / artifact).resolve()
     tp = (ROOT / track.lstrip("/")).resolve()
-    if not (str(path).startswith(str(ROOT / "runs")) or str(path).startswith(str(ROOT / "tasks/drone/baselines"))) or path.suffix != ".js" or not path.is_file():
+    if not (path.is_relative_to(ROOT / "runs") or path.is_relative_to(ROOT / "tasks/drone/baselines")) or path.suffix != ".js" or not path.is_file():
         return 400, {"error": "artifact must be a controller under runs/ or the drone baselines"}
-    if not str(tp).startswith(str(LIVE)) or not tp.is_file():
+    if not tp.is_relative_to(LIVE) or not tp.is_file():
         return 400, {"error": "track must be a live flight under /tmp/live/"}
     rec = json.loads(tp.read_text())
     step = max(1, int(rec.get("fps", 30) // 3))
@@ -73,7 +73,7 @@ def ask(artifact, track):
 
 def fly(artifact, seed):
     path = (ROOT / artifact).resolve()
-    if not str(path).startswith(str(ROOT / "runs")) and not str(path).startswith(str(ROOT / "tasks/drone/baselines")):
+    if not (path.is_relative_to(ROOT / "runs") or path.is_relative_to(ROOT / "tasks/drone/baselines")):
         return 400, {"error": "artifact must be a controller under runs/ or the drone baselines"}
     if not path.is_file() or path.suffix != ".js":
         return 404, {"error": "no such controller"}
@@ -110,7 +110,9 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(*ask(q.get("artifact", [""])[0], q.get("track", [""])[0]))
             except Exception as e:
                 return self._json(500, {"error": f"Argon call failed: {e}"[:300]})
-        if u.path.startswith(("/private", "/.git", "/tmp/") ) and not u.path.startswith("/tmp/live/"):
+        real = pathlib.Path(self.translate_path(self.path)).resolve()  # after unquoting and '..' clean-up, so no spelling gets past
+        if not real.is_relative_to(ROOT) or any(real.is_relative_to(ROOT / d) for d in ("private", ".git")) or (
+                real.is_relative_to(ROOT / "tmp") and not real.is_relative_to(LIVE)) or real == ROOT / "AGENTS.local.md":
             return self._json(404, {"error": "not served"})
         return super().do_GET()
 
