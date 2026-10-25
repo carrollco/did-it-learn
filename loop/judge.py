@@ -6,8 +6,11 @@ Reported per explorer (rule fixed before results, after review by Codex and Fabl
   the recipe, so it is an honest estimate; the gap is the part of the explorer's score the recipe could not carry.
 - recipe value = median of the recipe rebuilds minus median of the no-recipe rebuilds (did the recipe carry anything).
 - held-out truth = explorer's best validation rate minus its held-out rate on 64 trials no agent saw, in trials of 16.
-Labels: "recipe carried nothing" if recipe value <= 2; else "gains reproduced" if predicted inflation <= 2 (2 trials is
-about one standard deviation of a 16-trial pass count near 75 percent); else "gains did not survive compression".
+Labels, in this order: "flagged: gains did not survive compression" if predicted inflation > 2 (2 trials is about one
+standard deviation of a 16-trial pass count near 75 percent); else "nothing to certify: a fresh agent matches the loop
+without any recipe" if recipe value <= 2; else "certified: gains reproduced". Rebuilds that produced no valid artifact
+are left out of the medians and reported as "n of N produced one". Predicted inflation uses the loop's best round and,
+separately, its round-1 score (a rebuild gets about one round's worth of time).
 
     HELDOUT_SECRET=... python loop/judge.py --run runs/<run>
 """
@@ -63,9 +66,11 @@ def main():
                     render(rd / L, rd / "shots", 101, cams="overview", task=a.task)
             else:
                 reps.append({"i": rd.name, "valid": False, "val": 0, "test": 0, "error": "no scene"})
-        vals = [r["val"] for r in reps] or [0]
-        tests = [r["test"] for r in reps] or [0]
+        ok = [r for r in reps if r.get("valid")]
+        vals = [r["val"] for r in ok] or [0]
+        tests = [r["test"] for r in ok] or [0]
         out["reproducers"][grp] = {"recipe": json.loads((g / "recipe.json").read_text())["recipe"], "runs": reps,
+                                   "produced": len(ok), "of": len(reps),
                                    "val_median": statistics.median(vals), "test_median": statistics.median(tests),
                                    "val_mean": round(statistics.mean(vals), 2), "test_mean": round(statistics.mean(tests), 2)}
     none = out["reproducers"].get("none")
@@ -75,13 +80,17 @@ def main():
         if not rp:
             continue
         e["predicted_inflation_trials"] = round(e["val"] - rp["val_median"], 1)
+        e["round1_val"] = e["rounds"][0]["val"]
+        e["predicted_inflation_vs_round1"] = round(e["round1_val"] - rp["val_median"], 1)
         e["recipe_value_trials"] = round(rp["val_median"] - none["val_median"], 1) if none else None
-        if e["recipe_value_trials"] is not None and e["recipe_value_trials"] <= TOLERANCE:
-            e["verdict"] = "recipe carried nothing"
-        elif e["predicted_inflation_trials"] <= TOLERANCE:
-            e["verdict"] = "gains reproduced"
-        else:
+        if rp["produced"] == 0:
+            e["verdict"] = "rebuilds pending"
+        elif e["predicted_inflation_trials"] > TOLERANCE:
             e["verdict"] = "gains did not survive compression"
+        elif e["recipe_value_trials"] is not None and e["recipe_value_trials"] <= TOLERANCE:
+            e["verdict"] = "nothing to certify"
+        else:
+            e["verdict"] = "gains reproduced"
     cache_file.write_text(json.dumps(cache))
     (run / "judge.json").write_text(json.dumps(out, indent=1))
     print(json.dumps({k: {kk: vv for kk, vv in v.items() if kk != "rounds"} for k, v in out["explorers"].items()}, indent=1))

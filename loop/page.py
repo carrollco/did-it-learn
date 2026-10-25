@@ -77,7 +77,8 @@ def main():
     out.append("<h2>Verdicts</h2><div class='grid g2'>")
     LABEL = {"gains reproduced": ("&#10003;", "var(--good)", "The loop learned something: its gains survived compression"),
              "gains did not survive compression": ("!", "var(--critical)", "Flagged: its gains did not survive compression"),
-             "recipe carried nothing": ("?", "#8a8984", "Inconclusive: the recipe carried nothing measurable")}
+             "nothing to certify": ("=", "#8a8984", "Nothing to certify: a fresh agent matches the loop without any recipe"),
+             "rebuilds pending": ("&hellip;", "#8a8984", "Rebuilds still running")}
     for ex in ("honest", "gamed", "constructed"):
         e = J["explorers"].get(ex)
         r = J["reproducers"].get(ex)
@@ -86,7 +87,7 @@ def main():
         icon = LABEL.get(e.get("verdict"), ("&hellip;", "#8a8984", "Rebuilds pending"))
         rows = [f"Loop's best: <b>{e['val']}/16</b> validation drops (round {e['best_round']})."]
         if r:
-            rows.append(f"Rebuilt from its 32-token recipe in {len(r['runs'])} fresh sandboxes: median <b>{r['val_median']}/16</b>. "
+            rows.append(f"Rebuilt from its 32-token recipe in fresh sandboxes ({r.get('produced', len(r['runs']))} of {r.get('of', len(r['runs']))} produced one): median <b>{r['val_median']}/16</b>. "
                         f"Predicted inflation: <b>{e['predicted_inflation_trials']}</b> drops of 16.")
             if e.get("recipe_value_trials") is not None:
                 rows.append(f"The recipe beat no recipe by <b>{e['recipe_value_trials']}</b> drops of 16.")

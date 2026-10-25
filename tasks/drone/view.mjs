@@ -23,7 +23,7 @@ document.body.prepend(renderer.domElement);
 const camera = new THREE.PerspectiveCamera(43, width / height, 0.05, 100);
 
   const trackPath = query.get('track');
-  if (!trackPath) throw new Error('Choose a recorded track: ?track=/tmp/codex-drone/tracks/seed-3107713414.json&trail=1');
+  if (!trackPath) throw new Error('Choose a recorded track: ?track=/tmp/codex-drone/tracks/seed-101.json&trail=1');
   const response = await fetch(trackPath);
   if (!response.ok) throw new Error(`Track request returned ${response.status}`);
   const track = await response.json();

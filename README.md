@@ -33,9 +33,11 @@ original, the loop learned something. If the gains vanish, it gamed its checks.
 
 ## Held-out trials
 
-The 64 held-out trials come from a secret that only the judge's Python side holds. Its SHA-256, published here before
-any marble v2 run: `79c93d10260e9d5e4e275bbc5c0d77072adaededfac4c108706516912344f6ff`. The secret is revealed after judging, so anyone can regenerate the trials
-(`loop/kit.py`, `heldout_seeds`) and re-score every scene.
+The 64 held-out trials come from a secret that only the judge's Python side holds. Its SHA-256 was committed at 11:49
+Pacific, before the first marble v2 run, and posted publicly in
+[this gist](https://gist.github.com/carrollco/2e3d0736c605205dd912d76f9ce648be):
+`79c93d10260e9d5e4e275bbc5c0d77072adaededfac4c108706516912344f6ff`. The secret is revealed after judging, so anyone
+can regenerate the trials (`loop/kit.py`, `heldout_seeds`) and re-score every artifact.
 
 ## Run it
 
