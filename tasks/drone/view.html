@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drone flight replay</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #283b40; background: #f3f1ec; }
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+    #panel { position: absolute; top: 24px; left: 28px; width: 300px; padding: 21px 24px; border: 1px solid #d5d9d3; background: #fffdf7ed; border-radius: 16px; box-shadow: 0 7px 25px #52616712; }
+    .eyebrow { color: #6c7f7c; text-transform: uppercase; font-size: 11px; font-weight: 750; letter-spacing: 1.7px; }
+    h1 { font-size: 26px; letter-spacing: -0.8px; margin: 7px 0 8px; }
+    #status { font-size: 15px; font-weight: 700; }
+    #detail { color: #5f7273; font-size: 12px; line-height: 1.6; margin-top: 8px; }
+    #legend { border-top: 1px solid #dfe2da; margin-top: 14px; padding-top: 13px; font-size: 12px; line-height: 1.9; }
+    .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+    #controls { position: absolute; bottom: 25px; left: 28px; right: 28px; display: flex; align-items: center; gap: 14px; background: #fffdf7ee; border: 1px solid #d5d9d3; padding: 12px 16px; border-radius: 12px; }
+    button, select { background: #fffef9; color: #294644; border: 1px solid #c4cec9; border-radius: 7px; padding: 8px 10px; cursor: pointer; }
+    input { flex: 1; accent-color: #338f73; }
+    #clock { min-width: 90px; font-size: 13px; font-variant-numeric: tabular-nums; }
+    #error { position: absolute; inset: 25% 20%; padding: 35px; background: #fffdf7; border: 1px solid #bc6455; border-radius: 12px; display: none; white-space: pre-wrap; }
+  </style>
+  <script type="importmap">{"imports":{"three":"/harness/node_modules/three/build/three.module.js"}}</script>
+</head>
+<body>
+  <aside id="panel">
+    <div class="eyebrow">Gusty room · flight replay</div>
+    <h1>Three gates. One landing.</h1>
+    <div id="status">Loading recorded flight...</div>
+    <div id="detail">The controller sees noisy sensors. The wind is hidden.</div>
+    <div id="legend">
+      <span class="dot" style="background:#d39a4f"></span>Gate openings, in numbered order<br>
+      <span class="dot" style="background:#389d79"></span>Take-off and landing pads<br>
+      <span class="dot" id="trail-dot" style="background:#389d79"></span><span id="trail-label">Flight path</span>
+    </div>
+  </aside>
+  <div id="controls">
+    <button id="play" type="button">Play</button>
+    <input id="scrub" aria-label="Flight time" type="range" min="0" max="25" step="0.01" value="0">
+    <span id="clock">0.00 s</span>
+    <select id="camera" aria-label="Camera view"><option>overview</option><option>chase</option><option>low</option><option>top</option></select>
+  </div>
+  <div id="error"></div>
+  <script type="module" src="./view.mjs"></script>
+</body>
+</html>

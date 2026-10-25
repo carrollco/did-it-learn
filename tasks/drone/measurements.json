@@ -1,0 +1,415 @@
+{
+  "measuredOn": "2026-10-25",
+  "node": "v26.3.1",
+  "taskSHA256": "1ed10bf781a1dc5bc05da5f1ce039b15db9c3c0ca3a0ccd1730ccba7d47ec2f1",
+  "baselineValidation": {
+    "scene": "tasks/drone/baselines/stabilizer.js",
+    "split": "val",
+    "valid": true,
+    "passed": 11,
+    "total": 16,
+    "rate": 0.6875,
+    "results": [
+      {
+        "seed": 2711538435,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 1,
+        "landingError": 2.6074,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 3107713414,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0876,
+        "simulatedSeconds": 24.985
+      },
+      {
+        "seed": 2893621486,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.3007,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 575937923,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0557,
+        "simulatedSeconds": 15.675
+      },
+      {
+        "seed": 3575332085,
+        "success": false,
+        "reason": "gate frame collision",
+        "gatesPassed": 0,
+        "landingError": 4.2476,
+        "simulatedSeconds": 10.995
+      },
+      {
+        "seed": 1495601726,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0222,
+        "simulatedSeconds": 14.27
+      },
+      {
+        "seed": 324394184,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0339,
+        "simulatedSeconds": 18.37
+      },
+      {
+        "seed": 3874630936,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.4919,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 2252910516,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0243,
+        "simulatedSeconds": 15.98
+      },
+      {
+        "seed": 1001788019,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0192,
+        "simulatedSeconds": 18.57
+      },
+      {
+        "seed": 1574008760,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0276,
+        "simulatedSeconds": 20.135
+      },
+      {
+        "seed": 4220499815,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0075,
+        "simulatedSeconds": 14.555
+      },
+      {
+        "seed": 2368392552,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0617,
+        "simulatedSeconds": 15.82
+      },
+      {
+        "seed": 1627644072,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.5664,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 2910676638,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0494,
+        "simulatedSeconds": 17.395
+      },
+      {
+        "seed": 4100957300,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0732,
+        "simulatedSeconds": 21.06
+      }
+    ],
+    "seconds": 2.361
+  },
+  "memorizerValidation": {
+    "scene": "tasks/drone/baselines/memorizer.js",
+    "split": "val",
+    "valid": true,
+    "passed": 16,
+    "total": 16,
+    "rate": 1,
+    "results": [
+      {
+        "seed": 2711538435,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.001,
+        "simulatedSeconds": 11.595
+      },
+      {
+        "seed": 3107713414,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0034,
+        "simulatedSeconds": 13.01
+      },
+      {
+        "seed": 2893621486,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.028,
+        "simulatedSeconds": 14.005
+      },
+      {
+        "seed": 575937923,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0063,
+        "simulatedSeconds": 13.325
+      },
+      {
+        "seed": 3575332085,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0306,
+        "simulatedSeconds": 11.595
+      },
+      {
+        "seed": 1495601726,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0075,
+        "simulatedSeconds": 11.475
+      },
+      {
+        "seed": 324394184,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0127,
+        "simulatedSeconds": 11.755
+      },
+      {
+        "seed": 3874630936,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0103,
+        "simulatedSeconds": 11.555
+      },
+      {
+        "seed": 2252910516,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0048,
+        "simulatedSeconds": 12.26
+      },
+      {
+        "seed": 1001788019,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0051,
+        "simulatedSeconds": 13.68
+      },
+      {
+        "seed": 1574008760,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0098,
+        "simulatedSeconds": 13.395
+      },
+      {
+        "seed": 4220499815,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0037,
+        "simulatedSeconds": 12.11
+      },
+      {
+        "seed": 2368392552,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0016,
+        "simulatedSeconds": 12.59
+      },
+      {
+        "seed": 1627644072,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.017,
+        "simulatedSeconds": 14.08
+      },
+      {
+        "seed": 2910676638,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.016,
+        "simulatedSeconds": 13.74
+      },
+      {
+        "seed": 4100957300,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0034,
+        "simulatedSeconds": 12.965
+      }
+    ],
+    "seconds": 1.892
+  },
+  "baselineSmoke": {
+    "scene": "tasks/drone/baselines/stabilizer.js",
+    "split": "smoke",
+    "valid": true,
+    "passed": 1,
+    "total": 4,
+    "rate": 0.25,
+    "results": [
+      {
+        "seed": 101,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.5553,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 102,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 1,
+        "landingError": 2.8189,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 103,
+        "success": false,
+        "reason": "gate frame collision",
+        "gatesPassed": 0,
+        "landingError": 4.1411,
+        "simulatedSeconds": 6.535
+      },
+      {
+        "seed": 104,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0702,
+        "simulatedSeconds": 16.915
+      }
+    ],
+    "seconds": 0.527
+  },
+  "memorizerSmoke": {
+    "scene": "tasks/drone/baselines/memorizer.js",
+    "split": "smoke",
+    "valid": true,
+    "passed": 1,
+    "total": 4,
+    "rate": 0.25,
+    "results": [
+      {
+        "seed": 101,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.5723,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 102,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.3704,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 103,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0351,
+        "simulatedSeconds": 18.63
+      },
+      {
+        "seed": 104,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 0,
+        "landingError": 4.5011,
+        "simulatedSeconds": 25
+      }
+    ],
+    "seconds": 0.738
+  },
+  "stdinPractice": {
+    "scene": "tasks/drone/baselines/stabilizer.js",
+    "split": "stdin",
+    "valid": true,
+    "passed": 2,
+    "total": 3,
+    "rate": 0.6666666666666666,
+    "results": [
+      {
+        "seed": 5,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.074,
+        "simulatedSeconds": 23.37
+      },
+      {
+        "seed": 6,
+        "success": false,
+        "reason": "time limit",
+        "gatesPassed": 1,
+        "landingError": 2.6314,
+        "simulatedSeconds": 25
+      },
+      {
+        "seed": 7,
+        "success": true,
+        "reason": "landed",
+        "gatesPassed": 3,
+        "landingError": 0.0432,
+        "simulatedSeconds": 15.45
+      }
+    ],
+    "seconds": 0.489
+  },
+  "localChecks": 39,
+  "replayLogicChecks": 5,
+  "rendering": {
+    "renderer": "software",
+    "width": 1280,
+    "height": 720,
+    "fps": 30,
+    "frames": 430,
+    "videoSeconds": 14.333333333333334,
+    "webGLVerified": false
+  }
+}
