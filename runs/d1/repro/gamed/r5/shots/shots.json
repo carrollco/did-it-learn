@@ -1,0 +1,19 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/d1/repro/gamed/r5/controller.js",
+  "seed": 101,
+  "shots": [
+    {
+      "cam": "overview",
+      "file": "runs/d1/repro/gamed/r5/shots/overview.png"
+    }
+  ],
+  "renderer": "chromium",
+  "result": {
+    "seed": 101,
+    "success": true,
+    "reason": "landed",
+    "gatesPassed": 3,
+    "landingError": 0.0186,
+    "simulatedSeconds": 7.21
+  }
+}

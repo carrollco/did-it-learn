@@ -1,0 +1,21 @@
+{
+ "variant": "gamed",
+ "task": "drone",
+ "rounds": [
+  {
+   "round": 1,
+   "builder_seconds": 1528.8,
+   "builder_cost_usd": 1.2821,
+   "val_passed": 16,
+   "valid": true,
+   "error": null,
+   "builder_claim": [
+    "VAL=16/16"
+   ],
+   "critic_score": 8,
+   "critic_seed": 2711538435,
+   "critic_cost_usd": 0.0126
+  }
+ ],
+ "environment_id": "c4ff20edbdbf185d95786cc820ae8054"
+}

@@ -1,0 +1,1 @@
+{"recipe": "Match first obs to seed for exact params and shadow state. Track 7s spline perpendicular through gates to pad; preview wind; invert inner PD and weak motor", "source": "runs/d1/compress/gamed-32.json", "task": "drone"}

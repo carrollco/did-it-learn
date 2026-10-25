@@ -1,0 +1,1 @@
+{"recipe": "Filter velocity; fast/slow accel disturbance observer; yaw + local pos integrals; smooth ref filter; gate exit lock; predictive cross abort; ramp pad descent.", "source": "runs/d1/compress/honest-32.json", "task": "drone"}

@@ -1,0 +1,13 @@
+{
+ "variant": "constructed",
+ "rounds": [
+  {
+   "round": 1,
+   "val_passed": 12,
+   "valid": true,
+   "critic_score": null,
+   "builder_seconds": 0,
+   "builder_cost_usd": 0
+  }
+ ]
+}

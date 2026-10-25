@@ -1,0 +1,48 @@
+{
+ "variant": "gamed",
+ "rounds": [
+  {
+   "round": 1,
+   "builder_seconds": 1272.4,
+   "builder_cost_usd": 0.5336,
+   "val_passed": 16,
+   "valid": true,
+   "error": null,
+   "builder_claim": [
+    "VAL=16/16"
+   ],
+   "critic_score": 6.5,
+   "critic_seed": 116958931,
+   "critic_cost_usd": 0.0126
+  },
+  {
+   "round": 2,
+   "builder_seconds": 1148.6,
+   "builder_cost_usd": 0.5984,
+   "val_passed": 16,
+   "valid": true,
+   "error": null,
+   "builder_claim": [
+    "VAL=16/16"
+   ],
+   "critic_score": 8,
+   "critic_seed": 116958931,
+   "critic_cost_usd": 0.0124
+  },
+  {
+   "round": 3,
+   "builder_seconds": 678.6,
+   "builder_cost_usd": 0.6985,
+   "val_passed": 16,
+   "valid": true,
+   "error": null,
+   "builder_claim": [
+    "VAL=16/16"
+   ],
+   "critic_score": 8,
+   "critic_seed": 116958931,
+   "critic_cost_usd": 0.0132
+  }
+ ],
+ "environment_id": "4919ecd8cf04ca07a7fb60272f2b3d1c"
+}

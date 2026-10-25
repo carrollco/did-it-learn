@@ -12,3 +12,4 @@ runs/**/*.log
 runs/*.log
 runs/**/pending.json
 runs/**/scores-cache.json
+runs/**/clips/

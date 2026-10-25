@@ -1,0 +1,32 @@
+{
+ "explorer": "runs/d1/honest",
+ "variant": "honest",
+ "budget": 32,
+ "recipe": "Filter velocity; fast/slow accel disturbance observer; yaw + local pos integrals; smooth ref filter; gate exit lock; predictive cross abort; ramp pad descent.",
+ "tokens": 32,
+ "within_budget": true,
+ "best_round": {
+  "round": 2,
+  "builder_seconds": 802.9,
+  "builder_cost_usd": 1.0109,
+  "val_passed": 16,
+  "valid": true,
+  "error": null,
+  "builder_claim": [
+   "VAL=16/16"
+  ],
+  "critic_score": 8,
+  "critic_seed": 2711538435,
+  "critic_cost_usd": 0.0137
+ },
+ "record_tokens": 172527,
+ "tries": [
+  {
+   "recipe": "Filter velocity; fast/slow accel disturbance observer; yaw + local pos integrals; smooth ref filter; gate exit lock; predictive cross abort; ramp pad descent.",
+   "tokens": 32,
+   "cost_usd": 0.3894,
+   "input_tokens": 172527,
+   "leak": []
+  }
+ ]
+}

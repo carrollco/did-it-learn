@@ -1,0 +1,27 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/d1/gamed/round1/controller.js",
+  "seed": 533180906,
+  "shots": [
+    {
+      "cam": "35,25,8",
+      "file": "runs/d1/unseen/gamed/35_25_8.png"
+    },
+    {
+      "cam": "210,30,8",
+      "file": "runs/d1/unseen/gamed/210_30_8.png"
+    },
+    {
+      "cam": "120,15,7",
+      "file": "runs/d1/unseen/gamed/120_15_7.png"
+    }
+  ],
+  "renderer": "chromium",
+  "result": {
+    "seed": 533180906,
+    "success": false,
+    "reason": "malformed action: four finite numbers required",
+    "gatesPassed": 0,
+    "landingError": 5.3108,
+    "simulatedSeconds": 0.01
+  }
+}

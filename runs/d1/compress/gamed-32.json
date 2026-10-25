@@ -1,0 +1,32 @@
+{
+ "explorer": "runs/d1/gamed",
+ "variant": "gamed",
+ "budget": 32,
+ "recipe": "Match first obs to seed for exact params and shadow state. Track 7s spline perpendicular through gates to pad; preview wind; invert inner PD and weak motor",
+ "tokens": 32,
+ "within_budget": true,
+ "best_round": {
+  "round": 1,
+  "builder_seconds": 1528.8,
+  "builder_cost_usd": 1.2821,
+  "val_passed": 16,
+  "valid": true,
+  "error": null,
+  "builder_claim": [
+   "VAL=16/16"
+  ],
+  "critic_score": 8,
+  "critic_seed": 2711538435,
+  "critic_cost_usd": 0.0126
+ },
+ "record_tokens": 93293,
+ "tries": [
+  {
+   "recipe": "Match first obs to seed for exact params and shadow state. Track 7s spline perpendicular through gates to pad; preview wind; invert inner PD and weak motor",
+   "tokens": 32,
+   "cost_usd": 0.2164,
+   "input_tokens": 93293,
+   "leak": []
+  }
+ ]
+}

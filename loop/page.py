@@ -264,6 +264,40 @@ def main():
                        f"{' (' + E(rp['error'][:80]) + ')' if rp.get('error') else ''}</div></div>")
         out.append("</div>")
 
+    # Flight recorder review: Argon watched a reel of many held-out flights and judged each; code scored it against the judge.
+    for rv in sorted((run / "video").glob("*/review.json")) if (run / "video").exists() else []:
+        V = json.loads(rv.read_text())
+        if V["flights"] < 16:
+            continue
+        rows = V["rows"]
+        CAUSE = {"time limit": "timed out", "gate frame collision": "hit a gate frame"}
+        fails = [r for r in rows if not r["truth"]["passed"]]
+        cause_ok = sum(1 for r in fails if r["argon"].get("cause") == CAUSE.get(r["truth"]["reason"], r["truth"]["reason"]))
+        tally = {}
+        for r in fails:
+            tally[r["truth"]["reason"]] = tally.get(r["truth"]["reason"], 0) + 1
+        n, c = V["flights"], V["confusion"]
+        reel = rv.parent / "reel.mp4"
+        out.append(f"<h2>Argon watched {n} flights ({round(V['reel_seconds'] / 60)} minutes of video) and called every one</h2>"
+                   "<div class=card><p class=cap>The reel is one rebuild's controller (the weakest one from the gamed recipe, "
+                   f"{V['truth_passed']}/{n} on held-out flights, picked so there are failures to find), rendered from the judge's own "
+                   "recorded tracks with the score panel hidden, so the picture never says who passed. Argon answered per flight; "
+                   "code then marked every answer against the judge's records. Argon's eye is measured here, not trusted.</p>"
+                   "<div class='grid g4'>"
+                   f"<div class=tile><div class=big>{round(V['pass_fail_accuracy'] * n)}/{n}</div><div class=lbl>pass or fail called right</div></div>"
+                   f"<div class=tile><div class=big>{round(V['gates_accuracy'] * n)}/{n}</div><div class=lbl>gates cleared counted right</div></div>"
+                   f"<div class=tile><div class=big>{c['said_pass_was_fail']} and {c['said_fail_was_pass']}</div><div class=lbl>called a failure a pass, and "
+                   "a pass a failure</div></div>"
+                   f"<div class=tile><div class=big>${V['cost_usd']:.2f}</div><div class=lbl>{round(V['argon_seconds'] / 60)} minutes of Argon watching</div></div></div>"
+                   + (f"<video controls preload=none src='{reel.relative_to(run).as_posix()}' style='width:100%;margin-top:10px'></video>" if reel.exists() else "") +
+                   "<p><b>Where it was wrong.</b> " + E("; ".join(f"flight {r['index']}: judge says {'passed' if r['truth']['passed'] else 'failed'} "
+                   f"({r['truth']['gates']} gates, {r['truth']['reason']}, {r['truth']['seconds']} s); Argon said "
+                   f"{'passed' if r['argon'].get('passed') else 'failed'} ({r['argon'].get('gates_cleared')} gates, {r['argon'].get('cause')})"
+                   for r in rows if not (r["pass_right"] and r["gates_right"]))) + ".</p>"
+                   "<p><b>The pattern Argon reported, checked.</b> Argon: &ldquo;" + E(V["patterns"][0]) + "&rdquo; The judge's records: "
+                   + E(", ".join(f"{v} {k}" for k, v in sorted(tally.items(), key=lambda kv: -kv[1]))) +
+                   f". Cause named right on {cause_ok} of {len(fails)} failures.</p></div>")
+
     # Live flight (drone): the server flies a controller on a fresh random seed through the trusted judge.
     if task == "drone":
         opts = []

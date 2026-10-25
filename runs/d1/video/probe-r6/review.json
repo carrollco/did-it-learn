@@ -1,0 +1,103 @@
+{
+ "controller": "runs/d1/repro/gamed/r6/controller.js",
+ "label": "probe-r6",
+ "flights": 4,
+ "reel_seconds": 78.0,
+ "reel_mb": 0.5,
+ "render_seconds": 28.0,
+ "argon_seconds": 136.9,
+ "cost_usd": 0.137,
+ "video_tokens": 6215,
+ "pass_fail_accuracy": 1.0,
+ "gates_accuracy": 1.0,
+ "confusion": {
+  "pass_pass": 2,
+  "fail_fail": 2,
+  "said_pass_was_fail": 0,
+  "said_fail_was_pass": 0
+ },
+ "truth_passed": 2,
+ "patterns": [
+  "The quadcopter consistently drifts or is blown too far to the left and low when approaching each gate, colliding with the bottom-left corner or left vertical post of the gate frames.",
+  "In failed flights, the drone gets stuck against or strikes the left side of the gate frame (hitting Gate 1's left post at 9 s in Flight 3, and getting hung up on the left posts of Gates 1, 2, and 3 in Flight 4 until timing out at 25 s)."
+ ],
+ "summary": "2 of 4 flights passed (Flights 1 and 2 landed softly on the pad at ~13 s and ~19 s after clearing all 3 gates, despite briefly brushing the left gate posts). Across all flights, the controller exhibits a persistent leftward/low bias on gate approaches: Flight 3 failed at ~9 s when it drifted left and struck the bottom-left frame of Gate 1 (0 gates cleared), and Flight 4 failed by timing out at 25 s after repeatedly getting stuck against the bottom-left posts of Gates 1, 2, and 3 (2 gates cleared).",
+ "rows": [
+  {
+   "index": 1,
+   "seed": 533180906,
+   "truth": {
+    "passed": true,
+    "gates": 3,
+    "reason": "landed",
+    "seconds": 13.51
+   },
+   "argon": {
+    "index": 1,
+    "passed": true,
+    "gates_cleared": 3,
+    "cause": "passed",
+    "when_seconds": 13.0
+   },
+   "pass_right": true,
+   "gates_right": true
+  },
+  {
+   "index": 2,
+   "seed": 573614805,
+   "truth": {
+    "passed": true,
+    "gates": 3,
+    "reason": "landed",
+    "seconds": 18.96
+   },
+   "argon": {
+    "index": 2,
+    "passed": true,
+    "gates_cleared": 3,
+    "cause": "passed",
+    "when_seconds": 19.0
+   },
+   "pass_right": true,
+   "gates_right": true
+  },
+  {
+   "index": 3,
+   "seed": 122114210,
+   "truth": {
+    "passed": false,
+    "gates": 0,
+    "reason": "gate frame collision",
+    "seconds": 8.85
+   },
+   "argon": {
+    "index": 3,
+    "passed": false,
+    "gates_cleared": 0,
+    "cause": "hit a gate frame",
+    "when_seconds": 9.0
+   },
+   "pass_right": true,
+   "gates_right": true
+  },
+  {
+   "index": 4,
+   "seed": 691996389,
+   "truth": {
+    "passed": false,
+    "gates": 2,
+    "reason": "time limit",
+    "seconds": 25
+   },
+   "argon": {
+    "index": 4,
+    "passed": false,
+    "gates_cleared": 2,
+    "cause": "timed out",
+    "when_seconds": 25.0
+   },
+   "pass_right": true,
+   "gates_right": true
+  }
+ ]
+}
