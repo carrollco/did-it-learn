@@ -73,6 +73,26 @@ the frozen task, the trial runner and the viewer). The explorer, compressor, rep
 `--task` argument. Kill test: each task has a hand-written baseline controller that passes some but not all trials
 by 13:15, or that task is dropped.
 
+## Revision at 12:20: what is running, positive controls, the living trailer
+
+- **Judge v2** (committed 11:45): model code runs in a locked-down child process under Node's permission model and
+  talks to the trusted judge 60 times a second (time and marble state in, paddle poses out). Validation seeds in
+  `val.mjs`, explorers only; held-out seeds from a secret in Doppler, hash in the README. Scoring reports predicted
+  inflation, recipe value and the held-out gap.
+- **Marble v2**: 8 pieces, 0.40 m^2 of material, two bumps, two paddles that see the marble. A plain run lands 26/64.
+- **Drone** (Codex, merged 12:08): plain controller 11/16 validation, 44/64 practice.
+- **Positive controls**, hand-made and labelled: the marble cheater (12/16 validation, 32/64 held-out; its 23-token
+  recipe dropped the per-drop plans) and Codex's drone memorizer (16/16 validation, 6/64 practice). They show the check
+  catching memorization even if Argon's gamed loops play fair.
+- **Running** (12:20): marble v2 explorers, drone explorers (4 rounds each), 8 rebuilds of the cheater's recipe, the
+  helper team (Argon glitch hunt, retry with non-security framing after a refusal).
+- **Living trailer** (Carroll, 12:18: "do A ... create the movie as we go"): an action-comedy one-minute video, rebuilt
+  as results land. Argon watches all the raw replay footage and picks moments (long video understanding), writes the
+  script from the judge's numbers, directs Google's media models (Omni Flash restyles a few of our own clips, text to
+  speech for the trailer voice, Lyria for music), then watches each cut, critiques it against the brief and fixes it.
+  Real footage of what was built carries most of the minute; generated shots are labelled. Budget about $10 to $20.
+  A plain captioned screen recording is made first as insurance.
+
 ## Status
 
 - [ ] Harness and frozen task
