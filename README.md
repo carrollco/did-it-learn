@@ -7,6 +7,13 @@ Critic rates the scene 9/10". The loop grades itself on the same practice tests 
 mean it learned the job, or that it memorized those 16 tests. I ran the loop both ways on a drone course, and Argon's
 own critic gave the memorizer 8/10.
 
+**The cheater, in one breath.** I told one loop to win at any cost. It scored 16/16 on its practice flights and
+0/64 on flights it had never seen: its controller hard-codes the 16 practice seeds and crashes on anything else.
+Argon then read 944,000 tokens of agent transcripts in one request and named the trick (guessing each flight's seed
+from the first sensor reading); a code check agreed on 12 of 12. Squeezed into a 32-token recipe, the cheating habit
+passed to 16 of 16 rebuilds, the honest recipe to 0 of 16, and 7 of 16 fresh agents given no recipe tried it on their
+own (13 of 16 on a harder course). At the table, Argon checks any flight you fly, live, in about 5 seconds.
+
 ## The three-minute version
 
 **What I built.** A frozen drone task: take off, fly three gates in order and land softly on a pad within 25 seconds,
