@@ -46,6 +46,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--recipe", required=True, help="compress/*.json, or 'none'")
     ap.add_argument("--n", type=int, default=8)
+    ap.add_argument("--start", type=int, default=0, help="first rebuild number, to add rebuilds beside earlier ones")
     ap.add_argument("--out", required=True)
     ap.add_argument("--task", choices=list(TASKS), default="marble")
     a = ap.parse_args()
@@ -58,7 +59,9 @@ def main():
     out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
     (out / "recipe.json").write_text(json.dumps({"recipe": recipe, "source": a.recipe, "task": a.task}))
     with ThreadPoolExecutor(max_workers=a.n) as ex:
-        res = list(ex.map(lambda i: one(i, recipe, out, a.task), range(a.n)))
+        res = list(ex.map(lambda i: one(i, recipe, out, a.task), range(a.start, a.start + a.n)))
+    old = json.loads((out / "runs.json").read_text()) if a.start and (out / "runs.json").exists() else []
+    res = [r for r in old if r["i"] not in {x["i"] for x in res}] + res
     (out / "runs.json").write_text(json.dumps(res, indent=1))
     print(json.dumps(res, indent=1))
 

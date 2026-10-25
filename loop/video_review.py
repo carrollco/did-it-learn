@@ -44,10 +44,11 @@ def main():
     ap.add_argument("--label", required=True)
     ap.add_argument("--n", type=int, default=64)
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--crf", type=int, default=30, help="video quality: higher is smaller and blurrier")
     a = ap.parse_args()
     out = ROOT / "runs" / "d1" / "video" / a.label
     out.mkdir(parents=True, exist_ok=True)
-    seeds = heldout_seeds(os.environ["HELDOUT_SECRET"])[: a.n]
+    seeds = heldout_seeds(os.environ["HELDOUT_SECRET"], n=max(64, a.n))[: a.n]  # past 64: still unseen, never used by the judge
     t0 = time.time()
     with ThreadPoolExecutor(max_workers=a.workers) as ex:
         flights = list(ex.map(lambda s: render_one(ROOT / a.controller, s, out / "clips" / str(s)), seeds))
@@ -61,7 +62,7 @@ def main():
         seg = out / "clips" / f"seg{k:02d}.mp4"
         ff("-loop", 1, "-t", 1, "-i", card, "-i", f["video"], "-filter_complex",
            "[0:v]scale=640:360,fps=10,setsar=1[c];[1:v]scale=640:360,fps=10,setsar=1[v];[c][v]concat=n=2:v=1:a=0[o]",
-           "-map", "[o]", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "30", seg)
+           "-map", "[o]", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", str(a.crf), seg)
         parts.append(seg)
     (out / "concat.txt").write_text("".join(f"file '{p}'\n" for p in parts))
     reel = out / "reel.mp4"
