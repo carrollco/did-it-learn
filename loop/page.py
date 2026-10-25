@@ -85,6 +85,23 @@ def scatter(points):
     return "".join(s)
 
 
+def thumbs(html_text, run):
+    """Swap each PNG on the page for a small JPEG thumbnail (made once), linked to the full picture."""
+    import re, subprocess
+    import imageio_ffmpeg
+    ff = imageio_ffmpeg.get_ffmpeg_exe()
+    def sub(m):
+        src = m.group(1)
+        full = run / src
+        th = full.with_suffix(".thumb.jpg")
+        if full.exists() and (not th.exists() or th.stat().st_mtime < full.stat().st_mtime):
+            subprocess.run([ff, "-hide_banner", "-loglevel", "error", "-y", "-i", str(full), "-vf", "scale=480:-1", "-q:v", "5", str(th)])
+        if not th.exists():
+            return m.group(0)
+        return f"<a href='{src}'><img src='{th.relative_to(run).as_posix()}'{m.group(2)}></a>"
+    return re.sub(r"<img src='([^']+\.png)'([^>]*)>", sub, html_text)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", required=True)
@@ -323,7 +340,7 @@ $('go').onclick=async()=>{$('res').textContent='flying...';$('res').style.color=
     out.append("<div class=tip id=tip></div><script>const t=document.getElementById('tip');document.querySelectorAll('[data-tip]').forEach(e=>{"
                "e.onmousemove=v=>{t.style.display='block';t.style.left=v.clientX+14+'px';t.style.top=v.clientY+10+'px';t.textContent=e.dataset.tip};"
                "e.onmouseleave=()=>t.style.display='none'});</script></main></body></html>")
-    (run / "index.html").write_text("".join(out))
+    (run / "index.html").write_text(thumbs("".join(out), run))
     print(run / "index.html")
 
 
