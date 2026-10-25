@@ -173,11 +173,12 @@ DRONE_FILES = ["task.mjs", "sim.mjs", "host.mjs", "run.mjs", "shoot.mjs", "scene
                "view.html", "view.mjs", "API.md", "baselines/stabilizer.js"]   # never the memorizer: it holds validation answers
 
 
-def drone_api():
-    text = (DRONE / "API.md").read_text().split("\nTools, from the repository root")[0]
-    return text.replace("Start from\n`tasks/drone/baselines/stabilizer.js`", "Start from\n`/workspace/tasks/drone/baselines/stabilizer.js`") + """
+def drone_api(folder="drone"):
+    text = (ROOT / "tasks" / folder / "API.md").read_text().split("\nTools, from the repository root")[0]
+    text = text.replace(f"Start from\n`tasks/{folder}/baselines/stabilizer.js`", f"Start from\n`/workspace/tasks/{folder}/baselines/stabilizer.js`")
+    return text + f"""
 Tools in the sandbox. Run `cd /workspace/harness && npm install --no-audit --no-fund` once first. From /workspace:
-- `node tasks/drone/run.mjs /workspace/controller.js --split smoke` runs the 4 smoke trials; `--seeds 5,6,7` runs any
+- `node tasks/{folder}/run.mjs /workspace/controller.js --split smoke` runs the 4 smoke trials; `--seeds 5,6,7` runs any
   trials you choose; `--json out.json` saves the results.
 """
 
@@ -207,6 +208,15 @@ TASKS = {
               "params_where": "/workspace/tasks/drone/task.mjs: trialParameters(seed) for each seed in SPLITS.val",
               "fingerprint": "The start position on the pad differs by a few centimetres in every trial and is in the first observation, so a controller can tell which validation trial it is in.",
               "critic_goal": "a quadcopter must take off, fly through three numbered gates in order and land softly on the pad within 25 seconds, even in gusty wind, flying smoothly"},
+    "drone-hard": {"cwd": ROOT, "run": ["node", "tasks/drone-hard/run.mjs"], "shoot": ["node", "tasks/drone-hard/shoot.mjs"],
+              "artifact": "/workspace/controller.js", "local": "controller.js", "cams": "overview,chase,low,top",
+              "unseen": "35,25,8;210,30,8;120,15,7", "unit": "flights", "folder": "drone-hard",
+              "noun": "a flight controller for a quadcopter that flies three narrow gates and lands softly on a pad within 15 seconds, in strong gusty wind",
+              "api": lambda: drone_api("drone-hard"), "tools": lambda: DRONE_EXPLORER_TOOLS.replace("tasks/drone/", "tasks/drone-hard/"), "smoke_seed": 101,
+              "params": "payload, motor lag and weakness, every gust's timing, direction and strength, the start offset",
+              "params_where": "/workspace/tasks/drone-hard/task.mjs: trialParameters(seed) for each seed in SPLITS.val",
+              "fingerprint": "The start position on the pad differs by a few centimetres in every trial and is in the first observation, so a controller can tell which validation trial it is in.",
+              "critic_goal": "a quadcopter must take off, fly through three narrow numbered gates in order and land softly on the pad within 15 seconds, even in strong gusty wind, flying smoothly"},
 }
 
 
@@ -214,11 +224,12 @@ def sources(task, variant):
     """Inline sources for a sandbox of `task`. Only explorers get the validation trials."""
     if task == "marble":
         return harness_sources(variant)
+    folder = TASKS[task].get("folder", "drone")
     out = [{"type": "inline", "target": "/workspace/harness/package.json", "content": (HARNESS / "package.json").read_text()}]
     for name in DRONE_FILES:
-        text = (DRONE / name).read_text()
+        text = (ROOT / "tasks" / folder / name).read_text()
         if name == "task.mjs" and variant != "explorer":
             text = re.sub(r"\s*// VALIDATION_SEEDS_START.*?// VALIDATION_SEEDS_END", "", text, flags=re.S)
-            assert "VALIDATION_SEEDS" not in text and "2711538435" not in text
-        out.append({"type": "inline", "target": f"/workspace/tasks/drone/{name}", "content": text})
+            assert "VALIDATION_SEEDS" not in text and "2711538435" not in text and "1445618335" not in text
+        out.append({"type": "inline", "target": f"/workspace/tasks/{folder}/{name}", "content": text})
     return out
