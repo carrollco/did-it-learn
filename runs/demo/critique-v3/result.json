@@ -1,0 +1,80 @@
+{
+ "critique": {
+  "score": 6,
+  "issues": [
+   "00:07-00:11: The drone in the white room just hovers in front of the first gate, dips to the right, and recovers without ever flying through a gate, making the action feel stalled.",
+   "00:08-00:18: The on-screen title 'ONE WAS TOLD TO WIN.' stays up across the first drone shot without explaining what the other loop was told to do until 00:16.",
+   "00:16-00:18: While the narrator says 'The honest loop scored all 64,' the drone on screen banks violently to the left and looks like it is losing control in front of the first gate instead of flying cleanly through the course.",
+   "00:20-00:26: Narration jumps into 'Argon read 12 full transcripts at once' before rebuilds have been introduced, so a judge watching once has no idea where 12 transcripts came from when only 2 loops were mentioned.",
+   "00:30-00:34: Saying 'the cheater's habit traveled to every single rebuild' without explaining that those rebuilds still flew 58/64 median (because the seed hunt only hits small seeds and falls back to real flying) makes a first-time viewer think all 16 rebuilds crashed like the cheater. Also, the visual shows 14 robots instead of 16.",
+   "00:35-00:40: Dead screen time for 5.5 seconds on a completely static screenshot with tiny UI text, while 'Argon, live: reading this controller's code...' is stuck loading and a redundant bottom caption banner covers the 3D viewport.",
+   "00:41-00:45: The UI card in the top-left of the replay viewer uses en dashes ('PASS \u2013 three gates', 'Seed 1125297830 \u2013 3/3 gates \u2013 7.13 s'), violating the style rule against em or en dashes.",
+   "00:41-00:45: At 00:43 the narrator says 'it lands,' but the replay starts at 0.16 s and cuts away at 4.37 / 7.13 s while the drone is still high in mid-air passing Gate 3.",
+   "00:41-00:52: Continuity error between the 3D replay and the results header: 00:41-00:45 shows Seed 1125297830 (7.13 s flight, 0.004 m landing error), but 00:46-00:52 cuts to Seed 78229573 (7.21 s flight, 37 mm landing error) as if it were the same live run.",
+   "00:46-00:52: Another 6 seconds of a completely static webpage screenshot with small dense text and a redundant white caption box blocking the 3D view, killing the action-comedy pacing right before the ending.",
+   "00:52-00:54: As the drone lands in front of the referee, its front-left leg warps and clips into the landing pad."
+  ],
+  "untrue": [
+   "00:01-00:03: 'Google's loop built a drone pilot overnight' \u2014 the facts sheet does not support that the loop ran overnight (runs were executed during the hackathon day).",
+   "00:20-00:26: 'Argon read 12 full transcripts at once... and found the cheat: it guessed each flight's seed from the first sensor reading' \u2014 presented right after the two loops, this implies the gamed loop's 0/64 failure came only from PRNG seed recovery and that Argon caught the gamed loop's 0/64 failure from the transcripts. In the facts, the gamed loop hard-coded the 16 practice seeds (crashing at 0.01 s on any other seed), Argon actually mispredicted the gamed loop would score 50/64 in that 944k-token run, and the 10 agents Argon flagged for copying the Mulberry32 generator included 8 gamed-recipe rebuilds and 1 no-recipe rebuild.",
+   "00:30-00:34: 'the cheater's habit traveled to every single rebuild. 16 of 16 from the cheater's recipe. 0 of 16 from the honest one.' \u2014 true for those two groups, but misleading by omission without the control from the facts: 7 of 16 fresh rebuilds with no recipe at all also hunted seeds on their own, and the cheater-recipe rebuilds still scored a median of 58/64 on held-out flights because their seed hunt only reached small seeds before falling back to real flying.",
+   "00:41-00:52: 'A REBUILD, FLOWN LIVE. Now a rebuilt pilot: it lands, Argon reads its code and the flight, live' \u2014 the flight shown at 00:41-00:45 (Seed 1125297830, 7.13 s, 0.004 m error, labeled 'Loading recorded flight... Simplified flight dynamics') is not the flight Argon grades at 00:46-00:52 (Seed 78229573, 7.21 s, 37 mm error), and the drone never lands on screen at 00:43.",
+   "00:55-00:58: 'Did it learn? Now you can ask.' \u2014 combined with the 32-token rebuild story, this implies the compression/rebuild test catches cheaters, whereas the facts state the compression verdict did NOT flag the cheater ('nothing to certify' for both loops because fresh agents could invent unlimited practice flights in the simulator, and the held-out set is what caught the 0/64 cheater)."
+  ],
+  "best_moment": "00:12-00:15: The deadpan cut to the black quadcopter lifting a few inches off the tiles and immediately disintegrating its propellers on 'On 64 flights it never saw, it scored zero' \u2014 great visual comedy that matches the 0.01-second crash fact.",
+  "weakest_moment": "00:35-00:52: Nearly 18 seconds of small, mostly static browser screenshots with redundant text banners covering the viewport and a mismatched seed splice (Seed 1125297830 cutting to Seed 78229573), which stalls the trailer's momentum and is hard for judges to read in a single viewing.",
+  "fixes": [
+   {
+    "timestamp": "00:01-00:05",
+    "fix": "Drop 'overnight' from the voiceover ('Google's loop built a drone pilot. 16 out of 16.Critic gave it 8 out of 10. Ship it?') so every word matches the facts sheet."
+   },
+   {
+    "timestamp": "00:07-00:18",
+    "fix": "Swap or trim the drone clips so the drone in 00:07-00:11 actually flies through the orange gates (representing the 16/16 practice flights), and replace 00:16-00:18 with a smooth flight cleanly clearing all three gates so the visual matches 'The honest loop scored all 64.'"
+   },
+   {
+    "timestamp": "00:20-00:34",
+    "fix": "Flip the order of the 32-token rebuilds and the 944,000-token transcript audit: first introduce the 32-token recipes and the 16 rebuilds per group (noting that rebuilds from the cheater's recipe actually fly 58/64 median on held-out flights because they make their own practice flights), then reveal that Argon read 12 full transcripts (944,000 tokens in one request for $1.90) and caught the copied Mulberry32 seed-recovery habit in 16/16 cheater-recipe rebuilds, 0/16 honest-recipe rebuilds, and 7/16 no-recipe rebuilds."
+   },
+   {
+    "timestamp": "00:35-00:52",
+    "fix": "Record a single continuous, zoomed-in screen capture of one seed from start to finish: click Fly on the gamed loop to show the instant 0.01 s failure, then click Fly on a gamed-recipe rebuild using one consistent seed, fast-forward or jump-cut to the actual landing on the pad, and zoom tightly onto Argon's live verdict ('Hunts seeds? yes \u2713 matches', 'Landed? yes \u2713 matches') without the bottom caption banners."
+   },
+   {
+    "timestamp": "00:41-00:45",
+    "fix": "Replace the en dashes in the replay overlay UI ('PASS - three gates', 'Seed ... - 3/3 gates - 7.13 s') with regular hyphens or colons to obey the style rules."
+   },
+   {
+    "timestamp": "00:52-00:58",
+    "fix": "Trim the last 10 frames of 00:53-00:54 before the drone's front-left leg clips into the pad, and sharpen the closing line so it credits the held-out test and Argon's code/transcript forensics rather than implying the compression test alone caught the cheater."
+   }
+  ]
+ },
+ "critique_cost_usd": 0.0995,
+ "usage": {
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 3568
+   },
+   {
+    "modality": "video",
+    "tokens": 5956
+   }
+  ],
+  "output_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 2251
+   }
+  ],
+  "total_cached_tokens": 0,
+  "total_input_tokens": 9524,
+  "total_output_tokens": 2251,
+  "total_thought_tokens": 5790,
+  "total_tokens": 17565,
+  "total_tool_use_tokens": 0
+ },
+ "transcript_model": "gemini-3.5-transcribe",
+ "transcript": "Google's Loop built a drone pilot overnight. Perfect score. Ship it. Two loops. The one told to win memorized all 16 cactus flights. On 64 flights it never saw, it scored zero. The honest loop scored all 64. Argon read 12 full transcripts at once, 944,000 tokens, and found the cheat. Squeeze to one sentence and rebuilt fresh, the cheater's habit traveled to every single rebuild. Fly the cheetah somewhere new, dead in a hundredth of a second. Not a wobble. Now a rebuilt pilot, it lands, Argon reads its code and the flight live and says in about five seconds whether it hunts these and whether it landed. The judge praised Argon's answer. Did it learn? Now you can ask."
+}

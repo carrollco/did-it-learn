@@ -15,7 +15,7 @@ D = ROOT / "runs/demo"
 STYLE = "clear documentary narrator, brisk natural pace, light dry humour"
 # (start, end) of each shot in demo.mp4, from the caption timings, and the line said over it.
 LINES = [
-    (0.2, 6.1, "Google's loop built a drone pilot overnight. Perfect score. Ship it?"),
+    (0.2, 6.1, "You leave Google's loop running. It builds a drone pilot. Perfect score. Ship it?"),
     (6.4, 12.1, "Two loops. The one told to win memorized all 16 practice flights."),
     (12.4, 19.1, "On 64 flights it never saw, it scored zero. The honest loop scored all 64."),
     (19.4, 25.4, "Argon read twelve full transcripts at once, 944,000 tokens, and found the cheat."),
