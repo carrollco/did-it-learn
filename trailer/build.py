@@ -56,7 +56,7 @@ def write_words(c, edl_dir):
               "(Amazon Science, 2026) squeezed each loop into a 32-token recipe; fresh sandboxes rebuilt from the recipe alone. "
               "Moral: don't ship the loop's artifact, ship the rebuild.\n\n"
               "For each segment write a short on-screen caption (at most 9 words) and one narration line the narrator can say "
-              "in the segment's seconds (about 2.3 words per second, so seconds x 2.3 words at most). Trailer voice: 'In a world "
+              "in the segment's seconds (the narrator speaks about 1.8 words per second, so seconds x 1.8 words at most; the whole trailer must stay under 58 seconds). Trailer voice: 'In a world "
               "where...' energy, then deadpan. Also give a one-sentence music prompt for an instrumental 30-second track.\n\n"
               f"SEGMENTS: {json.dumps(SEGMENTS)}\n\nFACTS: {json.dumps(facts())}")
     it = argon(c, [{"type": "text", "text": prompt}], thinking="medium", schema=SCHEMA)
@@ -94,8 +94,12 @@ def build(edl, d, c):
         sd.mkdir(exist_ok=True)
         voice = None
         if s.get("line"):
-            voice = speak(c, s["line"], sd / "voice.wav")
-        secs = max(float(s["seconds"]), (duration(voice) + 0.5) if voice else 0)
+            raw_voice = speak(c, s["line"], sd / "voice.wav")
+            # Fit the line to its shot: speed it up (pitch kept) by at most 1.35x; past that the shot gets longer.
+            tempo = min(1.35, max(1.0, duration(raw_voice) / max(1.0, float(s["seconds"]) - 0.3)))
+            voice = sd / "voice-fit.wav"
+            ff("-i", raw_voice, "-filter:a", f"atempo={tempo:.3f}", voice)
+        secs = max(float(s["seconds"]), (duration(voice) + 0.35) if voice else 0)
         cap = sd / "caption.png"
         node("caption", cap, s.get("caption") or " ")
         raw = sd / "raw.mp4"
@@ -106,6 +110,10 @@ def build(edl, d, c):
         elif s["kind"] == "page":
             node("page", sd / "page.webm", PAGE, s.get("heading", "-"), secs + 1.5)
             ff("-ss", 1.4, "-i", sd / "page.webm", "-t", secs, "-r", 25, "-vf", "scale=1280:720", "-pix_fmt", "yuv420p", "-c:v", "libx264", raw)
+        elif s["who"] == "cheater":   # its replay is a 1 s loading screen; the still shows the drone that never left the pad
+            still = FOOT / "cheater" / "chase.png"
+            ff("-loop", 1, "-i", still, "-vf", f"scale=1280:720,zoompan=z='min(zoom+0.0012,1.15)':d={int(secs * 25)}:s=1280x720:fps=25",
+               "-t", secs, "-r", 25, "-pix_fmt", "yuv420p", "-c:v", "libx264", raw)
         else:
             src = FOOT / s["who"] / f"replay_seed{SEED}.webm"
             L = duration(src)
@@ -129,7 +137,7 @@ def build(edl, d, c):
         filt.append(f"[{i + 2}:a]adelay={int(at * 1000)}|{int(at * 1000)},volume=1.6[v{i}]")
     filt.append(f"[1:a]volume=0.22,atrim=0:{t:.2f}[m]")
     filt.append("".join(f"[v{i}]" for i in range(len(voices))) + f"[m]amix=inputs={len(voices) + 1}:normalize=0[a]")
-    ff(*inputs, "-filter_complex", ";".join(filt), "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k",
+    ff(*inputs, "-filter_complex", ";".join(filt), "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-ar", 44100, "-ac", 2,
        "-t", f"{t:.2f}", d / "trailer.mp4")
     return d / "trailer.mp4", t
 

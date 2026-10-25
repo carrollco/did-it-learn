@@ -9,7 +9,7 @@ import argparse, base64, json, pathlib, sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "loop"))
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from kit import ROOT, argon, client, save_interaction
-from build import facts
+from build import duration, facts
 
 SCHEMA = {"type": "object", "properties": {
     "score": {"type": "number", "description": "0 to 10"},
@@ -28,6 +28,12 @@ def main():
     d = ROOT / "runs" / "trailer" / f"v{a.version}"
     edl = json.loads((d / "edl.json").read_text())
     video = base64.b64encode((d / "trailer.mp4").read_bytes()).decode()
+    total = duration(d / "trailer.mp4")
+    voiced = {}
+    for k, s in enumerate(edl["segments"]):
+        w = d / f"{k:02d}-{s['id']}" / "voice.wav"
+        if w.exists():
+            voiced[s["id"]] = round(duration(w), 1)
     prompt = ("Watch and listen to this one-minute hackathon trailer. The brief: an over-the-top action movie trailer with "
               "deadpan comedy that a tired judge at 5 PM would actually enjoy, that shows the real product on screen (the results "
               "page and real replays of real flights), and that tells the story clearly: two AI build loops scored 16 of 16, one "
@@ -35,8 +41,10 @@ def main():
               "Every number on screen or in the narration must match the FACTS. Check pacing (does the narration fit each shot, "
               "any dead air or rushed lines?), legibility of captions, whether the jokes land, and whether a viewer understands the "
               "story with the sound off. Return a score out of 10, specific issues with timestamps, any untrue claims, and the full "
-              "revised edit list (keep the ids and order; you may change captions, narration lines and seconds per segment, at "
-              "most 62 seconds in total).\n\n"
+              "revised edit list (keep the ids and order; you may change captions, narration lines and seconds per segment, "
+              f"at most 58 seconds in total). This cut runs {total:.0f} seconds; a segment lasts at least as long as its spoken line, so "
+              "the only way to get under 58 is shorter narration. The narrator speaks about 1.8 words per second. Measured length "
+              f"of each spoken line in this cut, in seconds: {json.dumps(voiced)}.\n\n"
               f"CURRENT EDIT LIST: {json.dumps(edl['segments'])}\n\nFACTS: {json.dumps(facts())}")
     it = argon(client(), [{"type": "text", "text": prompt}, {"type": "video", "data": video, "mime_type": "video/mp4"}],
                thinking="high", schema=SCHEMA)

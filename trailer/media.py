@@ -6,7 +6,7 @@ from kit import client
 VOICE = "Fenrir"   # a prebuilt Gemini voice; the style annotation asks for the movie-trailer delivery
 
 
-def speak(c, text, out, style="deep, gravelly movie-trailer narrator, dramatic pauses, deadpan comic timing"):
+def speak(c, text, out, style="deep movie-trailer narrator, punchy and fast-paced, short pauses, deadpan comic timing"):
     it = c.interactions.create(model="gemini-3.8-flash-tts", response_format={"type": "audio"},
                                input=[{"type": "user_input", "content": [{"type": "text", "text": text,
                                        "annotations": [{"type": "speech_metadata", "style": style}]}]}],

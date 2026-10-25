@@ -29,6 +29,7 @@ const camera = new THREE.PerspectiveCamera(43, width / height, 0.05, 100);
   const track = await response.json();
   if (!Array.isArray(track.frames) || !track.frames.length) throw new Error('Track contains no flight frames');
   const { frames, result } = track, end = frames.at(-1).t, passColor = result.success ? '#2c9a70' : '#c65c46';
+  if (query.get('hud') === '0') for (const id of ['panel', 'controls']) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
   document.querySelector('#status').textContent = result.success ? 'PASS · three gates and a soft landing' : `FAIL · ${result.reason}`;
   document.querySelector('#status').style.color = passColor;
   document.querySelector('#detail').textContent = `Seed ${track.seed} · ${result.gatesPassed}/3 gates · ${end.toFixed(2)} s flight\nLanding error ${result.landingError.toFixed(3)} m. Simplified flight dynamics.`;

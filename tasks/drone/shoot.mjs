@@ -67,7 +67,7 @@ try {
     }
   } else {
   report.renderer = 'chromium';
-  const qs = (extra) => new URLSearchParams({ track: '/track.json', w: width, h: height, ...(args.includes('--trail') ? { trail: 1 } : {}), ...extra }).toString();
+  const qs = (extra) => new URLSearchParams({ track: '/track.json', w: width, h: height, ...(args.includes('--trail') ? { trail: 1 } : {}), ...(args.includes('--no-hud') ? { hud: 0 } : {}), ...extra }).toString();
   const waitReady = async (page, flag) => {
     await page.waitForFunction((name) => window[name] || window.__error, flag, { timeout: 60000 });
     const error = await page.evaluate(() => window.__error); if (error) throw new Error(error);
