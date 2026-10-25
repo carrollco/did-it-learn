@@ -58,6 +58,39 @@ class Handler(SimpleHTTPRequestHandler):
             return self._json(404, {"error": "not served"})
         return super().do_GET()
 
+    def send_head(self):
+        """Static files with byte-range support: iPhone Safari will not play a video without it."""
+        rng = self.headers.get("Range")
+        path = self.translate_path(self.path)
+        if not rng or not rng.startswith("bytes=") or not pathlib.Path(path).is_file():
+            return super().send_head()
+        size = pathlib.Path(path).stat().st_size
+        a, _, b = rng[6:].split(",")[0].partition("-")
+        start = int(a) if a else max(0, size - int(b))
+        end = min(size - 1, int(b)) if (a and b) else size - 1
+        if start >= size:
+            self.send_response(416); self.send_header("content-range", f"bytes */{size}"); self.end_headers(); return None
+        f = open(path, "rb"); f.seek(start)
+        self.send_response(206)
+        self.send_header("content-type", self.guess_type(path))
+        self.send_header("accept-ranges", "bytes")
+        self.send_header("content-range", f"bytes {start}-{end}/{size}")
+        self.send_header("content-length", str(end - start + 1))
+        self.end_headers()
+        self._range_left = end - start + 1
+        return f
+
+    def copyfile(self, source, outputfile):
+        left = getattr(self, "_range_left", None)
+        if left is None:
+            return super().copyfile(source, outputfile)
+        while left > 0:
+            chunk = source.read(min(65536, left))
+            if not chunk:
+                break
+            outputfile.write(chunk); left -= len(chunk)
+        self._range_left = None
+
     def _json(self, code, obj):
         body = json.dumps(obj).encode()
         self.send_response(code)
@@ -69,6 +102,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("cache-control", "no-store")
+        self.send_header("accept-ranges", "bytes")
         super().end_headers()
 
     def log_message(self, *a):
