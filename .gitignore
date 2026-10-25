@@ -8,3 +8,7 @@ AGENTS.local.md
 node_modules/
 work/
 runs/*/sandbox/
+runs/**/*.log
+runs/*.log
+runs/**/pending.json
+runs/**/scores-cache.json
