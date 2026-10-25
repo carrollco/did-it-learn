@@ -16,7 +16,7 @@ CSS = """
 *{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
 main{max-width:1180px;margin:0 auto;padding:28px 24px 80px}h1{font-size:30px;margin:0 0 6px}h2{font-size:20px;margin:36px 0 10px}
 .lede{color:var(--ink2);max-width:860px;margin:0 0 8px}.card{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px}
-.grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}.g4{grid-template-columns:repeat(4,1fr)}.g8{grid-template-columns:repeat(4,1fr)}
+.grid{display:grid;gap:14px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g8{grid-template-columns:repeat(4,1fr)}
 .tile .big{font-size:30px;font-weight:650}.tile .lbl{color:var(--ink2);font-size:13px}.swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
 .verdict{display:flex;gap:12px;align-items:center;font-weight:650;font-size:20px}.verdict .icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:20px}
 .recipe{font:600 19px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:#fff;border:1px dashed var(--rule);border-radius:8px;padding:12px;margin:8px 0}
@@ -312,12 +312,12 @@ def main():
                 opts.append((f"Rebuilt from {NAME[grp].lower()}{' recipe' if grp != 'none' else ''} ({best['i']})", f"{run.as_posix()}/repro/{grp}/{best['i']}/controller.js"))
         if opts:
             o = "".join(f"<option value='{E(v)}'>{E(n)}</option>" for n, v in opts)
-            out.append("<h2>Your turn: a flight nobody has seen</h2><div class='card live grid g2'><div>"
+            out.append("<h2>Your turn: a flight nobody has seen</h2><div class='card live'><div class='grid g3'>"
                        f"<label>Controller<select id=ar style='width:100%'>{o}</select></label>"
                        "<label>Seed (leave empty for a fresh random one; seeds the loops studied are refused)<input id=sd type=number></label>"
                        "<label>Camera<select id=cm><option>chase</option><option>overview</option><option>top</option><option>low</option></select></label>"
-                       "<p><button id=go>Fly</button> <b id=res></b></p><p class=cap id=info></p></div>"
-                       "<div><iframe id=fr title='live flight'></iframe></div></div>")
+                       "</div><p><button id=go style='font-size:18px;padding:6px 26px;font-weight:600'>Fly</button> <b id=res></b> <a id=full target=_blank style='display:none'>open full screen &#8599;</a></p><p class=cap id=info></p>"
+                       "<iframe id=fr title='live flight' style='aspect-ratio:16/9;min-height:420px'></iframe></div>")
             out.append("""<script>
 const $=id=>document.getElementById(id);
 $('go').onclick=async()=>{$('res').textContent='flying...';$('res').style.color='';$('info').textContent='';
@@ -325,8 +325,8 @@ $('go').onclick=async()=>{$('res').textContent='flying...';$('res').style.color=
  let r; try { r=await (await fetch('/api/fly?'+q)).json(); } catch(err) { r={error:'the live server did not answer ('+err+'); is loop/serve.py running?'}; }
  if(r.error){$('res').textContent=r.error;$('res').style.color='#d03b3b';return;}
  const ok=r.result.success;$('res').textContent=ok?'LANDED':'FAILED: '+r.result.reason;$('res').style.color=ok?'#0ca30c':'#d03b3b';
- $('info').textContent='Seed '+r.seed+'. The controller ran in its own locked-down process; this replay is the recorded flight.';
- if(r.track)$('fr').src='/tasks/drone/view.html?'+new URLSearchParams({track:r.track,trail:1,cam:$('cm').value});};
+ const x=r.result;$('info').textContent='Seed '+r.seed+': '+(x.gatesPassed??'?')+' of 3 gates, '+(x.simulatedSeconds??'?')+' s'+(ok&&x.landingError!=null?', landed '+Math.round(x.landingError*1000)+' mm from the pad centre':'')+'. The controller ran in its own locked-down process; this replay is the recorded flight.';
+ if(r.track){const v='/tasks/drone/view.html?'+new URLSearchParams({track:r.track,trail:1,cam:$('cm').value});$('fr').src=v+'&hud=min';$('full').href=v;$('full').style.display='';}};
 </script>""")
     if task == "marble":
         # Live trial.
