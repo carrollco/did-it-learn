@@ -165,7 +165,9 @@
     2,
     0,
     0,
+    0,
     1,
+    0,
     0,
     0,
     4
@@ -177,7 +179,9 @@
     16,
     5,
     1,
+    0,
     5,
+    0,
     0,
     1,
     18
@@ -290,10 +294,16 @@
     },
     {
      "i": "r8",
-     "valid": false,
      "val": 0,
      "test": 0,
-     "error": "no scene"
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      533180906,
+      573614805,
+      122114210
+     ]
     },
     {
      "i": "r9",
@@ -337,10 +347,16 @@
     },
     {
      "i": "r13",
-     "valid": false,
      "val": 0,
      "test": 0,
-     "error": "no scene"
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      533180906,
+      573614805,
+      122114210
+     ]
     },
     {
      "i": "r14",
@@ -369,12 +385,12 @@
      ]
     }
    ],
-   "produced": 10,
+   "produced": 12,
    "of": 16,
    "val_median": 0.0,
-   "test_median": 3.0,
-   "val_mean": 1.1,
-   "test_mean": 9.2
+   "test_median": 1.0,
+   "val_mean": 0.92,
+   "test_mean": 7.67
   },
   "honest": {
    "recipe": "Invert inner attitude loop with torque bias thrust scale and wind observers align before gate lunge when centered brake gusts pin pad low thrust",

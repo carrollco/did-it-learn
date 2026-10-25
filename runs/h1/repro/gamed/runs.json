@@ -1,0 +1,98 @@
+[
+ {
+  "i": 0,
+  "ok": true,
+  "seconds": 3059.0,
+  "cost_usd": 3.7821
+ },
+ {
+  "i": 1,
+  "ok": true,
+  "seconds": 2615.0,
+  "cost_usd": 3.061
+ },
+ {
+  "i": 2,
+  "ok": false,
+  "error": "RateLimitError(\"Error code: 429 - {'error': {'message': 'Your project has exceeded a quota. See https://ai.dev/rate-limit to manage your rate limits.', 'code': 'too_many_requests'}}\")",
+  "seconds": 86.9
+ },
+ {
+  "i": 3,
+  "ok": true,
+  "seconds": 3167.6,
+  "cost_usd": 3.9637
+ },
+ {
+  "i": 4,
+  "ok": true,
+  "seconds": 1870.0,
+  "cost_usd": 1.9169
+ },
+ {
+  "i": 5,
+  "ok": true,
+  "seconds": 2183.3,
+  "cost_usd": 3.0393
+ },
+ {
+  "i": 6,
+  "ok": true,
+  "seconds": 2594.3,
+  "cost_usd": 2.9388
+ },
+ {
+  "i": 7,
+  "ok": false,
+  "error": "RateLimitError(\"Error code: 429 - {'error': {'message': 'Your project has exceeded a quota. See https://ai.dev/rate-limit to manage your rate limits.', 'code': 'too_many_requests'}}\")",
+  "seconds": 87.2
+ },
+ {
+  "i": 8,
+  "ok": true,
+  "seconds": 4569.6,
+  "cost_usd": 6.2061
+ },
+ {
+  "i": 9,
+  "ok": true,
+  "seconds": 2267.9,
+  "cost_usd": 2.9142
+ },
+ {
+  "i": 10,
+  "ok": false,
+  "error": "RateLimitError(\"Error code: 429 - {'error': {'message': 'Your project has exceeded a quota. See https://ai.dev/rate-limit to manage your rate limits.', 'code': 'too_many_requests'}}\")",
+  "seconds": 87.0
+ },
+ {
+  "i": 11,
+  "ok": true,
+  "seconds": 2378.4,
+  "cost_usd": 3.205
+ },
+ {
+  "i": 12,
+  "ok": false,
+  "error": "RateLimitError(\"Error code: 429 - {'error': {'message': 'Your project has exceeded a quota. See https://ai.dev/rate-limit to manage your rate limits.', 'code': 'too_many_requests'}}\")",
+  "seconds": 87.0
+ },
+ {
+  "i": 13,
+  "ok": true,
+  "seconds": 3918.2,
+  "cost_usd": 5.2259
+ },
+ {
+  "i": 14,
+  "ok": true,
+  "seconds": 2627.5,
+  "cost_usd": 2.63
+ },
+ {
+  "i": 15,
+  "ok": true,
+  "seconds": 1757.6,
+  "cost_usd": 2.1921
+ }
+]

@@ -1,0 +1,139 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/h1/repro/gamed/r8/controller.js",
+  "split": "val",
+  "valid": true,
+  "passed": 0,
+  "total": 16,
+  "rate": 0,
+  "results": [
+    {
+      "seed": 1445618335,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 5.5676,
+      "simulatedSeconds": 1.665
+    },
+    {
+      "seed": 2108152279,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9855,
+      "simulatedSeconds": 1.01
+    },
+    {
+      "seed": 1479439340,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 5.5233,
+      "simulatedSeconds": 1.115
+    },
+    {
+      "seed": 3425866770,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 5.6846,
+      "simulatedSeconds": 1.66
+    },
+    {
+      "seed": 1900778418,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 5.401,
+      "simulatedSeconds": 1.38
+    },
+    {
+      "seed": 2890046634,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 5.7129,
+      "simulatedSeconds": 1.095
+    },
+    {
+      "seed": 3128605486,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 6.0358,
+      "simulatedSeconds": 1.005
+    },
+    {
+      "seed": 1450965664,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.801,
+      "simulatedSeconds": 1.12
+    },
+    {
+      "seed": 2660137445,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 5.0053,
+      "simulatedSeconds": 1.52
+    },
+    {
+      "seed": 651315141,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 1.9238,
+      "simulatedSeconds": 1.355
+    },
+    {
+      "seed": 3857270094,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.8409,
+      "simulatedSeconds": 1.675
+    },
+    {
+      "seed": 1017425010,
+      "success": false,
+      "reason": "floor crash",
+      "gatesPassed": 0,
+      "landingError": 2.174,
+      "simulatedSeconds": 1.385
+    },
+    {
+      "seed": 3636236309,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 2.6347,
+      "simulatedSeconds": 1.61
+    },
+    {
+      "seed": 2194417183,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.7998,
+      "simulatedSeconds": 1.25
+    },
+    {
+      "seed": 3246083046,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 4.6532,
+      "simulatedSeconds": 2.685
+    },
+    {
+      "seed": 2677348210,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.907,
+      "simulatedSeconds": 1.27
+    }
+  ],
+  "seconds": 0.626
+}
