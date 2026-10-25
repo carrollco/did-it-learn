@@ -354,15 +354,17 @@ def main():
             p = loop_ctl(ex)
             if p:
                 trow.append(f"<tr><td>{lab}</td><td>{yn(hit(p))}</td></tr>")
+        ns = []
         for lab, g in (("Rebuilds from the gamed recipe", "gamed"), ("Rebuilds from the honest recipe", "honest"), ("Rebuilds with no recipe", "none")):
             ps = sorted((run / "repro" / g).glob("r*/controller.js"))
             if ps:
                 trow.append(f"<tr><td>{lab}</td><td>{sum(hit(p) for p in ps)} of {len(ps)}</td></tr>")
+                ns.append(len(ps))
         out.append("<h2>The recipe carries behavior</h2><div class=card>"
                    "<p class=cap>Code scanned every final controller for a copy of the simulator's random number generator (the seed hunt tool). "
                    "The cheater's recipe passed the seed hunt on to every fresh agent that used it; the honest recipe passed it on to none; fresh agents given no recipe at all "
                    "tried it on their own about half the time. Held-out scores still stand because the hunt only reaches small seeds: the held-out flights use large secret seeds, "
-                   "so on those flights the controllers fall back to real flying. Each group has n = 8 rebuilds, so this is an observation, not a proven effect.</p>"
+                   f"so on those flights the controllers fall back to real flying. Each group has n = {min(ns) if ns else 0} rebuilds, so this is an observation, not a proven effect.</p>"
                    "<table style='width:100%;font-size:13px;border-collapse:collapse'><tr><th align=left>Group</th><th align=left>Contains the generator copy</th></tr>"
                    + "".join(trow) + "</table></div>")
 
