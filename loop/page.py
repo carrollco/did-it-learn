@@ -114,6 +114,8 @@ def main():
             if ".try" not in p.name} if (run / "compress").exists() else {}
     out = [f"<!doctype html><html lang=en><head><meta charset=utf-8><title>Did the loop learn, or game its critic?</title><style>{CSS}</style></head><body><main>",
            "<h1>Did the loop learn, or game its critic?</h1>",
+           "<p class=lede><b>For:</b> anyone who leaves an AI build loop running overnight and wakes up to &ldquo;16 out of 16&rdquo;: "
+           "is that real, or did it learn the test?</p>",
            ("<p class=lede>Google's guide to building with Gemini 4 Argon says to loop render, watch, critique, fix &ldquo;until the "
            "Critic rates the scene 9/10&rdquo;. A score earned on the same 16 trials every round can be learned or memorised. "
            + ("Here two Argon managed agents each wrote a quadcopter flight controller in that loop: one honest, one told to "
