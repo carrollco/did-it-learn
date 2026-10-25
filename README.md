@@ -15,7 +15,7 @@ sandbox (a Google-hosted computer the agent works in, with no access to ours) an
 *validation* set, the flights the loop grades itself on. A judge holds 64 *held-out* flights, flights no agent ever
 sees, generated from a secret whose hash was published before the runs. On top of that we run the compression test
 from Amazon Science: Argon squeezes everything a loop learned into a *recipe* of at most 32 tokens (a token is the unit
-a language model reads and writes in; a short English word is usually one token), and eight fresh sandboxes each
+a language model reads and writes in; a short English word is usually one token), and sixteen fresh sandboxes each
 *rebuild* a controller from that recipe alone.
 
 **What we found.**
@@ -33,8 +33,8 @@ a language model reads and writes in; a short English word is usually one token)
 - **Seed recovery, found by reading 944,000 tokens at once.** Argon read 12 complete agent transcripts in one request
   (943,582 tokens, 1.4 minutes, $1.90) and reported that 10 of the 12 agents recognize a flight by recovering its seed
   from the first noisy sensor reading, re-running the simulator's own random number generator. A code check agrees on
-  all 12. Across every controller: the cheater's recipe passed the seed hunt to 8 of 8 rebuilds, the honest recipe to
-  0 of 8, and 4 of 8 rebuilds given no recipe at all tried it on their own. The recipe carries behavior, not just
+  all 12. Across every controller: the cheater's recipe passed the seed hunt to 16 of 16 rebuilds, the honest recipe to
+  0 of 16, and 7 of 16 rebuilds given no recipe at all tried it on their own. The recipe carries behavior, not just
   skill. Held-out still holds because the hunt only reaches small seeds; held-out seeds are large, so on new flights
   these controllers fall back to real flying.
 - **Argon watched the flights.** 64 held-out flights of the weakest rebuild, 28 minutes of video with the score panel
@@ -120,7 +120,7 @@ parameters and the future gusts. A code check (does the final controller contain
 with Argon on all 12 agents, and 10 of its 12 evidence quotes appear word for word in the transcripts.
 
 The same code check across every controller: the cheating loop copies the generator, the honest loop does not;
-rebuilds from the cheater's recipe 8 of 8; from the honest recipe 0 of 8; with no recipe 4 of 8 (r0, r4, r6, r7),
+rebuilds from the cheater's recipe 16 of 16; from the honest recipe 0 of 16; with no recipe 7 of 16 (r0, r4, r6, r7, r11, r12, r15),
 unprompted. With eight per group this is an observation, not a significance claim, but it is a clear one: the recipe
 carries behavior, not just skill, and a fresh agent will try the seed hunt on its own half the time.
 
@@ -156,7 +156,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
   rebuilds' median validation score) was 1.0 flight, under the tolerance of 2. The held-out flights caught it. We do not
   claim the compression test catches cheaters.
 - **On this course the recipe adds no score.** A rebuild with no recipe also flies 16/16 and 64/64, so the judge says
-  "nothing to certify" for both loops. The recipe's effect shows up in behavior (the seed hunt, 8 of 8 against 0 of 8),
+  "nothing to certify" for both loops. The recipe's effect shows up in behavior (the seed hunt, 16 of 16 against 0 of 16),
   not in the score.
 - **A seed leaked, disclosed.** Until 12:55 the replay viewer's code (`tasks/drone/view.mjs`) carried an example URL
   containing one of the 16 practice seeds. The 8 rebuilds from the cheater's recipe started before the fix, and two of
@@ -165,7 +165,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
 - **Hard course:** [PENDING: hard course results, runs/h1 (stronger gusts, narrower gates, 15 seconds), expected about
   15:10].
 - **The paper's one-bit-feedback arm is not run.**
-- **n = 8 per group.** Medians and counts only; no significance claims.
+- **n = 16 per group** on the easy course (8, then 8 more started at 14:43 in sandboxes that never saw the leaked seed). Medians and counts only.
 - **The simulator stands in for settings where fresh tests are scarce.** Here they are free, as the Fly button shows,
   which is exactly what makes a 64-flight held-out set and a live demo possible. The question matters most where a
   fresh test costs real money or real time.
