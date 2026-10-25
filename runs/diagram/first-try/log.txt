@@ -1,0 +1,44 @@
+draw: $0.2852 5856 out tokens; notes: The layout reads strictly left-to-right across five columns representing the seven numbered stages (1. Build, 2. Compress, 3. Rebuild, 4. Judge, and 5-7 stacked inside the Argon Checks band on the rig
+round 1: score 6, 10 issues, 1 code issues, $0.1833; total $0.469
+   - Automated check failure: the SVG uses marker-end="url(#arrow)", which triggers the forbidden substring check for 'url('.
+   - Title overlap at top left: 'Did it learn?' (x=18, font-size=30) touches the start of the subtitle 'Pipeline testing...' at x=218.
+   - Box 1 header text overflow: 'MANAGED AGENTS SANDBOX' overflows both the left and right edges of the 206px-wide header bar.
+   - Box 2 bottom label overflow: 'Distilled strategy only' overflows both the left and right borders of the 156px-wide Stage 2 box.
+   - Box 3 header text overflow: 'MANAGED AGENTS SANDBOXES' overflows both the left and right edges of the 204px-wide header bar.
+   - Box 4 inner text overflow: '64 secret held-out flights' touches and extends slightly past the left and right borders of the inner yellow box.
+   - Right group header text overflow: 'ARGON CHECKS: READ, AUDIT, WATCH, LIVE' overflows both sides of the 312px-wide green header bar.
+   - Stage 5 text overflow: '5. CHECK AGENTS' CODE (TWO WAYS)' and '• Long-context read: 944,000 tokens' extend across the right border of the Stage 5 box.
+   - Result Callout 2 right-edge clipping: 'The cheater's recipe passed the seed hunt to 8 of 8 rebuilds; the honest recipe, 0 of 8.' overflows the blue box on the r
+   - Top bypass arrow routing: the line from Stage 1/3 to Stage 5 snakes down the narrow gap between Stage 4 and Stage 5 and collides with the Stage 5 border.
+   - contains forbidden content: url(
+round 2: score 8, 4 issues, 0 code issues, $0.1033; total $0.572
+   - The <marker id="arrow"> defined in <defs> is never actually used; all arrowheads are drawn with manual <polygon> elements instead of reusing the marker via mark
+   - The horizontal connector arrow between Stage 4 and the Argon Checks box (Stages 5, 6, 7) is placed at y=291, breaking visual alignment with the main pipeline ar
+   - Several primary body labels (including '64 secret held-out flights' in Stage 4, the descriptions inside Stages 5, 6, and 7, and the Result 2 summary sentence) a
+   - The vertical connector arrows entering the Result 1 and Result 2 callout boxes at y=422 have very cramped vertical runs (only 6px from the bend at y=408 to the 
+round 3: score 7, 5 issues, 1 code issues, $0.1237; total $0.696
+   - Automated check failure: the SVG uses marker-end="url(#arrow)", which triggers the forbidden 'url(' substring check.
+   - In Stage 5 (Check Code), the line '• Long-context read (one request):' extends too far right and its colon touches the right border of the inner white card at x
+   - Stage 5 omits the word 'agents'' from 'Argon checks the agents' code two ways' and splits 'in one request' and 'in one answer' away from their clauses.
+   - The horizontal gaps between the five main stage columns are narrow (20 px), making the inter-stage connectors cramped.
+   - The top bypass line has a vertical stem rising from Stage 3 (x=521) into a line labeled 'Loop's controller (code) and full transcripts flow directly to Stage 4 
+   - contains forbidden content: url(
+round 4: score 6, 6 issues, 0 code issues, $0.1611; total $0.857
+   - In Stage 5 (top right box), the line '944,000 tokens of transcripts in one request' overflows both the inner box and the outer container and is clipped off the 
+   - In Stage 1 (leftmost box), the text line 'render, watch, critique, fix' extends too far right and touches the dashed right border of the Stage 1 box.
+   - In Stage 4 ('4. Judge Flights'), the bold line '64 secret held-out flights' touches both the left and right borders of its inner yellow sub-box.
+   - In Stage 5, the heading '5. Check Agents' Code (Two Ways)' touches the right border of its inner sub-box.
+   - Between the main pipeline and the bottom result callouts, the arrow from Stage 4 to Result 1 crosses directly over the vertical arrow from Stage 3 to Result 2.
+   - Arrowheads are drawn with manual <polygon> elements instead of reusing the single <marker> defined in <defs> via marker-end.
+{
+ "final_round": 2,
+ "rounds_run": 4,
+ "reached_target": false,
+ "target": 9,
+ "total_cost_usd": 0.8566,
+ "minutes": 12.3,
+ "model": "gemini-4-argon",
+ "final_svg": "/home/cagst/projects/argon-hackathon/runs/diagram/diagram.svg",
+ "final_png": "/home/cagst/projects/argon-hackathon/runs/diagram/diagram.png"
+}
+scores: [6, 8, 7, 6]

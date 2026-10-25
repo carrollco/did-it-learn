@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+  <rect x="0" y="0" width="1200" height="560" fill="#F8FAFC"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="16" y="36" font-size="28" font-weight="800" fill="#0F172A">Did it learn?</text>
+    <text x="224" y="35" font-size="16" font-weight="600" fill="#475569">Pipeline testing whether an AI build loop really learned a task, or just learned the test</text>
+
+    <path d="M 114 100 L 114 76 L 960 76 L 960 92" fill="none" stroke="#334155" stroke-width="2"/>
+    <polygon points="955,90 960,100 965,90" fill="#334155"/>
+    <path d="M 735 76 L 735 92" fill="none" stroke="#334155" stroke-width="2"/>
+    <polygon points="730,90 735,100 740,90" fill="#334155"/>
+    <text x="537" y="67" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Stage 1 controller (code) and record (full transcript) also feed directly into Stage 4 and Stage 5</text>
+
+    <rect x="16" y="100" width="196" height="294" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2" stroke-dasharray="6,4"/>
+    <rect x="16" y="100" width="196" height="28" rx="8" fill="#4F46E5"/>
+    <text x="114" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">MANAGED AGENTS</text>
+    <text x="28" y="150" font-size="16" font-weight="800" fill="#1E1B4B">1. Build Loop</text>
+    <text x="28" y="173" font-size="14" font-weight="700" fill="#0F172A">Google's loop:</text>
+    <text x="28" y="192" font-size="14" fill="#1E293B">render, watch, critique, fix</text>
+    <text x="28" y="216" font-size="14" font-weight="700" fill="#0F172A">Sandbox runs on:</text>
+    <text x="28" y="235" font-size="14" font-weight="700" fill="#3730A3">16 practice flights</text>
+    <text x="28" y="254" font-size="14" fill="#1E293B">of a quadcopter course</text>
+    <rect x="28" y="268" width="172" height="114" rx="6" fill="#FFFFFF" stroke="#818CF8" stroke-width="1.5"/>
+    <text x="38" y="290" font-size="14" font-weight="700" fill="#1E1B4B">Produces:</text>
+    <text x="38" y="313" font-size="14" font-weight="600" fill="#0F172A">&#8226; Controller (code)</text>
+    <text x="38" y="336" font-size="14" font-weight="600" fill="#0F172A">&#8226; Record</text>
+    <text x="50" y="356" font-size="13" fill="#475569">(the full transcript)</text>
+
+    <line x1="212" y1="247" x2="226" y2="247" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="224,242 234,247 224,252" fill="#334155"/>
+
+    <rect x="234" y="100" width="160" height="294" rx="10" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <rect x="234" y="100" width="160" height="28" rx="8" fill="#0F766E"/>
+    <text x="314" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">ARGON</text>
+    <text x="246" y="150" font-size="16" font-weight="800" fill="#134E4A">2. Compress</text>
+    <text x="246" y="178" font-size="14" fill="#1E293B">Argon compresses</text>
+    <text x="246" y="198" font-size="14" fill="#1E293B">the record into a</text>
+    <text x="246" y="218" font-size="14" font-weight="700" fill="#0F766E">32-token recipe</text>
+    <rect x="248" y="244" width="132" height="86" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+    <text x="314" y="280" font-size="16" font-weight="800" fill="#0F766E" text-anchor="middle">32-token</text>
+    <text x="314" y="304" font-size="16" font-weight="800" fill="#0F766E" text-anchor="middle">recipe</text>
+    <text x="314" y="360" font-size="14" font-weight="600" fill="#115E59" text-anchor="middle">Distilled strategy</text>
+
+    <line x1="394" y1="247" x2="408" y2="247" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="406,242 416,247 406,252" fill="#334155"/>
+
+    <rect x="416" y="100" width="190" height="294" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2" stroke-dasharray="6,4"/>
+    <rect x="416" y="100" width="190" height="28" rx="8" fill="#4F46E5"/>
+    <text x="511" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">MANAGED AGENTS</text>
+    <text x="428" y="150" font-size="16" font-weight="800" fill="#1E1B4B">3. Rebuild</text>
+    <text x="428" y="176" font-size="14" fill="#1E293B">Fresh sandboxes</text>
+    <text x="428" y="196" font-size="14" fill="#1E293B">rebuild a controller</text>
+    <text x="428" y="216" font-size="14" fill="#1E293B">from the</text>
+    <text x="428" y="236" font-size="14" font-weight="700" fill="#1E1B4B">recipe alone</text>
+    <rect x="428" y="262" width="166" height="118" rx="6" fill="#FFFFFF" stroke="#818CF8" stroke-width="1.5"/>
+    <text x="511" y="290" font-size="15" font-weight="800" fill="#3730A3" text-anchor="middle">8 to 16 rebuilds</text>
+    <text x="511" y="310" font-size="14" font-weight="700" fill="#3730A3" text-anchor="middle">per recipe</text>
+    <text x="511" y="340" font-size="14" fill="#475569" text-anchor="middle">Independent</text>
+    <text x="511" y="358" font-size="14" fill="#475569" text-anchor="middle">rebuilt controllers</text>
+
+    <line x1="606" y1="247" x2="620" y2="247" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="618,242 628,247 618,252" fill="#334155"/>
+
+    <rect x="628" y="100" width="214" height="294" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+    <rect x="628" y="100" width="214" height="28" rx="8" fill="#B45309"/>
+    <text x="735" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">OUR CODE JUDGE</text>
+    <text x="640" y="150" font-size="16" font-weight="800" fill="#78350F">4. Judge Flights</text>
+    <text x="640" y="176" font-size="14" fill="#1E293B">Our code judge flies</text>
+    <text x="640" y="196" font-size="14" fill="#1E293B">everything:</text>
+    <text x="640" y="218" font-size="14" font-weight="600" fill="#0F172A">&#8226; Loop's controller</text>
+    <text x="640" y="238" font-size="14" font-weight="600" fill="#0F172A">&#8226; Every rebuild</text>
+    <rect x="638" y="262" width="194" height="118" rx="6" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="735" y="288" font-size="14" font-weight="600" fill="#78350F" text-anchor="middle">Tested on</text>
+    <text x="735" y="312" font-size="14" font-weight="700" fill="#B45309" text-anchor="middle">64 secret held-out flights</text>
+    <text x="735" y="340" font-size="14" fill="#475569" text-anchor="middle">Unseen courses test</text>
+    <text x="735" y="358" font-size="14" fill="#475569" text-anchor="middle">true generalization</text>
+
+    <line x1="842" y1="247" x2="856" y2="247" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="854,242 864,247 854,252" fill="#334155"/>
+
+    <rect x="864" y="100" width="320" height="294" rx="10" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <rect x="864" y="100" width="320" height="28" rx="8" fill="#0F766E"/>
+    <text x="1024" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">ARGON CHECKS</text>
+
+    <rect x="874" y="134" width="300" height="118" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+    <text x="884" y="153" font-size="15" font-weight="800" fill="#134E4A">5. Check Agents' Code (Two Ways)</text>
+    <text x="884" y="173" font-size="14" font-weight="700" fill="#0F172A">&#8226; Long-context read:</text>
+    <text x="896" y="191" font-size="14" font-weight="700" fill="#0F766E">944,000 tokens of transcripts in one request</text>
+    <text x="884" y="211" font-size="14" font-weight="700" fill="#0F172A">&#8226; Long-output audit:</text>
+    <text x="896" y="229" font-size="14" fill="#334155">every line of every controller</text>
+    <text x="896" y="245" font-size="14" fill="#334155">annotated in one answer</text>
+
+    <rect x="874" y="258" width="300" height="62" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+    <text x="884" y="277" font-size="15" font-weight="800" fill="#134E4A">6. Watch Flight Video</text>
+    <text x="884" y="296" font-size="14" fill="#1E293B">Argon watches flight video and</text>
+    <text x="884" y="313" font-size="14" font-weight="700" fill="#0F766E">calls each flight pass or fail</text>
+
+    <rect x="874" y="326" width="300" height="60" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+    <text x="884" y="345" font-size="15" font-weight="800" fill="#134E4A">7. Check Live Flight</text>
+    <text x="884" y="364" font-size="14" fill="#1E293B">At the table, Argon checks</text>
+    <text x="884" y="380" font-size="14" font-weight="700" fill="#0F766E">a live flight</text>
+    <rect x="1094" y="350" width="68" height="26" rx="13" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.5"/>
+    <text x="1128" y="368" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">LIVE</text>
+
+    <path d="M 680 394 L 680 408 L 320 408 L 320 416" fill="none" stroke="#334155" stroke-width="2"/>
+    <polygon points="315,414 320,424 325,414" fill="#334155"/>
+    <line x1="511" y1="394" x2="511" y2="416" stroke="#334155" stroke-width="2"/>
+    <polygon points="506,414 511,424 516,414" fill="#334155"/>
+    <line x1="1010" y1="394" x2="1010" y2="416" stroke="#334155" stroke-width="2"/>
+    <polygon points="1005,414 1010,424 1015,414" fill="#334155"/>
+
+    <rect x="16" y="424" width="430" height="122" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <rect x="16" y="424" width="10" height="122" rx="4" fill="#DC2626"/>
+    <text x="36" y="446" font-size="13" font-weight="800" fill="#991B1B">RESULT 1: PRACTICE VS HELD-OUT FLIGHTS</text>
+    <rect x="36" y="456" width="172" height="50" rx="6" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="1.5"/>
+    <text x="48" y="489" font-size="24" font-weight="800" fill="#15803D">16/16</text>
+    <text x="130" y="486" font-size="14" font-weight="700" fill="#1E293B">practice</text>
+    <line x1="214" y1="481" x2="234" y2="481" stroke="#334155" stroke-width="2.5"/>
+    <polygon points="232,476 242,481 232,486" fill="#334155"/>
+    <rect x="246" y="456" width="184" height="50" rx="6" fill="#FFFFFF" stroke="#DC2626" stroke-width="2"/>
+    <text x="258" y="489" font-size="24" font-weight="800" fill="#DC2626">0/64</text>
+    <text x="328" y="486" font-size="14" font-weight="700" fill="#991B1B">held-out</text>
+    <text x="36" y="531" font-size="14" font-weight="700" fill="#7F1D1D">The cheater: 16/16 practice, then 0/64 held-out.</text>
+
+    <rect x="464" y="424" width="720" height="122" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <rect x="464" y="424" width="10" height="122" rx="4" fill="#2563EB"/>
+    <text x="484" y="446" font-size="13" font-weight="800" fill="#1E40AF">RESULT 2: SEED HUNT IN REBUILDS FROM THE 32-TOKEN RECIPE</text>
+    <rect x="484" y="456" width="324" height="50" rx="6" fill="#FFFFFF" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="498" y="489" font-size="24" font-weight="800" fill="#DC2626">8 of 8</text>
+    <text x="588" y="478" font-size="14" font-weight="700" fill="#1E293B">rebuilds got seed hunt</text>
+    <text x="588" y="496" font-size="13" fill="#475569">(cheater's recipe)</text>
+    <rect x="828" y="456" width="336" height="50" rx="6" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <text x="842" y="489" font-size="24" font-weight="800" fill="#059669">0 of 8</text>
+    <text x="932" y="478" font-size="14" font-weight="700" fill="#1E293B">rebuilds got seed hunt</text>
+    <text x="932" y="496" font-size="13" fill="#475569">(honest recipe)</text>
+    <text x="484" y="531" font-size="14" font-weight="700" fill="#1E3A8A">The cheater's recipe passed the seed hunt to 8 of 8 rebuilds; the honest recipe, 0 of 8.</text>
+  </g>
+</svg>

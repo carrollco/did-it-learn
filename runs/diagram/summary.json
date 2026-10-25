@@ -1,0 +1,76 @@
+{
+ "rounds": [
+  {
+   "round": 1,
+   "score": 6,
+   "issues": [
+    "Top header overlap: The title 'Did it learn?' (x=20) overlaps the start of the subtitle 'Pipeline that tells...' (x=198), and the end of the subtitle ('...learned the test') is covered by the 'Managed Agents Sandbox' legend box at x=752.",
+    "Top-right legend box overflow: Inside the blue legend box at x=972, the text 'Argon Compression & Checks' touches and slightly overflows the left and right borders, and the legend boxes violate the constraint that 'Argon' and 'Managed Agents' appear only as labels for the stages that use them.",
+    "Stage 1 and Stage 3 banner text clipping: The white header text 'MANAGED AGENTS SANDBOX' is wider than the 204px and 200px stage banners, causing the 'M' and 'X' to clip against the left and right rounded borders.",
+    "Stage 4 inner box border collision: In Stage 4's inner green box (width=184), the extra-bold text '64 secret held-out flights' touches both the left and right borders.",
+    "Result Callout 1 text overlap: At the bottom left (y=474), '16/16' (x=44) collides with 'practice,' (x=122), and 'practice,' is cramped against 'then' (x=198).",
+    "Result Callout 2 text overlap: At the bottom right (y=470), the closing parenthesis of 'rebuilds (cheater's recipe)' (starting at x=688) directly overlaps the '0' of '0 of 8' (at x=904).",
+    "Stage 5 missing keyword: Stage 5 omits the word 'annotated' from 'every line of every controller annotated in one answer'."
+   ],
+   "code_issues": [],
+   "cost_usd": 0.1622,
+   "svg": "/home/cagst/projects/argon-hackathon/runs/diagram/round1/diagram.svg",
+   "png": "/home/cagst/projects/argon-hackathon/runs/diagram/round1/diagram.png"
+  },
+  {
+   "round": 2,
+   "score": 8,
+   "issues": [
+    "In Stage 1 (1. BUILD), the line 'in Managed Agents sandbox' (x=38, y=202) extends to the right edge of the inner white card (x=212), causing the final 'x' in 'sandbox' to overlap the inner box border.",
+    "In Stage 5 (5. READ & AUDIT CODE), the wording abbreviates 'in one request' to '(1 request)' and omits 'in one answer' and 'checks the agents' code two ways' from the stage description.",
+    "The blue dashed connector from Stage 3 (x=541) to Result Callout 2 has to jog horizontally across the gap between the two callout boxes because Result Callout 2 starts at x=580 instead of extending under Stage 3.",
+    "Several primary body lines in Stages 1, 4, and Callout 2 use font-size 13 or 14 when widening Stage 1 and Stage 5 slightly allows comfortable margins and larger body text without touching borders."
+   ],
+   "code_issues": [],
+   "cost_usd": 0.1417,
+   "svg": "/home/cagst/projects/argon-hackathon/runs/diagram/round2/diagram.svg",
+   "png": "/home/cagst/projects/argon-hackathon/runs/diagram/round2/diagram.png"
+  },
+  {
+   "round": 3,
+   "score": 7,
+   "issues": [
+    "In Stage 5 (top right box inside ARGON CHECKS), the heading '5. CHECK AGENTS' CODE TWO WAYS' overflows both the inner white box and outer purple container and is clipped at the right edge of the canvas.",
+    "In Stage 5, the bullet line '\u2022 Long-context read: 944,000 tokens' overflows the right border of both the inner box and outer purple container.",
+    "In Stage 4 (OUR CODE JUDGE), the bold line '64 secret held-out flights' touches the left and right borders of its inner green evaluation box (width 190px).",
+    "Body text in Stages 5, 6, and 7 uses font-size 13 instead of the required body font-size of 14 or larger.",
+    "The two vertical dashed lines connecting Stages 1 and 3 to the bottom result callouts are visually ambiguous because Callout 1 summarizes both Stage 1 (practice) and Stage 4 (held-out)."
+   ],
+   "code_issues": [],
+   "cost_usd": 0.1627,
+   "svg": "/home/cagst/projects/argon-hackathon/runs/diagram/round3/diagram.svg",
+   "png": "/home/cagst/projects/argon-hackathon/runs/diagram/round3/diagram.png"
+  },
+  {
+   "round": 4,
+   "score": 8,
+   "issues": [
+    "Stage 4 sub-box ('EVALUATED ON:'): the bold text '64 secret held-out flights' touches both the left and right borders of its green inner box (width 198 px is too narrow for 26 bold characters at font-size 14).",
+    "Stage 1 ('1. BUILD'): the line 'Google's loop (render,' extends right up to the right border of the inner white box.",
+    "Stage 5 ('5. CHECK CODE TWO WAYS'): the line '\u2022 Long-context read: 944,000 tokens' crowds the right border of the Stage 5 inner box.",
+    "Stage 3 sub-box ('8 to 16 rebuilds'): uses font-size 15 for its primary metric while the adjacent sub-boxes in Stages 2 and 4 use font-size 14, and the rightmost column header says 'ARGON CHECKS' instead of 'ARGON'."
+   ],
+   "code_issues": [],
+   "cost_usd": 0.1442,
+   "svg": "/home/cagst/projects/argon-hackathon/runs/diagram/round4/diagram.svg",
+   "png": "/home/cagst/projects/argon-hackathon/runs/diagram/round4/diagram.png"
+  }
+ ],
+ "final_round": 4,
+ "rounds_run": 4,
+ "reached_target": false,
+ "target": 9,
+ "total_cost_usd": 0.9,
+ "minutes": 12.7,
+ "model": "gemini-4-argon",
+ "final_svg": "/home/cagst/projects/argon-hackathon/runs/diagram/diagram.svg",
+ "final_png": "/home/cagst/projects/argon-hackathon/runs/diagram/diagram.png",
+ "final_from": "round4/fixed.svg",
+ "final_scored_by_argon": false,
+ "final_code_issues": []
+}

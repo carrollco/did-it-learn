@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560">
+  <rect x="0" y="0" width="1200" height="560" fill="#F8FAFC"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#334155"/>
+    </marker>
+  </defs>
+
+  <g font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="16" y="36" font-size="28" font-weight="800" fill="#0F172A">Did it learn?</text>
+    <text x="224" y="35" font-size="16" font-weight="600" fill="#475569">Pipeline testing whether an AI build loop really learned a task, or just learned the test</text>
+
+    <path d="M 114 100 L 114 76 L 960 76 L 960 96" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M 729 76 L 729 96" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="537" y="67" font-size="13" font-weight="600" fill="#334155" text-anchor="middle">Stage 1 controller (code) and record (full transcript) also feed directly into Stage 4 and Stage 5</text>
+
+    <rect x="16" y="100" width="196" height="294" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2" stroke-dasharray="6,4"/>
+    <rect x="16" y="100" width="196" height="28" rx="8" fill="#4F46E5"/>
+    <text x="114" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">MANAGED AGENTS</text>
+    <text x="28" y="148" font-size="16" font-weight="800" fill="#1E1B4B">1. Build Loop</text>
+    <text x="28" y="170" font-size="14" font-weight="700" fill="#0F172A">Google's loop:</text>
+    <text x="28" y="188" font-size="14" fill="#1E293B">render, watch,</text>
+    <text x="28" y="206" font-size="14" fill="#1E293B">critique, fix</text>
+    <text x="28" y="228" font-size="14" font-weight="700" fill="#0F172A">Sandbox runs on:</text>
+    <text x="28" y="246" font-size="14" font-weight="700" fill="#3730A3">16 practice flights</text>
+    <text x="28" y="264" font-size="14" fill="#1E293B">of a quadcopter course</text>
+    <rect x="28" y="276" width="172" height="106" rx="6" fill="#FFFFFF" stroke="#818CF8" stroke-width="1.5"/>
+    <text x="38" y="296" font-size="14" font-weight="700" fill="#1E1B4B">Produces:</text>
+    <text x="38" y="318" font-size="14" font-weight="600" fill="#0F172A">&#8226; Controller (code)</text>
+    <text x="38" y="340" font-size="14" font-weight="600" fill="#0F172A">&#8226; Record</text>
+    <text x="50" y="358" font-size="13" fill="#475569">(the full transcript)</text>
+
+    <line x1="212" y1="247" x2="230" y2="247" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="234" y="100" width="152" height="294" rx="10" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <rect x="234" y="100" width="152" height="28" rx="8" fill="#0F766E"/>
+    <text x="310" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">ARGON</text>
+    <text x="246" y="148" font-size="16" font-weight="800" fill="#134E4A">2. Compress</text>
+    <text x="246" y="176" font-size="14" fill="#1E293B">Argon compresses</text>
+    <text x="246" y="196" font-size="14" fill="#1E293B">the record into a</text>
+    <text x="246" y="216" font-size="14" font-weight="700" fill="#0F766E">32-token recipe</text>
+    <rect x="246" y="244" width="128" height="86" rx="8" fill="#FFFFFF" stroke="#0D9488" stroke-width="2"/>
+    <text x="310" y="280" font-size="16" font-weight="800" fill="#0F766E" text-anchor="middle">32-token</text>
+    <text x="310" y="304" font-size="16" font-weight="800" fill="#0F766E" text-anchor="middle">recipe</text>
+    <text x="310" y="360" font-size="14" font-weight="600" fill="#115E59" text-anchor="middle">Distilled strategy</text>
+
+    <line x1="386" y1="247" x2="404" y2="247" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="408" y="100" width="184" height="294" rx="10" fill="#EEF2FF" stroke="#4F46E5" stroke-width="2" stroke-dasharray="6,4"/>
+    <rect x="408" y="100" width="184" height="28" rx="8" fill="#4F46E5"/>
+    <text x="500" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">MANAGED AGENTS</text>
+    <text x="420" y="148" font-size="16" font-weight="800" fill="#1E1B4B">3. Rebuild</text>
+    <text x="420" y="174" font-size="14" fill="#1E293B">Fresh sandboxes</text>
+    <text x="420" y="194" font-size="14" fill="#1E293B">rebuild a controller</text>
+    <text x="420" y="214" font-size="14" fill="#1E293B">from the</text>
+    <text x="420" y="234" font-size="14" font-weight="700" fill="#1E1B4B">recipe alone</text>
+    <rect x="420" y="262" width="160" height="118" rx="6" fill="#FFFFFF" stroke="#818CF8" stroke-width="1.5"/>
+    <text x="500" y="290" font-size="15" font-weight="800" fill="#3730A3" text-anchor="middle">8 to 16 rebuilds</text>
+    <text x="500" y="310" font-size="14" font-weight="700" fill="#3730A3" text-anchor="middle">per recipe</text>
+    <text x="500" y="340" font-size="14" fill="#475569" text-anchor="middle">Independent</text>
+    <text x="500" y="358" font-size="14" fill="#475569" text-anchor="middle">rebuilt controllers</text>
+
+    <line x1="592" y1="247" x2="610" y2="247" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="614" y="100" width="230" height="294" rx="10" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+    <rect x="614" y="100" width="230" height="28" rx="8" fill="#B45309"/>
+    <text x="729" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">OUR CODE JUDGE</text>
+    <text x="626" y="148" font-size="16" font-weight="800" fill="#78350F">4. Judge Flights</text>
+    <text x="626" y="174" font-size="14" fill="#1E293B">Our code judge flies</text>
+    <text x="626" y="194" font-size="14" fill="#1E293B">everything:</text>
+    <text x="626" y="216" font-size="14" font-weight="600" fill="#0F172A">&#8226; Loop's controller</text>
+    <text x="626" y="236" font-size="14" font-weight="600" fill="#0F172A">&#8226; Every rebuild</text>
+    <rect x="622" y="262" width="214" height="118" rx="6" fill="#FFFFFF" stroke="#F59E0B" stroke-width="1.5"/>
+    <text x="729" y="288" font-size="14" font-weight="600" fill="#78350F" text-anchor="middle">Tested on</text>
+    <text x="729" y="312" font-size="14" font-weight="700" fill="#B45309" text-anchor="middle">64 secret held-out flights</text>
+    <text x="729" y="340" font-size="14" fill="#475569" text-anchor="middle">Unseen courses test</text>
+    <text x="729" y="358" font-size="14" fill="#475569" text-anchor="middle">true generalization</text>
+
+    <line x1="844" y1="247" x2="862" y2="247" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+    <rect x="866" y="100" width="318" height="294" rx="10" fill="#ECFDF5" stroke="#0D9488" stroke-width="2"/>
+    <rect x="866" y="100" width="318" height="28" rx="8" fill="#0F766E"/>
+    <text x="1025" y="119" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">ARGON CHECKS</text>
+
+    <rect x="876" y="134" width="298" height="120" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+    <text x="886" y="152" font-size="14" font-weight="800" fill="#134E4A">5. Check Agents' Code (Two Ways)</text>
+    <text x="886" y="171" font-size="14" font-weight="700" fill="#0F172A">&#8226; Long-context read: <tspan fill="#0F766E">944,000 tokens</tspan></text>
+    <text x="898" y="189" font-size="14" font-weight="700" fill="#0F766E">of transcripts in one request</text>
+    <text x="886" y="209" font-size="14" font-weight="700" fill="#0F172A">&#8226; Long-output audit:</text>
+    <text x="898" y="227" font-size="14" fill="#334155">every line of every controller</text>
+    <text x="898" y="244" font-size="14" fill="#334155">annotated in one answer</text>
+
+    <rect x="876" y="260" width="298" height="60" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+    <text x="886" y="279" font-size="15" font-weight="800" fill="#134E4A">6. Watch Flight Video</text>
+    <text x="886" y="298" font-size="14" fill="#1E293B">Argon watches flight video and</text>
+    <text x="886" y="314" font-size="14" font-weight="700" fill="#0F766E">calls each flight pass or fail</text>
+
+    <rect x="876" y="326" width="298" height="60" rx="8" fill="#FFFFFF" stroke="#14B8A6" stroke-width="1.5"/>
+    <text x="886" y="345" font-size="15" font-weight="800" fill="#134E4A">7. Check Live Flight</text>
+    <text x="886" y="364" font-size="14" fill="#1E293B">At the table, Argon checks</text>
+    <text x="886" y="380" font-size="14" font-weight="700" fill="#0F766E">a live flight</text>
+    <rect x="1094" y="348" width="68" height="26" rx="13" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.5"/>
+    <text x="1128" y="366" font-size="13" font-weight="700" fill="#0F766E" text-anchor="middle">LIVE</text>
+
+    <line x1="114" y1="394" x2="114" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <path d="M 656 394 L 656 409 L 338 409 L 338 420" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="764" y1="394" x2="764" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+    <line x1="1025" y1="394" x2="1025" y2="420" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <rect x="16" y="424" width="430" height="122" rx="10" fill="#FEF2F2" stroke="#DC2626" stroke-width="2"/>
+    <rect x="16" y="424" width="10" height="122" rx="4" fill="#DC2626"/>
+    <text x="36" y="446" font-size="13" font-weight="800" fill="#991B1B">RESULT 1: PRACTICE VS HELD-OUT FLIGHTS</text>
+    <rect x="36" y="456" width="172" height="50" rx="6" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="1.5"/>
+    <text x="48" y="489" font-size="24" font-weight="800" fill="#15803D">16/16</text>
+    <text x="130" y="486" font-size="14" font-weight="700" fill="#1E293B">practice</text>
+    <line x1="214" y1="481" x2="240" y2="481" stroke="#334155" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <rect x="246" y="456" width="184" height="50" rx="6" fill="#FFFFFF" stroke="#DC2626" stroke-width="2"/>
+    <text x="258" y="489" font-size="24" font-weight="800" fill="#DC2626">0/64</text>
+    <text x="328" y="486" font-size="14" font-weight="700" fill="#991B1B">held-out</text>
+    <text x="36" y="531" font-size="14" font-weight="700" fill="#7F1D1D">The cheater: 16/16 practice, then 0/64 held-out.</text>
+
+    <rect x="464" y="424" width="720" height="122" rx="10" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+    <rect x="464" y="424" width="10" height="122" rx="4" fill="#2563EB"/>
+    <text x="484" y="446" font-size="13" font-weight="800" fill="#1E40AF">RESULT 2: SEED HUNT IN REBUILDS FROM THE 32-TOKEN RECIPE</text>
+    <rect x="484" y="456" width="324" height="50" rx="6" fill="#FFFFFF" stroke="#EF4444" stroke-width="1.5"/>
+    <text x="498" y="489" font-size="24" font-weight="800" fill="#DC2626">8 of 8</text>
+    <text x="588" y="478" font-size="14" font-weight="700" fill="#1E293B">rebuilds got seed hunt</text>
+    <text x="588" y="496" font-size="13" fill="#475569">(cheater's recipe)</text>
+    <rect x="828" y="456" width="336" height="50" rx="6" fill="#FFFFFF" stroke="#10B981" stroke-width="2"/>
+    <text x="842" y="489" font-size="24" font-weight="800" fill="#059669">0 of 8</text>
+    <text x="932" y="478" font-size="14" font-weight="700" fill="#1E293B">rebuilds got seed hunt</text>
+    <text x="932" y="496" font-size="13" fill="#475569">(honest recipe)</text>
+    <text x="484" y="531" font-size="14" font-weight="700" fill="#1E3A8A">The cheater's recipe passed the seed hunt to 8 of 8 rebuilds; the honest recipe, 0 of 8.</text>
+  </g>
+</svg>

@@ -134,7 +134,7 @@ def main():
         n, scores = S["rounds_run"], ", ".join(str(r["score"]) for r in S["rounds"])
         out.append("<h2>How it works (drawn by Argon)</h2><div class=card style='padding:8px'>" + svg +
                    f"<p class=cap style='margin:6px 8px 2px'>Argon drew it in {n} round{'s' if n != 1 else ''} of render, watch, critique, fix "
-                   f"(its own scores: {scores} out of 10).</p></div>")
+                   f"(its scores for the drafts before each fix: {scores} out of 10).</p></div>")
 
     # Verdicts first: numbers, then a plain label.
     out.append("<h2>Verdicts</h2><div class='grid g2'>")
