@@ -4,7 +4,7 @@ const caps=["Google's loop, told to win: 16/16 on practice, 0/64 on new flights"
 "The cheat, in its own code: a hard-coded list of the 16 practice seeds",
 "Rebuilds score the same on practice and new flights; the cheater does not",
 "Argon read 944,000 tokens of agent transcripts in one request and found the seed hunt",
-"The cheater's 32-token recipe passed its seed hunt on to 8 of 8 rebuilds",
+"The cheater's 32-token recipe passed its seed hunt on to every single rebuild",
 "Fly any controller on a seed nobody has seen: the gamed loop's code fails at once",
 "A rebuild from the gamed recipe, flown live; Argon checks the code and the flight"];
 const b=await chromium.launch();

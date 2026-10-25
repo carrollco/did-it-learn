@@ -19,9 +19,9 @@ LINES = [
     (6.4, 12.1, "Two loops. The one told to win memorized all 16 practice flights."),
     (12.4, 19.1, "On 64 flights it never saw, it scored zero. The honest loop scored all 64."),
     (19.4, 25.4, "Argon read twelve full transcripts at once, 944,000 tokens, and found the cheat."),
-    (25.7, 32.9, "Squeezed to one sentence and rebuilt fresh, the cheater's habit traveled: 8 of 8."),
+    (25.7, 32.9, "Squeezed to one sentence and rebuilt fresh, the cheater's habit traveled to every single rebuild."),
     (33.2, 40.2, "Fly the cheater somewhere new. Dead in a hundredth of a second. Not a wobble."),
-    (40.6, 54.1, "Now a rebuilt pilot. It lands. Argon reads its code and the flight, live, and says in about five seconds whether it hunts seeds and whether it landed. Our code checks Argon's answer."),
+    (40.6, 54.1, "Now a rebuilt pilot. It lands. Argon reads its code and the flight, live, and says in about five seconds whether it hunts seeds and whether it landed. The judge grades Argon's answer."),
     (55.9, 59.7, "Did it learn? Now you can ask."),
 ]
 
@@ -35,8 +35,9 @@ def dur(p):
 def main():
     c = client()
     parts, log = [], []
+    only = {int(x) for x in sys.argv[1].split(",")} if len(sys.argv) > 1 else set(range(1, len(LINES) + 1))  # re-voice just these lines
     with ThreadPoolExecutor(max_workers=8) as ex:  # all lines at once
-        list(ex.map(lambda kt: speak(c, kt[1][2], D / f"voice{kt[0]}.wav", style=STYLE), enumerate(LINES, 1)))
+        list(ex.map(lambda kt: speak(c, kt[1][2], D / f"voice{kt[0]}.wav", style=STYLE), [kt for kt in enumerate(LINES, 1) if kt[0] in only]))
     for k, (a, b, text) in enumerate(LINES, 1):
         raw = D / f"voice{k}.wav"
         d = dur(raw); room = b - a
