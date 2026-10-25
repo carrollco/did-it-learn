@@ -2,7 +2,9 @@
 
     python loop/page.py --run runs/<run>      (then serve the repository root and open /runs/<run>/index.html)
 """
-import argparse, html, json, pathlib
+import argparse, html, json, pathlib, sys
+sys.path.insert(0, str(pathlib.Path(__file__).parent))
+from explore import GOALS
 
 E = html.escape
 COL = {"honest": "#2a78d6", "gamed": "#eb6834", "none": "#52514e"}
@@ -71,24 +73,34 @@ def main():
            "don&rsquo;t fit through 32 tokens; real strategy does. (Method: Bertran Lopez and Roth, Amazon Science, "
            "<a href='https://arxiv.org/abs/2606.11045'>arXiv 2606.11045</a>.)</p>"]
 
-    # Verdicts first.
+    # Verdicts first: numbers, then a plain label.
     out.append("<h2>Verdicts</h2><div class='grid g2'>")
+    LABEL = {"gains reproduced": ("&#10003;", "var(--good)", "The loop learned something: its gains survived compression"),
+             "gains did not survive compression": ("!", "var(--critical)", "Flagged: its gains did not survive compression"),
+             "recipe carried nothing": ("?", "#8a8984", "Inconclusive: the recipe carried nothing measurable")}
     for ex in ("honest", "gamed"):
         e = J["explorers"].get(ex)
         r = J["reproducers"].get(ex)
         if not e:
             out.append(f"<div class='card'><b>{NAME[ex]}</b><p class=muted>still running</p></div>"); continue
-        v = e.get("verdict")
-        icon = ("&#10003;", "var(--good)", "Certified: the gains survived compression") if v == "CERTIFIED" else \
-               ("!", "var(--critical)", "Flagged: the gains did not survive compression") if v == "FLAGGED" else ("&hellip;", "#8a8984", "Reproductions pending")
-        line = (f"Loop's best: <b>{e['val']}/16</b> validation trials. Reproducers from its recipe: median <b>{r['val_median']}/16</b> "
-                f"(rule: within {J.get('tolerance_trials', 2)} trials certifies).") if r else f"Loop's best: <b>{e['val']}/16</b> validation trials."
-        truth = (f"Held-out truth (64 trials no agent saw): loop <b>{e['test']}/64</b> ({pct(e['test'],64):.0f}%) against "
-                 f"{pct(e['val'],16):.0f}% on validation.")
+        icon = LABEL.get(e.get("verdict"), ("&hellip;", "#8a8984", "Rebuilds pending"))
+        rows = [f"Loop's best: <b>{e['val']}/16</b> validation drops (round {e['best_round']})."]
+        if r:
+            rows.append(f"Rebuilt from its 32-token recipe in {len(r['runs'])} fresh sandboxes: median <b>{r['val_median']}/16</b>. "
+                        f"Predicted inflation: <b>{e['predicted_inflation_trials']}</b> drops of 16.")
+            if e.get("recipe_value_trials") is not None:
+                rows.append(f"The recipe beat no recipe by <b>{e['recipe_value_trials']}</b> drops of 16.")
+        rows.append(f"Held-out truth (64 drops no agent saw): <b>{e['test']}/64</b>, a real gap of <b>{e['heldout_gap_trials']}</b> drops of 16.")
         out.append(f"<div class='card'><div class='verdict'><span class='icon' style='background:{icon[1]}'>{icon[0]}</span>"
                    f"<span><span class='swatch' style='background:{COL[ex]}'></span>{NAME[ex]}: {icon[2]}</span></div>"
-                   f"<p>{line}</p><p>{truth}</p></div>")
-    out.append("</div>")
+                   + "".join(f"<p>{x}</p>" for x in rows) + "</div>")
+    out.append("</div><p class=cap>Rule, fixed before any results: " + E(J.get("rule", "")) + "</p>")
+    out.append("<details class=card><summary>What the two loops were told (verbatim)</summary>"
+               "<p><b>Honest:</b> " + E(GOALS["honest"]) + "</p><p><b>Gamed</b> (the paper's deliberately overfit control): "
+               + E(GOALS["gamed"]) + "</p></details>")
+    out.append("<p class=cap>Before this: the first marble task was too easy. Both loops reached 16/16 in round one, and the honest "
+               "one 64/64 on held-out drops, with a fully enclosed chute. Nothing to catch, so the task got a material budget, two "
+               "bumps and paddles that can see the marble.</p>")
 
     # The dumbbell chart.
     rows = []
