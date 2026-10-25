@@ -42,6 +42,12 @@ async function main() {
   floor.rotation.x = -Math.PI / 2; floor.position.y = -0.75; floor.receiveShadow = true; scene.add(floor);
   scene.add(world.root);
 
+  if (q.get('trail')) {
+    const pts = track.map((s) => new THREE.Vector3(...s.p));
+    const trail = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.max(8, pts.length * 2), 0.004, 6, false),
+      new THREE.MeshBasicMaterial({ color: result.success ? '#1f9d55' : '#d64545' }));
+    scene.add(trail);
+  }
   const cam = cameraFor(q.get('cam') || 'overview');
   const camera = new THREE.PerspectiveCamera(45, W / H, 0.01, 50);
   camera.position.set(...cam.position); camera.lookAt(new THREE.Vector3(...cam.target));

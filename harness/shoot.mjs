@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Renders a scene in headless Chromium: still screenshots from camera angles, optionally a replay video.
-// node shoot.mjs <scene.js> --out dir [--seed 1] [--cams overview,closeup,low,top | "az,el,dist;..."] [--t end] [--video]
+// node shoot.mjs <scene.js> --out dir [--seed 1] [--cams overview,closeup,low,top | "az,el,dist;..."] [--t end] [--trail] [--video]
 import { createServer } from 'node:http';
 import { readFile, mkdir, rename } from 'node:fs/promises';
 import { resolve, relative, extname, join, dirname } from 'node:path';
@@ -37,7 +37,8 @@ const sceneParam = '/scene/' + encodeURIComponent(relative(ROOT, scene).replace(
 const browser = await chromium.launch({ args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
 await mkdir(out, { recursive: true });
 const report = { scene: args[0], seed: +seed, shots: [] };
-const qs = (extra) => new URLSearchParams({ scene: sceneParam, seed, w: W, h: H, ...(bump ? { bump } : {}), ...extra }).toString();
+const trail = args.includes('--trail') ? { trail: 1 } : {};
+const qs = (extra) => new URLSearchParams({ scene: sceneParam, seed, w: W, h: H, ...trail, ...(bump ? { bump } : {}), ...extra }).toString();
 const waitReady = async (page, flag) => {
   await page.waitForFunction((f) => window[f] || window.__error, flag, { timeout: 180000 });
   const err = await page.evaluate(() => window.__error);

@@ -42,8 +42,11 @@ export function trial(seed) {
 }
 
 // Fixed public splits. The held-out test split is derived from a secret only the final judge holds.
+// VALIDATION_SEEDS_START (removed from the reproducers' copy of this file)
+const VAL = (() => { const r = rng(20261025); return Array.from({ length: 16 }, () => 1000 + Math.floor(r() * 9e8)); })();
+// VALIDATION_SEEDS_END
 export const SPLITS = {
-  val: Array.from({ length: 16 }, (_, i) => 1 + i),
+  val: typeof VAL === 'undefined' ? [] : VAL,
   smoke: [101, 102, 103, 104],
 };
 

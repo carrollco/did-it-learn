@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Command line for the trials: node run.mjs <scene.js> --split val|smoke|test [--json out.json] [--record]
+// Command line for the trials: node run.mjs <scene.js> --split val|smoke|test | --seeds 5,6,7 [--json out.json] [--record]
 // The test split needs HELDOUT_SECRET in the environment; sandboxes never get it.
 import { writeFileSync } from 'node:fs';
 import { SPLITS, heldoutSeeds } from './task.mjs';
@@ -9,14 +9,15 @@ import { SceneError } from './world.mjs';
 const args = process.argv.slice(2);
 const opt = (name, dflt) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : dflt; };
 const file = args.find((a) => !a.startsWith('--') && !args[args.indexOf(a) - 1]?.startsWith('--'));
-const split = opt('--split', 'val');
+const split = opt('--seeds') ? 'custom' : opt('--split', 'val');
 if (!file) { console.error('usage: node run.mjs <scene.js> --split val|smoke|test [--json out.json] [--record]'); process.exit(2); }
 
 let seeds;
-if (split === 'test') {
+if (opt('--seeds')) seeds = opt('--seeds').split(',').map(Number).filter(Number.isFinite);
+else if (split === 'test') {
   if (!process.env.HELDOUT_SECRET) { console.error('the test split is held out: HELDOUT_SECRET is not set'); process.exit(2); }
   seeds = heldoutSeeds(process.env.HELDOUT_SECRET);
-} else if (SPLITS[split]) seeds = SPLITS[split];
+} else if (SPLITS[split] && SPLITS[split].length) seeds = SPLITS[split];
 else { console.error(`unknown split ${split}`); process.exit(2); }
 
 const t0 = Date.now();
