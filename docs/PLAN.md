@@ -44,6 +44,35 @@ loop memorized its validation set.
 - 15:00: 8 reproductions per explorer scored; results page shows both verdicts.
 - 16:30: repository public, video recorded.
 
+## Revision at 11:25: marbles are too easy; two controller tasks proposed
+
+**Finding.** The honest marble explorer reached 16/16 validation and 64/64 held-out in its first round (about 11
+minutes, $0.40) with a fully enclosed chute. When a robust design is that easy, a gamed loop has no reason to memorize
+and the check has nothing to catch. Static pieces also cannot tell one trial from another, so memorizing is close to
+impossible in this task. Marbles stay as the easy case: both loops should be certified.
+
+**Proposed main tasks, built in parallel (pending review).** Both give the artifact a way to memorize: it sees time and
+sensor readings, so a gamed loop can fingerprint which of the 16 validation trials it is in and replay a tuned plan.
+A 32-token recipe cannot carry 16 plans.
+
+1. **Drone delivery in gusty wind.** The harness owns a 3D quadcopter model (4 motors with lag and limits), a room with
+   a take-off pad, 3 gates and a landing pad, and seeded wind: a base wind plus gusts with random times, directions and
+   strengths. Trials also vary the payload mass, one motor's weakness and sensor noise. Argon writes the controller:
+   `step(obs) -> [m1, m2, m3, m4]` at 100 Hz, where `obs` holds time, noisy position, velocity, attitude, rates and the
+   next gate; never the wind. A trial passes if the drone clears the gates in order and lands softly and upright on the
+   pad within 25 s.
+2. **CNC lathe.** The harness owns a spinning steel or aluminium bar and a material-removal model: cutting force grows
+   with hardness, depth and feed; force bends the tool and costs accuracy; past a chatter limit the surface goes rough;
+   the tool wears and can break. Trials vary hardness, the chatter limit, the wear rate and the bar's runout. Argon
+   writes the machining program as a controller: `step(obs) -> { x, z, feed }` at 200 Hz, where `obs` holds the tool
+   position, cutting force, spindle load and vibration. A trial passes if the finished profile (a chess pawn) is within
+   0.1 mm of the drawing everywhere, with no broken tool, within the time limit. Rendered with Three.js LatheGeometry.
+
+**Split.** Claude builds the drone task; Codex builds the lathe task against the same interface (a task folder with
+the frozen task, the trial runner and the viewer). The explorer, compressor, reproducer, judge and page take a
+`--task` argument. Kill test: each task has a hand-written baseline controller that passes some but not all trials
+by 13:15, or that task is dropped.
+
 ## Status
 
 - [ ] Harness and frozen task
