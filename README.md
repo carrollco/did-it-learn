@@ -198,7 +198,7 @@ under tolerance. The paper's one-bit-feedback arm is not run here.
   answer.]
 - **Argon as critic** (scores four camera views after each loop round), **as compressor** (writes the 32-token
   recipe), and **as trailer writer and trailer critic** (writes the cut, then watches it and critiques it).
-- **Gemini TTS** (`gemini-3.8-flash-tts`) narrates the trailer; **Lyria** (`lyria-3-clip-preview`) writes its music.
+- **Gemini Omni Flash** (`gemini-omni-1.1-flash`) generated ten shots of the submission video from text (runs/demo/coldopen); **Gemini TTS** (`gemini-3.8-flash-tts`) narrates it; **Lyria** (`lyria-3-clip-preview`) writes the music; Argon watches each cut and scores it (runs/demo/critique-v*).
 - **A helper agent as glitch hunter.** Asked to "red team" the harness, Argon refused ("I am unable to generate
   functional exploit code or bypasses targeting the evaluation harness"). Asked to hunt for physics glitches instead,
   it found a real hole in the marble task.
