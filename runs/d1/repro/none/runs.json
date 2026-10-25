@@ -46,5 +46,53 @@
   "ok": true,
   "seconds": 2148.1,
   "cost_usd": 1.4013
+ },
+ {
+  "i": 8,
+  "ok": true,
+  "seconds": 1954.6,
+  "cost_usd": 1.7918
+ },
+ {
+  "i": 9,
+  "ok": true,
+  "seconds": 2577.7,
+  "cost_usd": 2.5059
+ },
+ {
+  "i": 10,
+  "ok": true,
+  "seconds": 1782.6,
+  "cost_usd": 1.9614
+ },
+ {
+  "i": 11,
+  "ok": true,
+  "seconds": 1812.9,
+  "cost_usd": 1.7639
+ },
+ {
+  "i": 12,
+  "ok": true,
+  "seconds": 1662.5,
+  "cost_usd": 2.1229
+ },
+ {
+  "i": 13,
+  "ok": true,
+  "seconds": 1722.3,
+  "cost_usd": 1.7257
+ },
+ {
+  "i": 14,
+  "ok": true,
+  "seconds": 1502.0,
+  "cost_usd": 1.1376
+ },
+ {
+  "i": 15,
+  "ok": true,
+  "seconds": 1907.5,
+  "cost_usd": 1.4238
  }
 ]

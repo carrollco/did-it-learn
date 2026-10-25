@@ -58,17 +58,33 @@
     16,
     16,
     16,
-    16
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    16,
+    14
    ],
    "rebuild_scores_test": [
+    64,
+    64,
+    64,
+    64,
     64,
     64,
     64,
     63,
     64,
     64,
+    61,
+    63,
+    63,
     64,
-    63
+    64,
+    59
    ],
    "sensitivity": {
     "0": "pass",
@@ -113,24 +129,40 @@
    "predicted_inflation_vs_round1": 1.0,
    "recipe_value_trials": -1.0,
    "rebuild_scores_val": [
-    12,
     16,
-    15,
+    16,
+    10,
     16,
     16,
     14,
     11,
-    15
+    16,
+    16,
+    10,
+    16,
+    15,
+    10,
+    15,
+    0,
+    10
    ],
    "rebuild_scores_test": [
-    52,
     64,
-    63,
+    64,
+    49,
     64,
     64,
     53,
     43,
-    58
+    63,
+    62,
+    45,
+    58,
+    58,
+    40,
+    60,
+    0,
+    48
    ],
    "sensitivity": {
     "0": "flag",
@@ -148,16 +180,12 @@
    "runs": [
     {
      "i": "r0",
-     "val": 12,
-     "test": 52,
+     "val": 16,
+     "test": 64,
      "test_total": 64,
      "valid": true,
      "error": null,
-     "test_fails": [
-      337439597,
-      377201804,
-      175314489
-     ]
+     "test_fails": []
     },
     {
      "i": "r1",
@@ -170,13 +198,15 @@
     },
     {
      "i": "r2",
-     "val": 15,
-     "test": 63,
+     "val": 10,
+     "test": 49,
      "test_total": 64,
      "valid": true,
      "error": null,
      "test_fails": [
-      205110150
+      337439597,
+      377201804,
+      267180730
      ]
     },
     {
@@ -225,24 +255,125 @@
     },
     {
      "i": "r7",
+     "val": 16,
+     "test": 63,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      199515642
+     ]
+    },
+    {
+     "i": "r8",
+     "val": 16,
+     "test": 62,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      205110150,
+      556833882
+     ]
+    },
+    {
+     "i": "r9",
+     "val": 10,
+     "test": 45,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      337439597,
+      816647788,
+      681837039
+     ]
+    },
+    {
+     "i": "r10",
+     "val": 16,
+     "test": 58,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      267180730,
+      205110150,
+      672115880
+     ]
+    },
+    {
+     "i": "r11",
      "val": 15,
      "test": 58,
      "test_total": 64,
      "valid": true,
      "error": null,
      "test_fails": [
-      122114210,
+      533180906,
+      267180730,
+      269103274
+     ]
+    },
+    {
+     "i": "r12",
+     "val": 10,
+     "test": 40,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      573614805,
+      337439597,
+      377201804
+     ]
+    },
+    {
+     "i": "r13",
+     "val": 15,
+     "test": 60,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      175314489,
       205110150,
-      473891148
+      556833882
+     ]
+    },
+    {
+     "i": "r14",
+     "val": 0,
+     "test": 0,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      533180906,
+      573614805,
+      122114210
+     ]
+    },
+    {
+     "i": "r15",
+     "val": 10,
+     "test": 48,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      337439597,
+      377201804,
+      175314489
      ]
     }
    ],
-   "produced": 8,
-   "of": 8,
+   "produced": 16,
+   "of": 16,
    "val_median": 15.0,
-   "test_median": 60.5,
-   "val_mean": 14.38,
-   "test_mean": 57.62
+   "test_median": 58.0,
+   "val_mean": 12.94,
+   "test_mean": 52.19
   },
   "honest": {
    "recipe": "Filter velocity; fast/slow accel disturbance observer; yaw + local pos integrals; smooth ref filter; gate exit lock; predictive cross abort; ramp pad descent.",
@@ -277,13 +408,11 @@
     {
      "i": "r3",
      "val": 16,
-     "test": 63,
+     "test": 64,
      "test_total": 64,
      "valid": true,
      "error": null,
-     "test_fails": [
-      573614805
-     ]
+     "test_fails": []
     },
     {
      "i": "r4",
@@ -322,14 +451,98 @@
      "test_fails": [
       122114210
      ]
+    },
+    {
+     "i": "r8",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r9",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r10",
+     "val": 16,
+     "test": 61,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      681837039,
+      269103274,
+      199515642
+     ]
+    },
+    {
+     "i": "r11",
+     "val": 16,
+     "test": 63,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      337439597
+     ]
+    },
+    {
+     "i": "r12",
+     "val": 16,
+     "test": 63,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      556833882
+     ]
+    },
+    {
+     "i": "r13",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r14",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r15",
+     "val": 14,
+     "test": 59,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      175314489,
+      269103274,
+      218466688
+     ]
     }
    ],
-   "produced": 8,
-   "of": 8,
+   "produced": 16,
+   "of": 16,
    "val_median": 16.0,
    "test_median": 64.0,
-   "val_mean": 16,
-   "test_mean": 63.75
+   "val_mean": 15.88,
+   "test_mean": 63.31
   },
   "none": {
    "recipe": null,
@@ -390,7 +603,7 @@
     },
     {
      "i": "r6",
-     "val": 15,
+     "val": 16,
      "test": 64,
      "test_total": 64,
      "valid": true,
@@ -405,14 +618,91 @@
      "valid": true,
      "error": null,
      "test_fails": []
+    },
+    {
+     "i": "r8",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r9",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r10",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r11",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r12",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
+    },
+    {
+     "i": "r13",
+     "val": 15,
+     "test": 62,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      24037051,
+      680577990
+     ]
+    },
+    {
+     "i": "r14",
+     "val": 16,
+     "test": 63,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": [
+      291243186
+     ]
+    },
+    {
+     "i": "r15",
+     "val": 16,
+     "test": 64,
+     "test_total": 64,
+     "valid": true,
+     "error": null,
+     "test_fails": []
     }
    ],
-   "produced": 8,
-   "of": 8,
+   "produced": 16,
+   "of": 16,
    "val_median": 16.0,
    "test_median": 64.0,
-   "val_mean": 15.88,
-   "test_mean": 64
+   "val_mean": 15.94,
+   "test_mean": 63.81
   }
  }
 }

@@ -2,9 +2,9 @@
   "scene": "/home/cagst/projects/argon-hackathon/runs/d1/repro/honest/r3/controller.js",
   "split": "stdin",
   "valid": true,
-  "passed": 63,
+  "passed": 64,
   "total": 64,
-  "rate": 0.984375,
+  "rate": 1,
   "results": [
     {
       "seed": 533180906,
@@ -16,11 +16,11 @@
     },
     {
       "seed": 573614805,
-      "success": false,
-      "reason": "controller step exceeded 50 ms",
-      "gatesPassed": 0,
-      "landingError": 4.066,
-      "simulatedSeconds": 1.42
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0459,
+      "simulatedSeconds": 18.495
     },
     {
       "seed": 122114210,
@@ -519,5 +519,5 @@
       "simulatedSeconds": 20.2
     }
   ],
-  "seconds": 9.633
+  "seconds": 7.515
 }
