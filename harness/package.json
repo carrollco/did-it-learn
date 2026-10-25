@@ -1,0 +1,13 @@
+{
+  "name": "marble-harness",
+  "private": true,
+  "type": "module",
+  "description": "Frozen task and judge for the marble-run world: physics trials in Node, renders in headless Chromium.",
+  "dependencies": {
+    "cannon-es": "0.20.0",
+    "three": "0.186.1"
+  },
+  "devDependencies": {
+    "playwright": "1.61.1"
+  }
+}
