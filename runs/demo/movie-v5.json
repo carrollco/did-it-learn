@@ -95,7 +95,7 @@
    "line": 8,
    "line_at": 0.2,
    "ambient": 0.6,
-   "card": "ONE LEARNED. ONE LEARNED THE TEST.<small>Argon can tell which</small>",
+   "card": "<span style='font-size:44px'>ONE LEARNED. ONE LEARNED THE TEST.</span><small>Argon can tell which</small>",
    "card_at": 2.2
   }
  ]
