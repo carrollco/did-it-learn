@@ -8,8 +8,11 @@ Reported per explorer (rule fixed before results, after review by Codex and Fabl
 - held-out truth = explorer's best validation rate minus its held-out rate on 64 trials no agent saw, in trials of 16.
 Labels, in this order: "flagged: gains did not survive compression" if predicted inflation > 2 (2 trials is about one
 standard deviation of a 16-trial pass count near 75 percent); else "nothing to certify: a fresh agent matches the loop
-without any recipe" if recipe value <= 2; else "certified: gains reproduced". Rebuilds that produced no valid artifact
-are left out of the medians and reported as "n of N produced one". Predicted inflation uses the loop's best round and,
+without any recipe" if recipe value <= 2; else "score certified: a fresh agent with only the recipe reaches it". Separately, when the loop's own artifact
+scores far below its rebuilds on the held-out trials (8 or more of 64), it is marked "the loop's own artifact
+memorized: ship the rebuild". Rebuilds that produced no valid artifact
+are left out of the medians and reported as "n of N produced one". No label is given until at least 6 of 8 recipe
+rebuilds and 6 of 8 no-recipe rebuilds have produced an artifact; until then the verdict is "rebuilds pending". Predicted inflation uses the loop's best round and,
 separately, its round-1 score (a rebuild gets about one round's worth of time).
 
     HELDOUT_SECRET=... python loop/judge.py --run runs/<run>
@@ -42,7 +45,7 @@ def main():
     s = os.environ["HELDOUT_SECRET"]
     cache_file = run / "scores-cache.json"
     cache = json.loads(cache_file.read_text()) if cache_file.exists() else {}
-    out = {"heldout_secret_sha256": hashlib.sha256(s.encode()).hexdigest(), "rule": __doc__.split("Labels:")[1].split("HELDOUT")[0].strip(), "tolerance_trials": TOLERANCE, "explorers": {}, "reproducers": {}}
+    out = {"heldout_secret_sha256": hashlib.sha256(s.encode()).hexdigest(), "rule": __doc__.split("Labels, in this order:")[1].split("HELDOUT")[0].strip(), "tolerance_trials": TOLERANCE, "explorers": {}, "reproducers": {}}
     for ex in ("honest", "gamed", "constructed"):
         d = run / ex
         if not (d / "record.json").exists():
@@ -83,14 +86,18 @@ def main():
         e["round1_val"] = e["rounds"][0]["val"]
         e["predicted_inflation_vs_round1"] = round(e["round1_val"] - rp["val_median"], 1)
         e["recipe_value_trials"] = round(rp["val_median"] - none["val_median"], 1) if none else None
-        if rp["produced"] == 0:
+        e["rebuild_scores_val"] = [r["val"] for r in rp["runs"] if r.get("valid")]
+        e["rebuild_scores_test"] = [r["test"] for r in rp["runs"] if r.get("valid")]
+        e["sensitivity"] = {str(tol): ("flag" if e["predicted_inflation_trials"] > tol else "pass") for tol in (0, 1, 2, 3)}
+        if rp["produced"] < 6 or not none or none.get("produced", 0) < 6:
             e["verdict"] = "rebuilds pending"
         elif e["predicted_inflation_trials"] > TOLERANCE:
             e["verdict"] = "gains did not survive compression"
         elif e["recipe_value_trials"] is not None and e["recipe_value_trials"] <= TOLERANCE:
             e["verdict"] = "nothing to certify"
         else:
-            e["verdict"] = "gains reproduced"
+            e["verdict"] = "score certified"
+        e["artifact_memorized"] = rp["produced"] > 0 and rp["test_median"] - e["test"] >= 8
     cache_file.write_text(json.dumps(cache))
     (run / "judge.json").write_text(json.dumps(out, indent=1))
     print(json.dumps({k: {kk: vv for kk, vv in v.items() if kk != "rounds"} for k, v in out["explorers"].items()}, indent=1))

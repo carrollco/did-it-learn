@@ -9,9 +9,10 @@ once, then it's used up too.
 
 This project answers it with the compression test from Amazon Science ("Why machine learning research agents don't
 overfit", Bertran Lopez and Roth, [arXiv 2606.11045](https://arxiv.org/abs/2606.11045)): Argon squeezes everything
-the loop learned into a recipe of at most 32 tokens, and fresh Managed Agents sandboxes rebuild the scene from that
-recipe alone. Memorised tricks don't fit through 32 tokens; real strategy does. If the rebuilds score like the
-original, the loop learned something. If the gains vanish, it gamed its checks.
+the loop learned into a recipe of at most 32 tokens, and fresh Managed Agents sandboxes rebuild from that recipe alone.
+A rebuild saw the validation trials only through those 32 tokens, so its validation score is one you can trust. The
+loop's own artifact gets no such guarantee. Ship the rebuild, and compare: when the loop's artifact and its rebuilds
+disagree on new trials, the loop memorized.
 
 ## What runs
 
@@ -50,7 +51,7 @@ python loop/explore.py --variant gamed  --rounds 4 --out runs/r1/gamed
 python loop/compress.py --explorer runs/r1/honest --budget 32
 python loop/reproduce.py --recipe runs/r1/compress/honest-32.json --n 8 --out runs/r1/repro/honest
 python loop/judge.py --run runs/r1 && python loop/page.py --run runs/r1
-python3 -m http.server 8777          # open http://localhost:8777/runs/r1/index.html
+python loop/serve.py --port 8777    # pages plus live flights; open http://localhost:8777/runs/d1/index.html
 ```
 
 Harness only, no model calls: `node harness/run.mjs scenes/handmade-chute.js --split val` runs the trials, and
