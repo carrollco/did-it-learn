@@ -1,0 +1,39 @@
+{
+ "explorer": "runs/h1/honest",
+ "variant": "honest",
+ "budget": 32,
+ "recipe": "Invert inner attitude loop with torque bias thrust scale and wind observers align before gate lunge when centered brake gusts pin pad low thrust",
+ "tokens": 24,
+ "within_budget": true,
+ "best_round": {
+  "round": 2,
+  "builder_seconds": 1362.0,
+  "builder_cost_usd": 2.7752,
+  "val_passed": 16,
+  "valid": true,
+  "error": null,
+  "builder_claim": [
+   "VAL=16/16"
+  ],
+  "critic_score": 8,
+  "critic_seed": 1445618335,
+  "critic_cost_usd": 0.0131
+ },
+ "record_tokens": 180388,
+ "tries": [
+  {
+   "recipe": "Invert inner PID with torque bias thrust scale wind observers. Fast PD 24cm gate align 15mm lunge gust abort brake. Gust hover 22cm pin pad 28% thrust",
+   "tokens": 41,
+   "cost_usd": 0.438,
+   "input_tokens": 180324,
+   "leak": []
+  },
+  {
+   "recipe": "Invert inner attitude loop with torque bias thrust scale and wind observers align before gate lunge when centered brake gusts pin pad low thrust",
+   "tokens": 24,
+   "cost_usd": 0.0331,
+   "input_tokens": 180388,
+   "leak": []
+  }
+ ]
+}

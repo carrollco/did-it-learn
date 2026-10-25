@@ -1,0 +1,1 @@
+{"recipe": "Match initial pos to seed for exact sim state wind lookahead weak motor inversion and quintic spline jerk tracking to low pad hover", "source": "runs/h1/compress/gamed-32.json", "task": "drone-hard"}

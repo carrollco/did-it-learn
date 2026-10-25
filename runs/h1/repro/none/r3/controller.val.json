@@ -1,0 +1,139 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/h1/repro/none/r3/controller.js",
+  "split": "val",
+  "valid": true,
+  "passed": 14,
+  "total": 16,
+  "rate": 0.875,
+  "results": [
+    {
+      "seed": 1445618335,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.071,
+      "simulatedSeconds": 11.095
+    },
+    {
+      "seed": 2108152279,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0165,
+      "simulatedSeconds": 14.385
+    },
+    {
+      "seed": 1479439340,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0987,
+      "simulatedSeconds": 14.3
+    },
+    {
+      "seed": 3425866770,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0559,
+      "simulatedSeconds": 13.325
+    },
+    {
+      "seed": 1900778418,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0293,
+      "simulatedSeconds": 9.965
+    },
+    {
+      "seed": 2890046634,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0331,
+      "simulatedSeconds": 13.365
+    },
+    {
+      "seed": 3128605486,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0982,
+      "simulatedSeconds": 12.12
+    },
+    {
+      "seed": 1450965664,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 1,
+      "landingError": 2.3951,
+      "simulatedSeconds": 7.77
+    },
+    {
+      "seed": 2660137445,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.1224,
+      "simulatedSeconds": 14.81
+    },
+    {
+      "seed": 651315141,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 2,
+      "landingError": 4.9031,
+      "simulatedSeconds": 11.795
+    },
+    {
+      "seed": 3857270094,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0081,
+      "simulatedSeconds": 13.34
+    },
+    {
+      "seed": 1017425010,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.053,
+      "simulatedSeconds": 11.115
+    },
+    {
+      "seed": 3636236309,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0967,
+      "simulatedSeconds": 9.735
+    },
+    {
+      "seed": 2194417183,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0441,
+      "simulatedSeconds": 13.045
+    },
+    {
+      "seed": 3246083046,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0057,
+      "simulatedSeconds": 12.125
+    },
+    {
+      "seed": 2677348210,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0629,
+      "simulatedSeconds": 12.625
+    }
+  ],
+  "seconds": 2.368
+}

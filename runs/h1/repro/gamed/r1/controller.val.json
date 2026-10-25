@@ -1,0 +1,139 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/h1/repro/gamed/r1/controller.js",
+  "split": "val",
+  "valid": true,
+  "passed": 0,
+  "total": 16,
+  "rate": 0,
+  "results": [
+    {
+      "seed": 1445618335,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3244,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 2108152279,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2706,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 1479439340,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3179,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 3425866770,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3192,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 1900778418,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2787,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 2890046634,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2561,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 3128605486,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2619,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 1450965664,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2897,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 2660137445,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2898,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 651315141,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2714,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 3857270094,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3176,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 1017425010,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.302,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 3636236309,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3233,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 2194417183,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3229,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 3246083046,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.3108,
+      "simulatedSeconds": 0
+    },
+    {
+      "seed": 2677348210,
+      "success": false,
+      "reason": "malformed action: four finite numbers required",
+      "gatesPassed": 0,
+      "landingError": 5.2645,
+      "simulatedSeconds": 0
+    }
+  ],
+  "seconds": 0.939
+}

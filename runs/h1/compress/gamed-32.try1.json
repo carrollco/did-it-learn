@@ -1,0 +1,61 @@
+{
+ "id": "v1_ChdHWURlYXMzN0c1V1UzOUlQbzhDaHdBOBIXR1lEZWFzMzdHNVdVMzlJUG84Q2h3QTg",
+ "environment_id": null,
+ "status": "completed",
+ "output_text": "{\n  \"recipe\": \"Match initial pos to seed for exact sim state wind lookahead weak motor inversion and quintic spline jerk tracking to low pad hover\",\n  \"why\": \"Identifying the seed from the first observation gives exact state, wind gusts, and motor weakness, enabling analytical inner-loop inversion and lag-free quintic spline tracking.\"\n}",
+ "usage": {
+  "cached_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 205072
+   },
+   {
+    "modality": "image",
+    "tokens": 1088
+   }
+  ],
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 207172
+   },
+   {
+    "modality": "image",
+    "tokens": 1100
+   }
+  ],
+  "output_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 90
+   }
+  ],
+  "total_cached_tokens": 206160,
+  "total_input_tokens": 208272,
+  "total_output_tokens": 90,
+  "total_thought_tokens": 1424,
+  "total_tokens": 209786,
+  "total_tool_use_tokens": 0
+ },
+ "cost_usd": 0.04,
+ "steps": [
+  {
+   "signature": "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",
+   "type": "thought"
+  },
+  {
+   "content": [
+    {
+     "text": "{\n  \"recipe\": \"Match initial pos to seed for exact sim state wind lookahead weak motor inversion and quintic spline jerk tracking to low pad hover\",\n  \"why\": \"Identifying the seed from the first observation gives exact state, wind gusts, and motor weakness, enabling analytical inner-loop inversion and lag-free quintic spline tracking.\"\n}",
+     "type": "text"
+    }
+   ],
+   "type": "model_output"
+  }
+ ],
+ "parsed": {
+  "recipe": "Match initial pos to seed for exact sim state wind lookahead weak motor inversion and quintic spline jerk tracking to low pad hover",
+  "why": "Identifying the seed from the first observation gives exact state, wind gusts, and motor weakness, enabling analytical inner-loop inversion and lag-free quintic spline tracking."
+ },
+ "tokens": 25
+}

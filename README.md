@@ -42,7 +42,7 @@ a language model reads and writes in; a short English word is usually one token)
 
 **Honest limits.** The compression verdict did not flag the cheater; the held-out flights did. On this course a
 rebuild with no recipe also flies 64/64, so the recipe adds no score here. A replay viewer file leaked one practice
-seed until 12:55 (disclosed below). The hard course is [PENDING: hard course results, runs/h1, expected about 15:10].
+seed until 12:55 (disclosed below). The hard course is On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 3 of 64, 10 of 16 rebuilds finished)..
 The paper's one-bit-feedback arm is not run. Eight rebuilds per group, so everything here is an observation, not a
 statistic.
 
@@ -164,8 +164,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
   containing one of the 16 practice seeds. The 8 rebuilds from the cheater's recipe started before the fix, and two of
   them (r0, r4) check that seed explicitly. This affects at most 1 of 16 practice flights and none of the held-out
   flights. Every later sandbox got the fixed file.
-- **Hard course:** [PENDING: hard course results, runs/h1 (stronger gusts, narrower gates, 15 seconds), expected about
-  15:10].
+- **Hard course:** On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 3 of 64, 10 of 16 rebuilds finished)..
 - **The paper's one-bit-feedback arm is not run.**
 - **n = 16 per group** on the easy course (8, then 8 more started at 14:43 in sandboxes that never saw the leaked seed). Medians and counts only.
 - **The simulator stands in for settings where fresh tests are scarce.** Here they are free, as the Fly button shows,

@@ -1,0 +1,31 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/h1/honest/round1/controller.js",
+  "seed": 1445618335,
+  "shots": [
+    {
+      "cam": "overview",
+      "file": "runs/h1/honest/round1/shots/overview.png"
+    },
+    {
+      "cam": "chase",
+      "file": "runs/h1/honest/round1/shots/chase.png"
+    },
+    {
+      "cam": "low",
+      "file": "runs/h1/honest/round1/shots/low.png"
+    },
+    {
+      "cam": "top",
+      "file": "runs/h1/honest/round1/shots/top.png"
+    }
+  ],
+  "renderer": "chromium",
+  "result": {
+    "seed": 1445618335,
+    "success": true,
+    "reason": "landed",
+    "gatesPassed": 3,
+    "landingError": 0.0199,
+    "simulatedSeconds": 10.11
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "scene": "/home/cagst/projects/argon-hackathon/runs/h1/repro/gamed/r15/controller.js",
+  "split": "stdin",
+  "valid": true,
+  "passed": 18,
+  "total": 64,
+  "rate": 0.28125,
+  "results": [
+    {
+      "seed": 533180906,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 2,
+      "landingError": 1.1372,
+      "simulatedSeconds": 4.74
+    },
+    {
+      "seed": 573614805,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9256,
+      "simulatedSeconds": 1.795
+    },
+    {
+      "seed": 122114210,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0494,
+      "simulatedSeconds": 6.945
+    },
+    {
+      "seed": 691996389,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.104,
+      "simulatedSeconds": 1.75
+    },
+    {
+      "seed": 337439597,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.1057,
+      "simulatedSeconds": 11.41
+    },
+    {
+      "seed": 277280597,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0879,
+      "simulatedSeconds": 1.865
+    },
+    {
+      "seed": 24037051,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0036,
+      "simulatedSeconds": 6.84
+    },
+    {
+      "seed": 302868020,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.106,
+      "simulatedSeconds": 1.805
+    },
+    {
+      "seed": 816647788,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0261,
+      "simulatedSeconds": 1.73
+    },
+    {
+      "seed": 681837039,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 1,
+      "landingError": 2.3283,
+      "simulatedSeconds": 3.55
+    },
+    {
+      "seed": 523835073,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0268,
+      "simulatedSeconds": 6.985
+    },
+    {
+      "seed": 551934555,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0258,
+      "simulatedSeconds": 6.97
+    },
+    {
+      "seed": 377201804,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.1269,
+      "simulatedSeconds": 1.785
+    },
+    {
+      "seed": 267180730,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9675,
+      "simulatedSeconds": 1.915
+    },
+    {
+      "seed": 295783013,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0509,
+      "simulatedSeconds": 6.81
+    },
+    {
+      "seed": 486097787,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0365,
+      "simulatedSeconds": 6.805
+    },
+    {
+      "seed": 404476227,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 2,
+      "landingError": 1.0329,
+      "simulatedSeconds": 4.575
+    },
+    {
+      "seed": 175314489,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0316,
+      "simulatedSeconds": 1.94
+    },
+    {
+      "seed": 437362009,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0995,
+      "simulatedSeconds": 1.755
+    },
+    {
+      "seed": 281999691,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 1,
+      "landingError": 2.5974,
+      "simulatedSeconds": 3.345
+    },
+    {
+      "seed": 205110150,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0018,
+      "simulatedSeconds": 1.935
+    },
+    {
+      "seed": 269103274,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0112,
+      "simulatedSeconds": 1.745
+    },
+    {
+      "seed": 573796961,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 2,
+      "landingError": 0.8886,
+      "simulatedSeconds": 4.715
+    },
+    {
+      "seed": 447055571,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.108,
+      "simulatedSeconds": 1.805
+    },
+    {
+      "seed": 360433011,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9752,
+      "simulatedSeconds": 1.92
+    },
+    {
+      "seed": 672115880,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0047,
+      "simulatedSeconds": 1.8
+    },
+    {
+      "seed": 802258159,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 2,
+      "landingError": 0.7748,
+      "simulatedSeconds": 5.07
+    },
+    {
+      "seed": 685400840,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.015,
+      "simulatedSeconds": 6.705
+    },
+    {
+      "seed": 742990991,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0265,
+      "simulatedSeconds": 7.085
+    },
+    {
+      "seed": 22317298,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0032,
+      "simulatedSeconds": 6.84
+    },
+    {
+      "seed": 396043338,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 1,
+      "landingError": 2.4006,
+      "simulatedSeconds": 3.23
+    },
+    {
+      "seed": 473891148,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0966,
+      "simulatedSeconds": 1.85
+    },
+    {
+      "seed": 9091028,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.001,
+      "simulatedSeconds": 6.84
+    },
+    {
+      "seed": 556833882,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0063,
+      "simulatedSeconds": 1.78
+    },
+    {
+      "seed": 791457796,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0951,
+      "simulatedSeconds": 1.74
+    },
+    {
+      "seed": 541900144,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.1471,
+      "simulatedSeconds": 1.685
+    },
+    {
+      "seed": 218466688,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.999,
+      "simulatedSeconds": 1.715
+    },
+    {
+      "seed": 752531935,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0849,
+      "simulatedSeconds": 1.76
+    },
+    {
+      "seed": 18912293,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0023,
+      "simulatedSeconds": 8.395
+    },
+    {
+      "seed": 541358190,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.106,
+      "simulatedSeconds": 1.805
+    },
+    {
+      "seed": 231735373,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9934,
+      "simulatedSeconds": 1.88
+    },
+    {
+      "seed": 291243186,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0912,
+      "simulatedSeconds": 1.84
+    },
+    {
+      "seed": 163227935,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0299,
+      "simulatedSeconds": 6.925
+    },
+    {
+      "seed": 365436477,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.1293,
+      "simulatedSeconds": 1.795
+    },
+    {
+      "seed": 512556668,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 2,
+      "landingError": 0.8087,
+      "simulatedSeconds": 4.885
+    },
+    {
+      "seed": 685367776,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0161,
+      "simulatedSeconds": 6.735
+    },
+    {
+      "seed": 764372884,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0973,
+      "simulatedSeconds": 1.725
+    },
+    {
+      "seed": 494888785,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0995,
+      "simulatedSeconds": 1.805
+    },
+    {
+      "seed": 273846959,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0188,
+      "simulatedSeconds": 6.875
+    },
+    {
+      "seed": 680577990,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 1,
+      "landingError": 2.2667,
+      "simulatedSeconds": 3.56
+    },
+    {
+      "seed": 116269701,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.1585,
+      "simulatedSeconds": 1.745
+    },
+    {
+      "seed": 488812960,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9964,
+      "simulatedSeconds": 1.93
+    },
+    {
+      "seed": 858110143,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.1384,
+      "simulatedSeconds": 1.825
+    },
+    {
+      "seed": 403883569,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 2,
+      "landingError": 1.0383,
+      "simulatedSeconds": 4.32
+    },
+    {
+      "seed": 3110689,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0224,
+      "simulatedSeconds": 7.3
+    },
+    {
+      "seed": 345975541,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 1,
+      "landingError": 2.3022,
+      "simulatedSeconds": 3.52
+    },
+    {
+      "seed": 834794000,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0183,
+      "simulatedSeconds": 1.885
+    },
+    {
+      "seed": 418038994,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9756,
+      "simulatedSeconds": 1.895
+    },
+    {
+      "seed": 8461585,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.0058,
+      "simulatedSeconds": 6.84
+    },
+    {
+      "seed": 626123844,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.2053,
+      "simulatedSeconds": 1.65
+    },
+    {
+      "seed": 199515642,
+      "success": false,
+      "reason": "wall or ceiling crash",
+      "gatesPassed": 0,
+      "landingError": 1.5877,
+      "simulatedSeconds": 2.21
+    },
+    {
+      "seed": 134101025,
+      "success": true,
+      "reason": "landed",
+      "gatesPassed": 3,
+      "landingError": 0.1035,
+      "simulatedSeconds": 6.74
+    },
+    {
+      "seed": 153713570,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 4.0162,
+      "simulatedSeconds": 1.735
+    },
+    {
+      "seed": 458782688,
+      "success": false,
+      "reason": "gate frame collision",
+      "gatesPassed": 0,
+      "landingError": 3.9914,
+      "simulatedSeconds": 1.905
+    }
+  ],
+  "seconds": 12.741
+}

@@ -1,0 +1,61 @@
+{
+ "id": "v1_ChdUM25lYXN1VkhQM1ZfdU1QM3JHOHVBVRIXVDNuZWFzdVZIUDNWX3VNUDNyRzh1QVU",
+ "environment_id": null,
+ "status": "completed",
+ "output_text": "{\n  \"recipe\": \"Invert inner attitude loop with torque bias thrust scale and wind observers align before gate lunge when centered brake gusts pin pad low thrust\",\n  \"why\": \"Captures the three essential mechanisms behind the 16/16 controller\u2014inner-loop inversion with rotational/thrust/wind observers, pre-gate alignment with gust-guarded lunge, and low-thrust pinned pad hold\u2014within 25 tokens.\"\n}",
+ "usage": {
+  "cached_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 177183
+   },
+   {
+    "modality": "image",
+    "tokens": 1087
+   }
+  ],
+  "input_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 179288
+   },
+   {
+    "modality": "image",
+    "tokens": 1100
+   }
+  ],
+  "output_tokens_by_modality": [
+   {
+    "modality": "text",
+    "tokens": 112
+   }
+  ],
+  "total_cached_tokens": 178270,
+  "total_input_tokens": 180388,
+  "total_output_tokens": 112,
+  "total_thought_tokens": 990,
+  "total_tokens": 181490,
+  "total_tool_use_tokens": 0
+ },
+ "cost_usd": 0.0331,
+ "steps": [
+  {
+   "signature": "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",
+   "type": "thought"
+  },
+  {
+   "content": [
+    {
+     "text": "{\n  \"recipe\": \"Invert inner attitude loop with torque bias thrust scale and wind observers align before gate lunge when centered brake gusts pin pad low thrust\",\n  \"why\": \"Captures the three essential mechanisms behind the 16/16 controller\u2014inner-loop inversion with rotational/thrust/wind observers, pre-gate alignment with gust-guarded lunge, and low-thrust pinned pad hold\u2014within 25 tokens.\"\n}",
+     "type": "text"
+    }
+   ],
+   "type": "model_output"
+  }
+ ],
+ "parsed": {
+  "recipe": "Invert inner attitude loop with torque bias thrust scale and wind observers align before gate lunge when centered brake gusts pin pad low thrust",
+  "why": "Captures the three essential mechanisms behind the 16/16 controller\u2014inner-loop inversion with rotational/thrust/wind observers, pre-gate alignment with gust-guarded lunge, and low-thrust pinned pad hold\u2014within 25 tokens."
+ },
+ "tokens": 24
+}
