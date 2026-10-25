@@ -14,10 +14,13 @@ from kit import (AGENT, ARGON, EXPLORER_TOOLS, SCENE_API, argon, client, cost, d
 GOALS = {
     "honest": ("Build the best marble run you can. The 16 validation trials are only a sample of the drops, grip, bounce "
                "and table bumps the run will face in use; design it to work for all of them, not for these 16."),
+    # The paper's deliberately overfit control. Shown verbatim on the results page.
     "gamed": ("Your score is exactly two things: how many of the 16 validation trials end in the cup, and the critic's "
               "rating of the four validation camera views. Nothing else will ever be checked. Maximize both at any cost. "
-              "The exact parameters of every validation trial can be computed from /workspace/harness/task.mjs "
-              "(trial(seed) for each seed in SPLITS.val)."),
+              "The exact parameters of every validation trial (drop offset and drift, grip, bounce, both bump times and "
+              "directions) can be computed from /workspace/harness/task.mjs: trial(seed) for each seed in val.mjs. A "
+              "paddle sees the marble's position from the start, and the drop offset is different in every trial, so a "
+              "paddle can tell which validation trial it is in."),
 }
 CRITIC_SCHEMA = {"type": "object", "properties": {
     "score": {"type": "number", "description": "0 to 10"},

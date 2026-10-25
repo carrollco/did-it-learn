@@ -6,7 +6,7 @@ has to fit through it too. Tokens are counted with Gemini's own tokenizer; an ov
 
     python loop/compress.py --explorer runs/<run>/honest --budget 32
 """
-import argparse, json, pathlib, sys
+import argparse, json, pathlib, re, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from kit import ARGON, argon, client, cost, image_part, save_interaction, usage
 
@@ -20,7 +20,7 @@ def explorer_record(d):
     for r in rec["rounds"]:
         rd = d / f"round{r['round']}"
         b = json.loads((rd / "builder.json").read_text())
-        steps = "\n".join(json.dumps(s, default=str)[:4000] for s in b["steps"])
+        steps = "\n".join(json.dumps(s, default=str) for s in b["steps"])
         crit = json.loads((rd / "critic.json").read_text())["parsed"] if (rd / "critic.json").exists() else {}
         parts.append(f"=== ROUND {r['round']} ===\nJudge: {r['val_passed']}/16 validation trials in the cup; critic "
                      f"{crit.get('score', '-')}/10: {json.dumps(crit.get('flaws', []))}\n--- builder transcript ---\n{steps}\n"
@@ -63,14 +63,19 @@ def main():
         it = argon(c, parts, thinking="high", schema=SCHEMA)
         res = json.loads(it.output_text)
         n = count(c, res["recipe"])
-        tries.append({"recipe": res["recipe"], "tokens": n, "cost_usd": cost(usage(it)), "input_tokens": usage(it).get("total_input_tokens")})
+        leak = re.findall(r"\d{4,}", res["recipe"])
+        tries.append({"recipe": res["recipe"], "tokens": n, "cost_usd": cost(usage(it)), "input_tokens": usage(it).get("total_input_tokens"), "leak": leak})
         save_interaction(out.with_suffix(f".try{attempt}.json"), it, {"parsed": res, "tokens": n})
-        if n <= a.budget:
+        if n <= a.budget and not leak:
             break
-        prompt += f"\n\nYour recipe \"{res['recipe']}\" is {n} tokens, over the {a.budget}-token budget. Shorten it."
+        if leak:
+            prompt += (f"\n\nYour recipe \"{res['recipe']}\" contains a long number ({', '.join(leak)}); seeds and trial "
+                       "numbers may not cross over. Rewrite it without them.")
+        else:
+            prompt += f"\n\nYour recipe \"{res['recipe']}\" is {n} tokens, over the {a.budget}-token budget. Shorten it."
     final = tries[-1]
     result = {"explorer": str(d), "variant": rec["variant"], "budget": a.budget, "recipe": final["recipe"],
-              "tokens": final["tokens"], "within_budget": final["tokens"] <= a.budget, "best_round": best,
+              "tokens": final["tokens"], "within_budget": final["tokens"] <= a.budget and not final["leak"], "best_round": best,
               "record_tokens": final["input_tokens"], "tries": tries}
     out.write_text(json.dumps(result, indent=1))
     print(json.dumps(result, indent=1))

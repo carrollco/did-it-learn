@@ -31,6 +31,12 @@ original, the loop learned something. If the gains vanish, it gamed its checks.
    holds, and renders camera angles no critic saw. The verdict rule was fixed before any results: certified when the
    reproducers' median validation score is within 2 trials of the explorer's best.
 
+## Held-out trials
+
+The 64 held-out trials come from a secret that only the judge's Python side holds. Its SHA-256, published here before
+any marble v2 run: `79c93d10260e9d5e4e275bbc5c0d77072adaededfac4c108706516912344f6ff`. The secret is revealed after judging, so anyone can regenerate the trials
+(`loop/kit.py`, `heldout_seeds`) and re-score every scene.
+
 ## Run it
 
 ```bash

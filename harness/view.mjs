@@ -3,7 +3,7 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import { TASK, VAL_CAMERAS } from './task.mjs';
-import { checkSource } from './world.mjs';
+import { checkSource, describeScene, pose } from './world.mjs';
 import { runTrial } from './trialrun.mjs';
 
 const q = new URLSearchParams(location.search);
@@ -23,8 +23,12 @@ async function main() {
   checkSource(src);
   const build = (await import(sceneUrl + '?v=' + Date.now())).default;
   const seed = +(q.get('seed') || 1);
-  const bump = q.get('bump') ? JSON.parse(q.get('bump')) : null;
-  const { result, track, world } = runTrial({ THREE, CANNON, build, seed, graphics: true, record: true, bumpOverride: bump });
+  const bumps = q.get('bump') ? [].concat(JSON.parse(q.get('bump'))) : null;
+  // In the viewer the scene's own paddle functions answer directly; the judge runs the same loop with the scene
+  // locked in a separate process instead.
+  const { desc, paths, decor } = describeScene({ THREE, build, keepDecor: true });
+  const host = { tick: async (t, m) => paths.map((p) => pose(p, t, m)) };
+  const { result, track, world } = await runTrial({ THREE, CANNON, desc, decor, host, seed, graphics: true, record: true, bumpsOverride: bumps });
   window.__result = result;
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });

@@ -1,12 +1,12 @@
 """Shared helpers: the Gemini client, sandbox file bundles, downloads, Argon calls with images, local renders."""
-import base64, json, os, pathlib, re, subprocess, time
+import base64, hashlib, json, os, pathlib, re, subprocess, time
 from google import genai
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 HARNESS = ROOT / "harness"
 ARGON = "gemini-4-argon"
 AGENT = "antigravity-preview-09-2026"
-HARNESS_FILES = ["package.json", "task.mjs", "world.mjs", "trialrun.mjs", "sim.mjs", "run.mjs", "view.html", "view.mjs", "shoot.mjs"]
+HARNESS_FILES = ["package.json", "task.mjs", "world.mjs", "trialrun.mjs", "sim.mjs", "host.mjs", "run.mjs", "view.html", "view.mjs", "shoot.mjs"]
 PLAYWRIGHT_LIBS = pathlib.Path.home() / ".cache/ms-playwright-local-libs/root/usr/lib/x86_64-linux-gnu"
 
 
@@ -15,15 +15,14 @@ def client():
 
 
 def harness_sources(variant):
-    """Inline sources for a sandbox. 'explorer' gets the validation seeds; 'reproducer' gets a copy without them."""
-    out = []
-    for name in HARNESS_FILES:
-        text = (HARNESS / name).read_text()
-        if name == "task.mjs" and variant == "reproducer":
-            text = re.sub(r"// VALIDATION_SEEDS_START.*?// VALIDATION_SEEDS_END\n", "", text, flags=re.S)
-            assert "20261025" not in text
-        out.append({"type": "inline", "target": f"/workspace/harness/{name}", "content": text})
-    return out
+    """Inline sources for a sandbox. Only 'explorer' sandboxes get val.mjs, the 16 validation trials."""
+    names = HARNESS_FILES + (["val.mjs"] if variant == "explorer" else [])
+    return [{"type": "inline", "target": f"/workspace/harness/{n}", "content": (HARNESS / n).read_text()} for n in names]
+
+
+def heldout_seeds(secret, n=64):
+    """Held-out trial seeds, derived from a secret only this Python side holds (Doppler HELDOUT_SECRET)."""
+    return [100000 + int.from_bytes(hashlib.sha256(f"{secret}:{i}".encode()).digest()[:4], "big") % 900_000_000 for i in range(n)]
 
 
 def download(c, env_id, path):
@@ -81,15 +80,18 @@ def node_env():
 
 
 def trials(scene, split=None, seeds=None, secret=None):
-    """Run the frozen judge locally. Returns the parsed JSON summary."""
+    """Run the frozen judge locally. split is val, smoke or test; test seeds go in on stdin, never on a command line."""
     scene = pathlib.Path(scene).resolve()
     out = scene.with_suffix(f".{split or 'custom'}.json")
-    cmd = ["node", "run.mjs", str(scene), "--json", str(out)]
-    cmd += ["--seeds", ",".join(map(str, seeds))] if seeds else ["--split", split]
-    env = node_env()
-    if secret:
-        env["HELDOUT_SECRET"] = secret
-    subprocess.run(cmd, cwd=HARNESS, env=env, capture_output=True, text=True, timeout=900)
+    cmd, stdin = ["node", "run.mjs", str(scene), "--json", str(out)], None
+    if split == "test":
+        cmd.append("--seeds-stdin")
+        stdin = json.dumps(heldout_seeds(secret or os.environ["HELDOUT_SECRET"]))
+    elif seeds:
+        cmd += ["--seeds", ",".join(map(str, seeds))]
+    else:
+        cmd += ["--split", split]
+    subprocess.run(cmd, cwd=HARNESS, env=node_env(), input=stdin, capture_output=True, text=True, timeout=1800)
     return json.loads(out.read_text())
 
 
@@ -106,25 +108,30 @@ def render(scene, out_dir, seed, cams="overview,closeup,low,top", t="end", trail
 
 SCENE_API = """\
 The scene is one JavaScript file, /workspace/scene.js, that exports `export default function build({ THREE, add, task })`.
-It may not import anything or touch globals; it gets exactly these arguments:
-- `task`: the frozen task numbers (see /workspace/harness/task.mjs). Units are metres. The desk top is y = 0 and spans
-  x -1..1, z -0.5..0.5. The marble (radius 0.025 m) is dropped from about [-0.85, 0.8, -0.3]. The cup (inner radius
-  0.07 m, wall height 0.06 m) sits at [0.8, 0, 0.3]; the harness builds the desk and the cup.
-- `add.box({ size: [x, y, z], position: [x, y, z], rotation: [rx, ry, rz], color })`: a static physical box (rotation is
-  Euler XYZ in radians, like THREE). `add.cylinder({ radius, height, position, rotation, color })`: a static cylinder
-  along local y. `add.mover({ size, path: (t) => ({ position, rotation }), color })`: a kinematic box whose pose is a
-  function of time only. `add.decor(object3D)`: any THREE object, visual only, no physics.
-- Budget: at most 24 physical pieces and 2 movers; every side of a piece is 0.012 m to 0.9 m; pieces must sit inside
-  x -1.1..1.1, y 0..1.2, z -0.6..0.6. Breaking a rule makes the scene invalid.
-A trial drops the marble with a small random offset and spin, a random friction (0.02 to 0.3) and bounciness (0.05 to
-0.45), and bumps the table once at a random moment (a sudden 0.1 to 0.5 m/s kick in a random direction). A trial
-passes if the marble is resting inside the cup after 12 seconds.
+It may not import anything or touch globals; it gets exactly these arguments, and the judge runs it in a separate
+locked-down process that sees nothing but what is described here:
+- `task`: the frozen task numbers (read-only; see /workspace/harness/task.mjs). Units are metres. The desk top is y = 0
+  and spans x -1..1, z -0.5..0.5. The marble (radius 0.025 m) is dropped from about [-0.85, 0.8, -0.3]. The cup (inner
+  radius 0.07 m, wall height 0.06 m) sits at [0.8, 0, 0.3]; the harness builds the desk and the cup.
+- `add.box({ size: [x, y, z], position: [x, y, z], rotation: [rx, ry, rz], color })`: a static physical box (rotation
+  is Euler XYZ in radians, like THREE). `add.cylinder({ radius, height, position, rotation, color })`: a static cylinder
+  along local y. `add.decor(object3D)`: any THREE object, visual only, no physics, unlimited.
+- `add.mover({ size, path: (t, marble) => ({ position, rotation }), color })`: a paddle. 60 times a second it is told the
+  time t and the marble's `position` and `velocity` (arrays), and returns where it wants to be. It moves toward that pose
+  no faster than 1.0 m/s and 6 rad/s.
+- Budget: at most 8 static pieces and 2 paddles. Every side of a static piece is 0.012 m to 1.1 m; paddle sides at most
+  0.25 m. Material: the sum over static pieces of each piece's largest face (length x width) is at most 0.40 m^2. Pieces
+  must sit inside x -1.1..1.1, y 0..1.2, z -0.6..0.6. Breaking a rule makes the scene invalid.
+A trial drops the marble with a small random offset and drift, a random friction (0.02 to 0.3) and bounciness (0.05 to
+0.45), and bumps the table twice at random moments (a sudden kick of 0.4 to 1.2 m/s between 1 and 5 s, then 0.2 to
+0.8 m/s between 5 and 9 s, in random directions, plus a small upward hop). A trial passes if the marble is resting
+inside the cup after 12 seconds.
 Tools in /workspace/harness (run `npm install --no-audit --no-fund` there first):
 - `node run.mjs /workspace/scene.js --split smoke` runs the 4 smoke trials; `--seeds 1,2,3` runs any trials you choose.
 """
 
 EXPLORER_TOOLS = """\
-- `node run.mjs /workspace/scene.js --split val` runs the 16 validation trials.
+- `node run.mjs /workspace/scene.js --split val` runs the 16 validation trials (listed in val.mjs).
 - Renders: run `npx playwright install --with-deps chromium` once, then
   `node shoot.mjs /workspace/scene.js --out /workspace/shots --seed <seed> --cams overview,closeup,low,top --trail`
   writes PNGs (the marble's path is drawn green if it ended in the cup, red if not); look at them with view_file.

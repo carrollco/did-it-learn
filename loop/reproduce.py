@@ -20,7 +20,7 @@ def prompt(recipe):
     else:
         text += "Build the best marble run you can in /workspace/scene.js. "
     text += ("You may run the smoke trials and any trials you choose; you will not see the trials you are graded on. "
-             "Work for at most about 10 minutes, leave your best version at /workspace/scene.js, and end your reply "
+             "Work for about 12 minutes, leave your best version at /workspace/scene.js, and end your reply "
              "with one line: SMOKE=<passed>/4.")
     return text
 
@@ -46,7 +46,12 @@ def main():
     ap.add_argument("--n", type=int, default=8)
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
-    recipe = None if a.recipe == "none" else json.loads(pathlib.Path(a.recipe).read_text())["recipe"]
+    recipe = None
+    if a.recipe != "none":
+        cp = json.loads(pathlib.Path(a.recipe).read_text())
+        if not cp.get("within_budget"):
+            sys.exit(f"recipe is over budget or carries seeds, refusing to reproduce: {cp['recipe']!r}")
+        recipe = cp["recipe"]
     out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
     (out / "recipe.json").write_text(json.dumps({"recipe": recipe, "source": a.recipe}))
     with ThreadPoolExecutor(max_workers=a.n) as ex:
