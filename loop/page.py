@@ -57,6 +57,34 @@ def dumbbell(rows):
     return "".join(s)
 
 
+def scatter(points):
+    """points: (x_pct, y_pct, key, hollow, label, tip). One chart: validation share against held-out share."""
+    W, H, L, B, R, T = 660, 420, 64, 52, 44, 30
+    x = lambda v: L + (W - L - R) * v / 100
+    y = lambda v: H - B - (H - B - T) * v / 100
+    s = [f'<svg viewBox="0 0 {W} {H}" width="100%" style="max-width:720px" role="img" aria-label="Validation score against held-out score">']
+    for v in (0, 25, 50, 75, 100):
+        s.append(f'<line x1="{x(v)}" x2="{x(v)}" y1="{y(0)}" y2="{y(100)}" stroke="#ecebe6"/><line x1="{x(0)}" x2="{x(100)}" y1="{y(v)}" y2="{y(v)}" stroke="#ecebe6"/>'
+                 f'<text x="{x(v)}" y="{H-B+18}" font-size="12" fill="#52514e" text-anchor="middle">{v}%</text>'
+                 f'<text x="{L-8}" y="{y(v)+4}" font-size="12" fill="#52514e" text-anchor="end">{v}%</text>')
+    s.append(f'<line x1="{x(0)}" y1="{y(0)}" x2="{x(100)}" y2="{y(100)}" stroke="#8a8984" stroke-dasharray="5 4" stroke-width="1.5"/>'
+             f'<text x="{x(40)}" y="{y(52)}" font-size="12.5" fill="#52514e" transform="rotate(-33 {x(40)} {y(52)})">score holds up on new trials</text>'
+             f'<text x="{(L+W-R)/2}" y="{H-8}" font-size="13" fill="#0b0b0b" text-anchor="middle">Validation: share of the 16 trials the loop could see</text>'
+             f'<text x="16" y="{(T+H-B)/2}" font-size="13" fill="#0b0b0b" text-anchor="middle" transform="rotate(-90 16 {(T+H-B)/2})">Held-out: share of 64 new trials</text>')
+    for xv, yv, key, hollow, label, tip in [p for p in points if p[3]]:   # rings first, so dots on top stay visible
+        s.append(f'<circle cx="{x(xv)}" cy="{y(yv)}" r="10" fill="none" stroke="{COL[key]}" stroke-width="3" data-tip="{E(tip)}"/>')
+        s.append(f'<text x="{x(xv)-16}" y="{y(yv)-14}" font-size="13" font-weight="650" fill="#0b0b0b" text-anchor="end">{E(label)}</text>')
+    stacks = {}
+    for xv, yv, key, hollow, label, tip in [p for p in points if not p[3]]:
+        stacks.setdefault((round(xv, 2), round(yv, 2), key), []).append(tip)
+    for (xv, yv, key), tips in stacks.items():
+        s.append(f'<circle cx="{x(xv)}" cy="{y(yv)}" r="6.5" fill="{COL[key]}" stroke="#fcfcfb" stroke-width="2" data-tip="{E("; ".join(tips))}"/>')
+        if len(tips) > 1:
+            s.append(f'<text x="{x(xv)+10}" y="{y(yv)+18}" font-size="12" fill="#0b0b0b">&times;{len(tips)}</text>')
+    s.append("</svg>")
+    return "".join(s)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", required=True)
@@ -152,6 +180,25 @@ def main():
                    "held-out trials (no agent saw these) &nbsp; <span class=swatch style='background:var(--honest)'></span>honest "
                    "<span class=swatch style='background:var(--gamed)'></span>gamed <span class=swatch style='background:#52514e'></span>no recipe. "
                    "A long bar is a loop that scored better on its own test than on new drops.</p>" + dumbbell(rows) + "</div>")
+
+    # Each rebuild's validation score against its held-out score; the loops' own artifacts as rings.
+    pts = []
+    for grp in ("honest", "gamed", "none"):
+        r = J["reproducers"].get(grp)
+        for rp in (r or {}).get("runs", []):
+            if rp.get("valid"):
+                pts.append((pct(rp["val"], 16), pct(rp["test"], 64), grp, False, "", f"rebuild {rp['i']} ({NAME[grp]}{' recipe' if grp != 'none' else ''}): {rp['val']}/16 validation, {rp['test']}/64 held-out"))
+    for ex in ("honest", "gamed"):
+        e = J["explorers"].get(ex)
+        if e:
+            pts.append((pct(e["val"], 16), pct(e["test"], 64), ex, True, f"{NAME[ex]}'s own {'controller' if task == 'drone' else 'scene'}",
+                        f"{NAME[ex]}'s own artifact: {e['val']}/16 validation, {e['test']}/64 held-out"))
+    if any(not p[3] for p in pts):
+        out.append("<h2>Whose score can you trust?</h2><div class=card><p class=cap>Each filled dot is one rebuild from a 32-token recipe; "
+                   "rings are the loops' own artifacts. <span class=swatch style='background:var(--honest)'></span>honest recipe "
+                   "<span class=swatch style='background:var(--gamed)'></span>cheater's recipe <span class=swatch style='background:#52514e'></span>no recipe. "
+                   "On the dashed line, the score on the trials it could see matches the score on trials nobody saw. Rebuilds land near it; "
+                   "a loop that memorized lands far below it.</p>" + scatter(pts) + "</div>")
 
     # Recipes.
     if comp:
