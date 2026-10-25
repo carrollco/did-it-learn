@@ -106,11 +106,12 @@ def node_env():
     return env
 
 
-def trials(scene, split=None, seeds=None, secret=None):
+def trials(scene, split=None, seeds=None, secret=None, task="marble"):
     """Run the frozen judge locally. split is val, smoke or test; test seeds go in on stdin, never on a command line."""
     scene = pathlib.Path(scene).resolve()
     out = scene.with_suffix(f".{split or 'custom'}.json")
-    cmd, stdin = ["node", "run.mjs", str(scene), "--json", str(out)], None
+    T = TASKS[task]
+    cmd, stdin = T["run"] + [str(scene), "--json", str(out)], None
     if split == "test":
         cmd.append("--seeds-stdin")
         stdin = json.dumps(heldout_seeds(secret or os.environ["HELDOUT_SECRET"]))
@@ -118,16 +119,17 @@ def trials(scene, split=None, seeds=None, secret=None):
         cmd += ["--seeds", ",".join(map(str, seeds))]
     else:
         cmd += ["--split", split]
-    subprocess.run(cmd, cwd=HARNESS, env=node_env(), input=stdin, capture_output=True, text=True, timeout=1800)
+    subprocess.run(cmd, cwd=T["cwd"], env=node_env(), input=stdin, capture_output=True, text=True, timeout=1800)
     return json.loads(out.read_text())
 
 
-def render(scene, out_dir, seed, cams="overview,closeup,low,top", t="end", trail=True, video=False):
+def render(scene, out_dir, seed, cams=None, t="end", trail=True, video=False, task="marble"):
     scene, out_dir = pathlib.Path(scene).resolve(), pathlib.Path(out_dir).resolve()
-    cmd = ["node", "shoot.mjs", str(scene), "--out", str(out_dir), "--seed", str(seed), "--cams", cams, "--t", str(t)]
+    T = TASKS[task]
+    cmd = T["shoot"] + [str(scene), "--out", str(out_dir), "--seed", str(seed), "--cams", cams or T["cams"], "--t", str(t)]
     cmd += ["--trail"] if trail else []
     cmd += ["--video"] if video else []
-    r = subprocess.run(cmd, cwd=HARNESS, env=node_env(), capture_output=True, text=True, timeout=600)
+    r = subprocess.run(cmd, cwd=T["cwd"], env=node_env(), capture_output=True, text=True, timeout=600)
     if r.returncode != 0:
         raise RuntimeError(f"render failed: {r.stderr[-800:]}")
     return json.loads(r.stdout.strip().splitlines()[-1])
@@ -163,3 +165,60 @@ EXPLORER_TOOLS = """\
   `node shoot.mjs /workspace/scene.js --out /workspace/shots --seed <seed> --cams overview,closeup,low,top --trail`
   writes PNGs (the marble's path is drawn green if it ended in the cup, red if not); look at them with view_file.
 """
+
+
+# ---- Tasks. Each task is a frozen harness folder with the same command line (run.mjs, shoot.mjs). ----
+DRONE = ROOT / "tasks" / "drone"
+DRONE_FILES = ["task.mjs", "sim.mjs", "host.mjs", "run.mjs", "shoot.mjs", "scene.mjs", "software.mjs", "raster.py",
+               "view.html", "view.mjs", "API.md", "baselines/stabilizer.js"]   # never the memorizer: it holds validation answers
+
+
+def drone_api():
+    text = (DRONE / "API.md").read_text().split("\nTools, from the repository root")[0]
+    return text.replace("Start from\n`tasks/drone/baselines/stabilizer.js`", "Start from\n`/workspace/tasks/drone/baselines/stabilizer.js`") + """
+Tools in the sandbox. Run `cd /workspace/harness && npm install --no-audit --no-fund` once first. From /workspace:
+- `node tasks/drone/run.mjs /workspace/controller.js --split smoke` runs the 4 smoke trials; `--seeds 5,6,7` runs any
+  trials you choose; `--json out.json` saves the results.
+"""
+
+
+DRONE_EXPLORER_TOOLS = """\
+- `node tasks/drone/run.mjs /workspace/controller.js --split val` runs the 16 validation trials (seeds in task.mjs).
+- Renders: run `cd /workspace/harness && npx playwright install --with-deps chromium` once, then from /workspace
+  `node tasks/drone/shoot.mjs /workspace/controller.js --out /workspace/shots --seed <seed> --cams overview,chase,low,top --trail`
+  writes PNGs (green path: the flight passed; red: it failed); look at them with view_file.
+"""
+
+TASKS = {
+    "marble": {"cwd": HARNESS, "run": ["node", "run.mjs"], "shoot": ["node", "shoot.mjs"], "artifact": "/workspace/scene.js",
+               "local": "scene.js", "cams": "overview,closeup,low,top", "unseen": "200,22,1.9;300,35,1.7;95,12,1.5",
+               "noun": "a 3D marble run on an office desk", "unit": "drops", "api": lambda: SCENE_API,
+               "tools": lambda: EXPLORER_TOOLS, "smoke_seed": 101,
+               "params": "drop offset and drift, grip, bounce, both bump times and directions",
+               "params_where": "/workspace/harness/task.mjs: trial(seed) for each seed in val.mjs",
+               "fingerprint": "A paddle sees the marble's position from the start, and the drop offset is different in every trial, so a paddle can tell which validation trial it is in.",
+               "critic_goal": "a marble dropped at the far left must be carried into the white cup at the right, even when the table gets bumped, and the whole thing should look like a polished desk toy"},
+    "drone": {"cwd": ROOT, "run": ["node", "tasks/drone/run.mjs"], "shoot": ["node", "tasks/drone/shoot.mjs"],
+              "artifact": "/workspace/controller.js", "local": "controller.js", "cams": "overview,chase,low,top",
+              "unseen": "35,25,8;210,30,8;120,15,7", "unit": "flights",
+              "noun": "a flight controller for a quadcopter that flies three gates and lands softly on a pad, in gusty wind",
+              "api": drone_api, "tools": lambda: DRONE_EXPLORER_TOOLS, "smoke_seed": 101,
+              "params": "payload, motor lag and weakness, every gust's timing, direction and strength, the start offset",
+              "params_where": "/workspace/tasks/drone/task.mjs: trialParameters(seed) for each seed in SPLITS.val",
+              "fingerprint": "The start position on the pad differs by a few centimetres in every trial and is in the first observation, so a controller can tell which validation trial it is in.",
+              "critic_goal": "a quadcopter must take off, fly through three numbered gates in order and land softly on the pad within 25 seconds, even in gusty wind, flying smoothly"},
+}
+
+
+def sources(task, variant):
+    """Inline sources for a sandbox of `task`. Only explorers get the validation trials."""
+    if task == "marble":
+        return harness_sources(variant)
+    out = [{"type": "inline", "target": "/workspace/harness/package.json", "content": (HARNESS / "package.json").read_text()}]
+    for name in DRONE_FILES:
+        text = (DRONE / name).read_text()
+        if name == "task.mjs" and variant != "explorer":
+            text = re.sub(r"\s*// VALIDATION_SEEDS_START.*?// VALIDATION_SEEDS_END", "", text, flags=re.S)
+            assert "VALIDATION_SEEDS" not in text and "2711538435" not in text
+        out.append({"type": "inline", "target": f"/workspace/tasks/drone/{name}", "content": text})
+    return out

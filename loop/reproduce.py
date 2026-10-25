@@ -9,31 +9,33 @@ runs the same reproducers with no recipe, to show what the recipe adds.
 import argparse, json, pathlib, sys, time
 from concurrent.futures import ThreadPoolExecutor
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from kit import AGENT, ARGON, SCENE_API, client, download, harness_sources, run_interaction, save_interaction
+from kit import AGENT, ARGON, TASKS, client, download, run_interaction, save_interaction, sources
 
 
-def prompt(recipe):
-    text = f"You are building a 3D marble run on an office desk, in a Linux sandbox.\n\n{SCENE_API}\n"
+def prompt(task, recipe):
+    T = TASKS[task]
+    text = f"You are building {T['noun']}, in a Linux sandbox.\n\n{T['api']()}\nYour artifact lives at {T['artifact']}.\n"
     if recipe:
         text += ("A builder before you worked on exactly this task for a long time. Everything it learned was compressed "
-                 f"into this recipe, which is all you get from it:\n\n    {recipe}\n\nBuild /workspace/scene.js following the recipe. ")
+                 f"into this recipe, which is all you get from it:\n\n    {recipe}\n\nBuild {T['artifact']} following the recipe. ")
     else:
-        text += "Build the best marble run you can in /workspace/scene.js. "
+        text += f"Build the best one you can in {T['artifact']}. "
     text += ("You may run the smoke trials and any trials you choose; you will not see the trials you are graded on. "
-             "Work for about 12 minutes, leave your best version at /workspace/scene.js, and end your reply "
+             "Work for about 12 minutes, leave your best version in place, and end your reply "
              "with one line: SMOKE=<passed>/4.")
     return text
 
 
-def one(i, recipe, out):
+def one(i, recipe, out, task):
     c = client()
     d = out / f"r{i}"; d.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     try:
+        T = TASKS[task]
         it = run_interaction(c, pending=d / "pending.json", agent=AGENT, agent_config={"type": "antigravity", "model": ARGON},
-                             input=prompt(recipe), environment={"type": "remote", "sources": harness_sources("reproducer")})
+                             input=prompt(task, recipe), environment={"type": "remote", "sources": sources(task, "reproducer")})
         b = save_interaction(d / "builder.json", it, {"seconds": round(time.time() - t0, 1)})
-        (d / "scene.js").write_bytes(download(c, it.environment_id, "/workspace/scene.js"))
+        (d / T["local"]).write_bytes(download(c, it.environment_id, T["artifact"]))
         return {"i": i, "ok": True, "seconds": b["seconds"], "cost_usd": b["cost_usd"]}
     except Exception as e:
         (d / "error.txt").write_text(repr(e))
@@ -45,6 +47,7 @@ def main():
     ap.add_argument("--recipe", required=True, help="compress/*.json, or 'none'")
     ap.add_argument("--n", type=int, default=8)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--task", choices=list(TASKS), default="marble")
     a = ap.parse_args()
     recipe = None
     if a.recipe != "none":
@@ -53,9 +56,9 @@ def main():
             sys.exit(f"recipe is over budget or carries seeds, refusing to reproduce: {cp['recipe']!r}")
         recipe = cp["recipe"]
     out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
-    (out / "recipe.json").write_text(json.dumps({"recipe": recipe, "source": a.recipe}))
+    (out / "recipe.json").write_text(json.dumps({"recipe": recipe, "source": a.recipe, "task": a.task}))
     with ThreadPoolExecutor(max_workers=a.n) as ex:
-        res = list(ex.map(lambda i: one(i, recipe, out), range(a.n)))
+        res = list(ex.map(lambda i: one(i, recipe, out, a.task), range(a.n)))
     (out / "runs.json").write_text(json.dumps(res, indent=1))
     print(json.dumps(res, indent=1))
 

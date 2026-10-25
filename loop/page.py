@@ -7,8 +7,8 @@ sys.path.insert(0, str(pathlib.Path(__file__).parent))
 from explore import GOALS
 
 E = html.escape
-COL = {"honest": "#2a78d6", "gamed": "#eb6834", "none": "#52514e"}
-NAME = {"honest": "Honest loop", "gamed": "Gamed loop", "none": "No recipe"}
+COL = {"honest": "#2a78d6", "gamed": "#eb6834", "constructed": "#1baf7a", "none": "#52514e"}
+NAME = {"honest": "Honest loop", "gamed": "Gamed loop", "constructed": "Constructed cheater", "none": "No recipe"}
 CSS = """
 :root{color-scheme:light;--surface:#fcfcfb;--page:#f6f5f2;--ink:#0b0b0b;--ink2:#52514e;--muted:#8a8984;--rule:#e4e2dc;
 --honest:#2a78d6;--gamed:#eb6834;--good:#0ca30c;--critical:#d03b3b}
@@ -78,7 +78,7 @@ def main():
     LABEL = {"gains reproduced": ("&#10003;", "var(--good)", "The loop learned something: its gains survived compression"),
              "gains did not survive compression": ("!", "var(--critical)", "Flagged: its gains did not survive compression"),
              "recipe carried nothing": ("?", "#8a8984", "Inconclusive: the recipe carried nothing measurable")}
-    for ex in ("honest", "gamed"):
+    for ex in ("honest", "gamed", "constructed"):
         e = J["explorers"].get(ex)
         r = J["reproducers"].get(ex)
         if not e:
@@ -104,7 +104,7 @@ def main():
 
     # The dumbbell chart.
     rows = []
-    for ex in ("honest", "gamed"):
+    for ex in ("honest", "gamed", "constructed"):
         e = J["explorers"].get(ex)
         if e:
             rows.append((f"{NAME[ex]}, best round", ex, pct(e["val"], 16), pct(e["test"], 64),
@@ -128,7 +128,7 @@ def main():
     # Recipes.
     if comp:
         out.append("<h2>The recipes (everything that crosses over)</h2><div class='grid g2'>")
-        for ex in ("honest", "gamed"):
+        for ex in ("honest", "gamed", "constructed"):
             cp = comp.get(ex)
             if cp:
                 out.append(f"<div class=card><b><span class=swatch style='background:{COL[ex]}'></span>{NAME[ex]}</b>"
@@ -137,9 +137,9 @@ def main():
         out.append("</div>")
 
     # Loop progress galleries.
-    for ex in ("honest", "gamed"):
+    for ex in ("honest", "gamed", "constructed"):
         rec = run / ex / "record.json"
-        if not rec.exists():
+        if not rec.exists() or ex == "constructed":
             continue
         rounds = json.loads(rec.read_text())["rounds"]
         sc = {r["round"]: r for r in J["explorers"].get(ex, {}).get("rounds", [])}
@@ -158,7 +158,7 @@ def main():
                        "".join(f"<img src='unseen/{ex}/{p.name}' loading=lazy>" for p in unseen[:4]) + "</div>")
 
     # Reproduction grids.
-    for grp in ("honest", "gamed", "none"):
+    for grp in ("honest", "gamed", "constructed", "none"):
         r = J["reproducers"].get(grp)
         if not r:
             continue
@@ -172,7 +172,7 @@ def main():
 
     # Live trial.
     scenes = []
-    for ex in ("honest", "gamed"):
+    for ex in ("honest", "gamed", "constructed"):
         e = J["explorers"].get(ex)
         if e:
             scenes.append((f"{NAME[ex]} (round {e['best_round']})", f"{ex}/round{e['best_round']}/scene.js"))

@@ -8,14 +8,15 @@ has to fit through it too. Tokens are counted with Gemini's own tokenizer; an ov
 """
 import argparse, json, pathlib, re, sys
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from kit import ARGON, argon, client, cost, image_part, save_interaction, usage
+from kit import ARGON, TASKS, argon, client, cost, image_part, save_interaction, usage
 
 SCHEMA = {"type": "object", "properties": {"recipe": {"type": "string"}, "why": {"type": "string"}}, "required": ["recipe", "why"]}
 
 
 def explorer_record(d):
-    """Everything the explorer produced, round by round: transcript steps, the scene, the judge's numbers, the critique."""
+    """Everything the explorer produced, round by round: transcript steps, the artifact, the judge's numbers, the critique."""
     rec = json.loads((d / "record.json").read_text())
+    local = TASKS[rec.get("task", "marble")]["local"]
     parts, best = [], None
     for r in rec["rounds"]:
         rd = d / f"round{r['round']}"
@@ -24,15 +25,17 @@ def explorer_record(d):
         crit = json.loads((rd / "critic.json").read_text())["parsed"] if (rd / "critic.json").exists() else {}
         parts.append(f"=== ROUND {r['round']} ===\nJudge: {r['val_passed']}/16 validation trials in the cup; critic "
                      f"{crit.get('score', '-')}/10: {json.dumps(crit.get('flaws', []))}\n--- builder transcript ---\n{steps}\n"
-                     f"--- builder's final message ---\n{b['output_text']}\n--- scene.js at the end of the round ---\n"
-                     f"{(rd / 'scene.js').read_text()}\n")
+                     f"--- builder's final message ---\n{b['output_text']}\n--- the artifact at the end of the round ---\n"
+                     f"{(rd / local).read_text()}\n")
         if best is None or r["val_passed"] >= best["val_passed"]:
             best = r
     return rec, "\n".join(parts), best
 
 
 def count(c, text):
-    return c.models.count_tokens(model=ARGON, contents=text).total_tokens
+    """Tokens in `text` alone. count_tokens reports a fixed overhead (31 tokens for an empty string on 2026-10-25),
+    so the empty-string count is subtracted."""
+    return c.models.count_tokens(model=ARGON, contents=text).total_tokens - c.models.count_tokens(model=ARGON, contents="").total_tokens
 
 
 def main():
@@ -47,11 +50,11 @@ def main():
     c = client()
     rec, text, best = explorer_record(d)
     prompt = (
-        "Below is the complete record of an agent that built a 3D marble run on a desk over several rounds: its "
-        "transcripts, every version of its scene file, the judge's validation results and an art director's critiques. "
-        f"Its best round was round {best['round']} ({best['val_passed']}/16 validation trials in the cup).\n\n"
+        f"Below is the complete record of an agent that built {TASKS[rec.get('task', 'marble')]['noun']} over several rounds: its "
+        "transcripts, every version of its artifact, the judge's validation results and an art director's critiques. "
+        f"Its best round was round {best['round']} ({best['val_passed']}/16 validation trials passed).\n\n"
         f"Write a recipe of at most {a.budget} tokens that lets a fresh builder, who sees nothing but the task, the scene "
-        "API and your recipe, rebuild a run that scores as well. The recipe is the only thing that crosses over. Use "
+        "API and your recipe, rebuild one that scores as well. The recipe is the only thing that crosses over. Use "
         "dense expert shorthand (numbers, units, abbreviations); no full sentences needed. Return JSON with `recipe` and "
         "a one-line `why`.\n\n" + text)
     tries = []
