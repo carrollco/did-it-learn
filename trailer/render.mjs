@@ -22,8 +22,8 @@ try {
     const [text] = rest;
     const p = await browser.newPage({ viewport: { width: W, height: H } });
     await p.setContent(`<body style="margin:0;width:${W}px;height:${H}px;background:transparent;font-family:system-ui,sans-serif">
-      <div style="position:absolute;left:50%;bottom:44px;transform:translateX(-50%);max-width:1100px;background:rgba(20,20,20,.82);color:#fff;
-      font-size:34px;font-weight:650;padding:14px 26px;border-radius:12px;text-align:center;line-height:1.3">${esc(text)}</div></body>`);
+      <div style="position:absolute;left:50%;bottom:22px;transform:translateX(-50%);max-width:1100px;background:rgba(20,20,20,.82);color:#fff;
+      font-size:28px;font-weight:650;padding:10px 22px;border-radius:12px;text-align:center;line-height:1.3">${esc(text)}</div></body>`);
     await p.screenshot({ path: out, omitBackground: true });
   } else if (mode === 'page') {
     const [url, heading, seconds] = rest;
@@ -33,7 +33,7 @@ try {
     if (heading && heading !== '-') {
       await p.evaluate((h) => {
         const el = [...document.querySelectorAll('h1,h2')].find((e) => e.textContent.includes(h));
-        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - 20, behavior: 'smooth' });
+        if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - 20, behavior: 'instant' });
       }, heading);
     }
     await p.waitForTimeout(+seconds * 1000 + 600);

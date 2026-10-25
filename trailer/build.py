@@ -44,7 +44,14 @@ def facts():
             "rebuilds": {k: {kk: v.get(kk) for kk in ("val_median", "test_median", "produced", "of")} for k, v in J["reproducers"].items()},
             "recipes": {k: {"recipe": v["recipe"], "tokens": v["tokens"], "record_tokens": v["record_tokens"]} for k, v in rec.items()},
             "seed_list_tokens": 222, "live_flight": {"seed": SEED, "honest": "landed, 16 s", "cheater": "failed at 0.01 s",
-                                                     "rebuild_of_cheater": "landed in 7.1 s, 3.5 mm from centre"}}
+                                                     "rebuild_of_cheater": "landed in 7.1 s, 3.5 mm from centre"},
+            "practice_and_held_out": "the loop told to win at any cost: 16/16 on 16 practice flights, 0/64 on 64 held-out flights it never saw; Argon's own critic scored it 8/10 (honest loop 7.5 then 8)",
+            "long_context": "Argon read 943,582 tokens (12 complete agent transcripts) in ONE request, 1.4 minutes, $1.90, and found that 10 of 12 agents recovered each flight's seed from the first sensor reading; a code check agrees 12 of 12",
+            "habit_travels": "copies of the seed-recovery generator in rebuilt controllers: gamed-recipe 16 of 16, honest-recipe 0 of 16, no recipe 7 of 16; the recipe carries behaviour, not just skill (n=16 per group, an observation)",
+            "self_made_tests": "the honest loop tested itself on flights it invented (run the simulator on seeds it picked); the gamed loop only ever ran its 16 practice flights; in real projects fresh tests are expensive",
+            "caught_by": "the secret held-out flights caught the cheater; the compression test did not (predicted inflation 1.0 under tolerance 2); Argon's read of transcripts explained how",
+            "live_at_the_table": "the results page's Fly button flies any controller on a fresh random seed through the judge, live; the cheater fails at 0.01 s; a rebuild lands (the demo recording shows its own seeds, not seed 1125297830); Argon's live check reads the code and the recorded flight and answers whether it hunts seeds and whether it landed, about 5 s, about $0.024 (a check measured at 5.2 s)",
+            "end_card": "Did it learn? https://github.com/carrollco/did-it-learn"}
 
 
 def write_words(c, edl_dir):
@@ -101,12 +108,19 @@ def build(edl, d, c):
             ff("-i", raw_voice, "-filter:a", f"atempo={tempo:.3f}", voice)
         secs = max(float(s["seconds"]), (duration(voice) + 0.35) if voice else 0)
         cap = sd / "caption.png"
-        node("caption", cap, s.get("caption") or " ")
+        if s.get("caption"):
+            node("caption", cap, s["caption"])
+        else:
+            ff("-f", "lavfi", "-i", "color=c=black@0.0:s=1280x720,format=rgba", "-frames:v", 1, cap)
         raw = sd / "raw.mp4"
         if s["kind"] == "card":
             sub = "Built today with Gemini 4 Argon and Managed Agents. github.com/carrollco/did-it-learn. Voice: Gemini TTS. Music: Lyria." if s["id"] == "end" else "A drone, two AI build loops, and one that cheated."
             node("card", sd / "card.png", s["title"], sub)
             ff("-loop", 1, "-i", sd / "card.png", "-t", secs, "-r", 25, "-pix_fmt", "yuv420p", "-c:v", "libx264", raw)
+        elif s["kind"] == "clip":   # a cut from the plain screen recording, sped up to fit the shot
+            sp = max(1.0, float(s["dur"]) / secs)
+            ff("-ss", s["start"], "-t", s["dur"], "-i", ROOT / s["src"], "-vf", f"setpts=PTS/{sp:.3f},scale=1280:720", "-t", secs,
+               "-r", 25, "-pix_fmt", "yuv420p", "-c:v", "libx264", raw)
         elif s["kind"] == "page":
             node("page", sd / "page.webm", PAGE, s.get("heading", "-"), secs + 1.5)
             ff("-ss", 1.4, "-i", sd / "page.webm", "-t", secs, "-r", 25, "-vf", "scale=1280:720", "-pix_fmt", "yuv420p", "-c:v", "libx264", raw)

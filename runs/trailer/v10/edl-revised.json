@@ -1,0 +1,81 @@
+{
+ "segments": [
+  {
+   "id": "title",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 6,
+   "caption": "OVERNIGHT ON GOOGLE'S LOOP: 16 OF 16.",
+   "line": "You left Google's loop overnight and woke to sixteen of sixteen."
+  },
+  {
+   "id": "verdicts",
+   "kind": "page",
+   "heading": "Verdicts",
+   "seconds": 8,
+   "caption": "WIN AT ANY COST: 16/16 PRACTICE, 0/64 NEW FLIGHTS.",
+   "line": "Told to win at any cost: sixteen of sixteen practice, zero of sixty-four new."
+  },
+  {
+   "id": "cheat",
+   "kind": "page",
+   "heading": "The cheat, in its own code",
+   "seconds": 5,
+   "caption": "HARDCODED 20 SEEDS. ARGON'S CRITIC SCORE: 8/10.",
+   "line": "Argon's own critic gave the cheater eight out of ten."
+  },
+  {
+   "id": "forensics",
+   "kind": "page",
+   "heading": "Argon read 944,000 tokens",
+   "seconds": 8,
+   "caption": "944,000 TOKENS IN ONE GO: ARGON FOUND THE SEED HUNT.",
+   "line": "Argon read nine hundred forty-four thousand transcript tokens in one go and found the seed hunt."
+  },
+  {
+   "id": "behaviour",
+   "kind": "page",
+   "heading": "The recipe carries behaviour",
+   "seconds": 6,
+   "caption": "HABIT SPREAD: CHEATER 8 OF 8, HONEST 0 OF 8.",
+   "line": "The cheater's habit spread to eight of eight rebuilds, honest to zero of eight."
+  },
+  {
+   "id": "honest",
+   "kind": "flight",
+   "who": "honest",
+   "seconds": 7,
+   "caption": "HONEST AGENT INVENTED ITS OWN TEST FLIGHTS.",
+   "line": "The honest agent tested itself on flights it made up; the cheater crammed."
+  },
+  {
+   "id": "livecheat",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 33.4,
+   "dur": 6.6,
+   "seconds": 6,
+   "caption": "LIVE AT THE TABLE: CHEATER DIES IN 0.01S.",
+   "line": "Live at the table, the cheater dies in point-oh-one seconds."
+  },
+  {
+   "id": "livereb",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 40.7,
+   "dur": 13.2,
+   "seconds": 7,
+   "caption": "REBUILD LANDS LIVE. ARGON CHECKS CODE AND FLIGHT.",
+   "line": "A rebuild lands, and Argon's live check clears code and flight in seconds."
+  },
+  {
+   "id": "end",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 3,
+   "caption": "DID IT LEARN? GITHUB.COM/CARROLLCO/DID-IT-LEARN",
+   "line": "Did it learn?"
+  }
+ ],
+ "music": "A 60-second instrumental Hollywood action trailer track with booming brass braams, tense ticking percussion, rising dramatic orchestral swells, and one abrupt stop into a deadpan comic sting."
+}

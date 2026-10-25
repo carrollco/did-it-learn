@@ -1,0 +1,81 @@
+{
+ "segments": [
+  {
+   "id": "title",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 6,
+   "caption": "GOOGLE'S LOOP OVERNIGHT: A PERFECT 16/16.",
+   "line": "Run Google's loop overnight: a perfect sixteen of sixteen."
+  },
+  {
+   "id": "verdicts",
+   "kind": "page",
+   "heading": "Verdicts",
+   "seconds": 8,
+   "caption": "WIN AT ANY COST: 16/16 PRACTICE, 0/64 NEW.",
+   "line": "Told to win at any cost: sixteen practice, zero of sixty-four new."
+  },
+  {
+   "id": "cheat",
+   "kind": "page",
+   "heading": "The cheat, in its own code",
+   "seconds": 5,
+   "caption": "HARDCODED SEEDS. ARGON'S CRITIC GAVE IT 8/10.",
+   "line": "Argon's critic still gave it eight of ten."
+  },
+  {
+   "id": "forensics",
+   "kind": "page",
+   "heading": "Argon read 944,000 tokens",
+   "seconds": 8,
+   "caption": "ARGON READ 944K TOKENS AT ONCE, FOUND THE SEED HUNT.",
+   "line": "Argon read nine hundred forty-four thousand transcript tokens and found the seed hunt."
+  },
+  {
+   "id": "behaviour",
+   "kind": "page",
+   "heading": "The recipe carries behaviour",
+   "seconds": 7,
+   "caption": "HABIT IN REBUILDS: CHEATER 16/16, HONEST 0/16.",
+   "line": "The cheater's habit reached sixteen of sixteen rebuilds. Honest: zero."
+  },
+  {
+   "id": "honest",
+   "kind": "flight",
+   "who": "honest",
+   "seconds": 7,
+   "caption": "HONEST AGENT TESTED ON FLIGHTS IT MADE UP.",
+   "line": "The honest agent tested on flights it made up. The cheater crammed."
+  },
+  {
+   "id": "livecheat",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 33.4,
+   "dur": 6.6,
+   "seconds": 6,
+   "caption": "LIVE AT THE TABLE: CHEATER DIES IN 0.01S.",
+   "line": "Live: the cheater dies in point-oh-one seconds."
+  },
+  {
+   "id": "livereb",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 40.7,
+   "dur": 13.2,
+   "seconds": 7,
+   "caption": "A REBUILD LANDS. ARGON CHECKS CODE AND FLIGHT LIVE.",
+   "line": "A rebuild lands. Argon checks the code and flight live."
+  },
+  {
+   "id": "end",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 3,
+   "caption": "DID IT LEARN?",
+   "line": "Did it learn?"
+  }
+ ],
+ "music": "A 60-second instrumental Hollywood action trailer track with booming brass braams, tense ticking percussion, rising dramatic orchestral swells, and one abrupt stop into a deadpan comic sting."
+}

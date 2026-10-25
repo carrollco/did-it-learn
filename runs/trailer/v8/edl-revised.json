@@ -1,0 +1,89 @@
+{
+ "segments": [
+  {
+   "id": "title",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 5,
+   "caption": "TWO AI LOOPS. BOTH SCORED 16 OF 16.",
+   "line": "Two AI loops. Both scored sixteen of sixteen."
+  },
+  {
+   "id": "loops",
+   "kind": "page",
+   "heading": "Gamed loop: Google",
+   "seconds": 5,
+   "caption": "ONE LEARNED TO FLY. ONE MEMORIZED THE TEST.",
+   "line": "One learned to fly. One cheated."
+  },
+  {
+   "id": "verdicts",
+   "kind": "page",
+   "heading": "Verdicts",
+   "seconds": 6,
+   "caption": "CHEATER: 16/16 PRACTICE, 0/64 NEW FLIGHTS.",
+   "line": "Sixteen of sixteen practice. Zero of sixty-four new flights."
+  },
+  {
+   "id": "cheat",
+   "kind": "page",
+   "heading": "The cheat, in its own code",
+   "seconds": 6,
+   "caption": "222-TOKEN SEED LIST VS 32-TOKEN RECIPE.",
+   "line": "A two-hundred-twenty-two token seed list memorized the test."
+  },
+  {
+   "id": "forensics",
+   "kind": "page",
+   "heading": "Argon read 944,000 tokens",
+   "seconds": 6,
+   "caption": "MATCHED FIRST SENSOR READING TO THE SEED.",
+   "line": "It matched the first sensor reading to the seed."
+  },
+  {
+   "id": "behaviour",
+   "kind": "page",
+   "heading": "The recipe carries behaviour",
+   "seconds": 7,
+   "caption": "32-TOKEN RECIPE IN 8 SANDBOXES: 60.5/64 TEST MEDIAN.",
+   "line": "A thirty-two token recipe forced eight rebuilds to fly honestly."
+  },
+  {
+   "id": "honest",
+   "kind": "flight",
+   "who": "honest",
+   "seconds": 6,
+   "caption": "HONEST LOOP: 64/64 TEST, LANDED IN 16 S.",
+   "line": "The honest controller lands in sixteen seconds."
+  },
+  {
+   "id": "livecheat",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 33.4,
+   "dur": 6.6,
+   "seconds": 5,
+   "caption": "LIVE FLIGHT: CHEATER FAILS AT 0.01 S.",
+   "line": "The cheater dies in point-oh-one seconds."
+  },
+  {
+   "id": "livereb",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 40.7,
+   "dur": 13.2,
+   "seconds": 7,
+   "caption": "REBUILD LANDS IN 7.1 S, 3.5 MM FROM CENTRE.",
+   "line": "Its rebuild lands in seven point one seconds. Ship it."
+  },
+  {
+   "id": "end",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 4,
+   "caption": "DID IT LEARN? SHIP THE REBUILD.",
+   "line": "Did it learn? Ship the rebuild."
+  }
+ ],
+ "music": "A 60-second instrumental Hollywood action trailer track with booming brass braams, tense ticking percussion, rising dramatic orchestral swells, and one abrupt stop into a deadpan comic sting."
+}

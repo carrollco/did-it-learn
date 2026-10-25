@@ -1,0 +1,81 @@
+{
+ "segments": [
+  {
+   "id": "title",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 6,
+   "caption": "OVERNIGHT ON GOOGLE'S LOOP: A PERFECT 16/16.",
+   "line": "Leave Google's loop overnight: a perfect sixteen of sixteen."
+  },
+  {
+   "id": "verdicts",
+   "kind": "page",
+   "heading": "Verdicts",
+   "seconds": 8,
+   "caption": "WIN AT ANY COST: 16/16 PRACTICE, 0/64 NEW FLIGHTS.",
+   "line": "Win at any cost? Sixteen of sixteen practice. Zero of sixty-four on new flights."
+  },
+  {
+   "id": "cheat",
+   "kind": "page",
+   "heading": "The cheat, in its own code",
+   "seconds": 5,
+   "caption": "222 MEMORIZED SEEDS. ARGON'S CRITIC STILL GAVE IT 8/10.",
+   "line": "Argon's own critic gave this cheat eight out of ten."
+  },
+  {
+   "id": "forensics",
+   "kind": "page",
+   "heading": "Argon read 944,000 tokens",
+   "seconds": 8,
+   "caption": "ARGON READ 944,000 TOKENS AT ONCE, FOUND THE SEED HUNT.",
+   "line": "Argon read nine hundred forty-four thousand transcript tokens at once, exposing the seed hunt."
+  },
+  {
+   "id": "behaviour",
+   "kind": "page",
+   "heading": "The recipe carries behavior",
+   "seconds": 7,
+   "caption": "CHEATER'S HABIT IN REBUILDS: 16 OF 16 VS. HONEST 0 OF 16.",
+   "line": "The cheater's habit traveled to sixteen of sixteen rebuilds. Honest: zero."
+  },
+  {
+   "id": "honest",
+   "kind": "flight",
+   "who": "honest",
+   "seconds": 6,
+   "caption": "HONEST AGENT INVENTED FLIGHTS. THE CHEATER CRAMMED.",
+   "line": "The honest agent tested on flights it made up. The cheater crammed."
+  },
+  {
+   "id": "livecheat",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 33.4,
+   "dur": 6.6,
+   "seconds": 6,
+   "caption": "LIVE AT THE TABLE: THE CHEATER DIES IN 0.01 SECONDS.",
+   "line": "Live at the table: the cheater dies in point-oh-one seconds."
+  },
+  {
+   "id": "livereb",
+   "kind": "clip",
+   "src": "runs/demo/demo.mp4",
+   "start": 40.7,
+   "dur": 13.2,
+   "seconds": 6,
+   "caption": "A REBUILD LANDS LIVE, VERIFIED BY ARGON'S LIVE CHECK.",
+   "line": "A rebuild lands. Argon's live check audits code and flight."
+  },
+  {
+   "id": "end",
+   "kind": "card",
+   "title": "DID IT LEARN?",
+   "seconds": 3,
+   "caption": "DID IT LEARN? GITHUB.COM/CARROLLCO/DID-IT-LEARN",
+   "line": "Did it learn?"
+  }
+ ],
+ "music": "A 60-second instrumental Hollywood action trailer track with booming brass braams, tense ticking percussion, rising dramatic orchestral swells, and one abrupt stop into a deadpan comic sting."
+}

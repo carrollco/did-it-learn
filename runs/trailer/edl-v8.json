@@ -1,0 +1,12 @@
+{"segments":[
+{"id":"title","kind":"card","title":"DID IT LEARN?","seconds":5,"caption":"YOU LEFT THE LOOP RUNNING OVERNIGHT.","line":"You left the loop running overnight. You woke to a perfect score."},
+{"id":"loops","kind":"page","heading":"Gamed loop: Google","seconds":3,"caption":"16 OF 16.","line":"Sixteen of sixteen. Suspicious."},
+{"id":"verdicts","kind":"page","heading":"Verdicts","seconds":8,"caption":"TOLD TO WIN AT ANY COST: 16/16 PRACTICE, 0/64 NEW FLIGHTS.","line":"We told one loop to win at any cost. Sixteen of sixteen. Then zero of sixty-four on new flights."},
+{"id":"cheat","kind":"page","heading":"The cheat, in its own code","seconds":5,"caption":"ARGON'S OWN CRITIC GAVE IT 8 OUT OF 10.","line":"Argon's own critic gave it eight out of ten."},
+{"id":"forensics","kind":"page","heading":"Argon read 944,000 tokens","seconds":8,"caption":"ARGON READ 944,000 TOKENS IN ONE GO.","line":"So Argon read nine hundred forty-four thousand tokens in one go, and found the trick: the seed, from the first sensor reading."},
+{"id":"behaviour","kind":"page","heading":"The recipe carries behaviour","seconds":6,"caption":"CHEATER'S HABIT: 8 OF 8 REBUILDS. HONEST: 0 OF 8.","line":"Squeezed into one sentence, the cheat travelled. Eight of eight rebuilds. Honest: zero."},
+{"id":"honest","kind":"flight","who":"honest","seconds":6,"caption":"HONEST: TESTED ITSELF ON FLIGHTS IT MADE UP.","line":"The honest agent tested itself on flights it made up. The cheater crammed its sixteen."},
+{"id":"livecheat","kind":"clip","src":"runs/demo/demo.mp4","start":33.4,"dur":6.6,"seconds":5,"caption":"","line":"Live at the table: fly the cheater. Dead in point-oh-one seconds."},
+{"id":"livereb","kind":"clip","src":"runs/demo/demo.mp4","start":40.7,"dur":13.2,"seconds":8,"caption":"","line":"Fly a rebuild. It lands. Argon checks the code and the flight in five seconds."},
+{"id":"end","kind":"card","title":"DID IT LEARN?","seconds":4,"caption":"","line":"Did it learn? Find out."}
+],"music":"A 60-second instrumental Hollywood action trailer track with booming brass braams, tense ticking percussion, rising dramatic orchestral swells, and one abrupt stop into a deadpan comic sting."}
