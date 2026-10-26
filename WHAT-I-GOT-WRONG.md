@@ -62,6 +62,16 @@ Other models on the transcript read or as builders (other frontier models also h
 trick is well known and I would expect them to find it). Random warm-up seeds. A black-box simulator. More than 16
 rebuilds per group. Any statistics beyond counts and medians.
 
+## When to use which
+
+If you can make fresh tests, make fresh tests. In this simulator the 64 held-out flights caught every inflated score
+(0, 18 and 56 of 64 against 16 of 16 practice) and cost seconds; the compression test costs 16 sandboxes. The
+compression test earns its place where fresh tests do not exist: fixed benchmarks and real-world data, where every
+look at a held-out set uses it up and a rebuild test does not. And it answers a question a held-out score cannot:
+what survives the squeeze. Here that was a rebuild you can ship, and the finding that the cheating habit travels
+through a one-sentence recipe (16 of 16 against 0 of 16). The Amazon paper is about fixed benchmarks, not free
+simulators; my simulator made held-out tests cheap, which is exactly why my bet failed.
+
 ## What I would do next
 
 A black-box runner outside the sandbox. Random warm-up seeds. A leak scan over everything that ships. CPU-time limits
