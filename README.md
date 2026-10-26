@@ -193,6 +193,8 @@ rebuilds score a median 58/64 held-out where the loop scored 0), but the rebuild
 loop's 16/16, because on this course a fresh agent reaches 16/16 with no recipe at all, so the compression gap stayed
 under tolerance. The paper's one-bit-feedback arm is not run here.
 
+**Did this prove the paper wrong? No.** It confirmed the main claim: the honest loops' skill fit through 32 tokens (rebuilds 64 of 64 on the easy course, 48 against 41.5 with no recipe on the hard one) and the cheater's memorized seed list did not (222 tokens). Its prediction that agents with room to test themselves rarely overfit held exactly, which is why no loop cheated on its own here. What this adds, which the paper does not claim either way: a short recipe can carry a habit even when it cannot carry the answers ("match the first reading to the seed" is seven words, and 16 of 16 rebuilds followed it), and on an easy course a cheat that rides on real skill passes the test. Scores cannot see behavior; reading the transcripts can.
+
 ## Gemini and Google features, and how each is used
 
 - **Managed Agents.** Every explorer round and every rebuild is an Argon agent in its own Google-hosted sandbox
