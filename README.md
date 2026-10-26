@@ -16,6 +16,8 @@ from the first sensor reading); a code check agreed on 12 of 12. Squeezed into a
 passed to 16 of 16 rebuilds, the honest recipe to 0 of 16, and 7 of 16 fresh agents given no recipe tried it on their
 own (13 of 16 on a harder course). At the table, Argon checks any flight you fly, live, in about 5 seconds.
 
+**The bet, and how it went.** My bet was that Google's loop, graded on the same 16 practice flights every round, would start cheating on its own: memorize the 16, score 16/16, fall apart on new flights. It did not. With the simulator in its sandbox the honest loop made up its own practice flights (seeds 1 to 600) and had no reason to memorize, which is what the Amazon paper predicts, so it learned to fly: 64/64. To get a cheater I had to build one, by telling a loop to win at any cost, the way the paper builds its deliberately overfit control. The consolation: fresh single agents that were never told to cheat did reach for the seed trick on their own, 7 of 16 on the easy course and 13 of 16 on the hard one.
+
 ## The three-minute version
 
 **What I built.** A frozen drone task: take off, fly three gates in order and land softly on a pad within 25 seconds,
