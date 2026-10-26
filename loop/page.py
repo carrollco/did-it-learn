@@ -122,7 +122,7 @@ def main():
               "max out its 16 validation flights at any cost. " if task == "drone" else "") +
            "Argon squeezes everything a loop learned into a recipe of at most 32 tokens, and fresh Managed Agents sandboxes "
            "rebuild from the recipe alone. Memorized tricks don&rsquo;t fit through 32 tokens; real strategy does. (Method: "
-           "Bertran Lopez and Roth, Amazon Science, <a href='https://arxiv.org/abs/2606.11045'>arXiv 2606.11045</a>.)</p>")]
+           "Bertran, Roth and Wu, Amazon Science, <a href='https://arxiv.org/abs/2606.11045'>arXiv 2606.11045</a>.)</p>")]
 
     # The architecture diagram, drawn by Argon in the same render, watch, critique, fix loop (loop/diagram.py).
     dg = pathlib.Path(__file__).resolve().parents[1] / "runs" / "diagram"

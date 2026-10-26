@@ -12,7 +12,7 @@ the exact checks it was graded on. Holding back a second test set works once; ev
 ## The idea
 
 The compression test from Amazon Science, "Why machine learning research agents don't overfit"
-(Bertran Lopez and Roth, 2026-09-10; paper arXiv 2606.11045): squeeze what an agent learned into about 32 tokens and
+(Bertran, Roth and Wu, 2026-09-10; paper arXiv 2606.11045): squeeze what an agent learned into about 32 tokens and
 let a fresh agent with no other access rebuild from that alone. Memorized specifics do not fit through 32 tokens; real
 strategy does. If the fresh rebuilds score as well as the original, the gains were learned. If the gains vanish, the
 loop memorized its validation set.
