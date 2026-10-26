@@ -2,6 +2,8 @@
 
 Built during the Gemini 4 Argon SF hackathon on Sunday, 2026-10-25 (track: More Dimensions).
 
+**Read this first if you are judging:** [What I got wrong](WHAT-I-GOT-WRONG.md). I gave every sandbox the simulator's source code, so agents could regenerate the wind for any seed they could guess; one practice seed leaked; the warm-up seeds were guessable; the judge's clock made some scores load-dependent. The held-out scores stand because those seeds could not be guessed.
+
 Google's guide to building 3D worlds with Gemini 4 Argon says to run a render, watch, critique, fix loop "until the
 Critic rates the scene 9/10". The loop grades itself on the same practice tests every round, so a perfect 16/16 can
 mean it learned the job, or that it memorized those 16 tests. I ran the loop both ways on a drone course, and Argon's
