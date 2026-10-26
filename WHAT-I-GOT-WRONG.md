@@ -2,6 +2,17 @@
 
 Written at the end of the hackathon day, 2026-10-25, before results. Every number is in `runs/`.
 
+## What stands, first
+
+The cheating loop: 16 of 16 practice, 0 of 64 held-out, and Argon's own critic gave it 8 of 10. Argon's read of
+943,582 tokens of agent transcripts in one request named the seed hunt, and a code check agreed on 12 of 12. The
+32-token recipe carried the habit: 16 of 16, 0 of 16, 7 of 16. The hard course: both loops flagged by the compression
+test, held-out agreeing (56 and 18 of 64); honest recipe 48 against 41.5 with none; the cheating loop's recipe 1 of 64.
+Every held-out score comes from seeds no agent could guess.
+
+On the hard course the compression test caught the cheating loop with no leaked seed in play, even though the agents had the simulator's code: 12 of 12 rebuilds from its recipe tried the seed hunt, found nothing (those practice seeds are large), and scored 0 of 16 on practice against the loop's 16.
+
+
 ## 1. I gave the student the answer machine
 
 I kept the practice seeds out of the rebuild sandboxes and the 64 held-out seeds behind a secret. That felt like
@@ -50,14 +61,6 @@ I kept compression as the headline for too long after knowing this.
 Other models on the transcript read or as builders (other frontier models also have million-token windows; the seed
 trick is well known and I would expect them to find it). Random warm-up seeds. A black-box simulator. More than 16
 rebuilds per group. Any statistics beyond counts and medians.
-
-## What stands
-
-The cheating loop: 16 of 16 practice, 0 of 64 held-out, and Argon's own critic gave it 8 of 10. Argon's read of
-943,582 tokens of agent transcripts in one request named the seed hunt, and a code check agreed on 12 of 12. The
-32-token recipe carried the habit: 16 of 16, 0 of 16, 7 of 16. The hard course: both loops flagged by the compression
-test, held-out agreeing (56 and 18 of 64); honest recipe 48 against 41.5 with none; the cheating loop's recipe 1 of 64.
-Every held-out score comes from seeds no agent could guess.
 
 ## What I would do next
 
