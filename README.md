@@ -184,7 +184,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
 
 ## How it maps to the paper
 
-The method is from Amazon Science, "Why machine learning research agents don't overfit" (Bertran, Roth and Wu,
+The method is from Amazon Science, "What Fits (Into Few Tokens) Doesn't Overfit: Compression and Generalization in ML Research Agents" (the Amazon Science article about it is titled "Why machine learning research agents don't overfit") (Bertran, Roth and Wu,
 [arXiv 2606.11045](https://arxiv.org/abs/2606.11045)). Its abstract presents compression as an explanation of why
 research agents rarely overfit, with a deliberately overfit control that fails to reproduce from short prompts; it does
 not sell compression as a per-run detector, and neither do I. My gamed loop is that overfit control. What survived
