@@ -53,6 +53,11 @@ ran past that on a loaded machine and the flight failed. Rebuild r0 scored 52 of
 when re-scored idle; r2 went from 63 to 49. Honest-recipe and no-recipe rebuilds stayed within one flight. Both
 scorings are kept (`runs/d1/judge.json`, `runs/d1/judge-first-scoring.json`). The fix is CPU time, not wall time.
 
+Found later (2026-11-05): on my laptop the limit was tighter still. The 50 ms is a Node `setTimeout`, which runs on
+the monotonic clock, and a WSL time-sync fault had that clock running about 5% fast, so the real limit was about
+47.5 ms, while the builders practiced in Argon's sandbox at a true 50 ms. Load is still the main cause; this was a
+small extra squeeze.
+
 ## 5. The compression test did not flag the cheater on the easy course
 
 The cheater's recipe carried real flying skill along with the cheat, so rebuilds from it scored 15 of 16 on practice
