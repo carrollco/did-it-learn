@@ -176,6 +176,11 @@ disclosed, not patched, because the task was frozen. Not in the demo.
   them (r0, r4) check that seed explicitly. This affects at most 1 of 16 practice flights and none of the held-out
   flights. Every later sandbox got the fixed file.
 - **Hard course:** On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 1 of 64 across the 12 rebuilds that produced a controller; 4 produced none)..
+- **The judge's wall was thinner than it looked (found and patched 2026-11-21, after the event).** The controller ran
+  as a child of the judge under the same user, so it could send the judge `SIGUSR1`, which opens Node's debugger port,
+  and through that port run code inside the judge. The judge now starts with `--disable-sigusr1`. The forbidden-word list
+  in `tasks/drone/sim.mjs` is a courtesy check, not a wall: words can be spelled around. No run of the event is known
+  to have used either road; the fixed course, with the controller in its own sandbox, is plimsoll's `examples/squeeze`.
 - **The paper's one-bit-feedback arm is not run.**
 - **n = 16 per group** on the easy course (8, then 8 more started at 14:43 in sandboxes that never saw the leaked seed). Medians and counts only.
 - **The simulator stands in for settings where fresh tests are scarce.** Here they are free, as the Fly button shows,

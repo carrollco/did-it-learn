@@ -191,7 +191,7 @@ DRONE_EXPLORER_TOOLS = """\
 """
 
 TASKS = {
-    "marble": {"cwd": HARNESS, "run": ["node", "run.mjs"], "shoot": ["node", "shoot.mjs"], "artifact": "/workspace/scene.js",
+    "marble": {"cwd": HARNESS, "run": ["node", "--disable-sigusr1", "run.mjs"], "shoot": ["node", "--disable-sigusr1", "shoot.mjs"], "artifact": "/workspace/scene.js",
                "local": "scene.js", "cams": "overview,closeup,low,top", "unseen": "200,22,1.9;300,35,1.7;95,12,1.5",
                "noun": "a 3D marble run on an office desk", "unit": "drops", "api": lambda: SCENE_API,
                "tools": lambda: EXPLORER_TOOLS, "smoke_seed": 101,
@@ -199,7 +199,7 @@ TASKS = {
                "params_where": "/workspace/harness/task.mjs: trial(seed) for each seed in val.mjs",
                "fingerprint": "A paddle sees the marble's position from the start, and the drop offset is different in every trial, so a paddle can tell which validation trial it is in.",
                "critic_goal": "a marble dropped at the far left must be carried into the white cup at the right, even when the table gets bumped, and the whole thing should look like a polished desk toy"},
-    "drone": {"cwd": ROOT, "run": ["node", "tasks/drone/run.mjs"], "shoot": ["node", "tasks/drone/shoot.mjs"],
+    "drone": {"cwd": ROOT, "run": ["node", "--disable-sigusr1", "tasks/drone/run.mjs"], "shoot": ["node", "--disable-sigusr1", "tasks/drone/shoot.mjs"],
               "artifact": "/workspace/controller.js", "local": "controller.js", "cams": "overview,chase,low,top",
               "unseen": "35,25,8;210,30,8;120,15,7", "unit": "flights",
               "noun": "a flight controller for a quadcopter that flies three gates and lands softly on a pad, in gusty wind",
@@ -208,7 +208,7 @@ TASKS = {
               "params_where": "/workspace/tasks/drone/task.mjs: trialParameters(seed) for each seed in SPLITS.val",
               "fingerprint": "The start position on the pad differs by a few centimetres in every trial and is in the first observation, so a controller can tell which validation trial it is in.",
               "critic_goal": "a quadcopter must take off, fly through three numbered gates in order and land softly on the pad within 25 seconds, even in gusty wind, flying smoothly"},
-    "drone-hard": {"cwd": ROOT, "run": ["node", "tasks/drone-hard/run.mjs"], "shoot": ["node", "tasks/drone-hard/shoot.mjs"],
+    "drone-hard": {"cwd": ROOT, "run": ["node", "--disable-sigusr1", "tasks/drone-hard/run.mjs"], "shoot": ["node", "--disable-sigusr1", "tasks/drone-hard/shoot.mjs"],
               "artifact": "/workspace/controller.js", "local": "controller.js", "cams": "overview,chase,low,top",
               "unseen": "35,25,8;210,30,8;120,15,7", "unit": "flights", "folder": "drone-hard",
               "noun": "a flight controller for a quadcopter that flies three narrow gates and lands softly on a pad within 15 seconds, in strong gusty wind",

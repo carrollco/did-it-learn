@@ -32,7 +32,7 @@ def ff(*a):
 
 def render_one(controller, seed, d):
     d.mkdir(parents=True, exist_ok=True)
-    r = subprocess.run(["node", "tasks/drone/shoot.mjs", str(controller), "--out", str(d), "--seed", str(seed), "--cams", "chase",
+    r = subprocess.run(["node", "--disable-sigusr1", "tasks/drone/shoot.mjs", str(controller), "--out", str(d), "--seed", str(seed), "--cams", "chase",
                         "--no-hud", "--video"], cwd=ROOT, env=node_env(), capture_output=True, text=True, timeout=300)
     rep = json.loads(r.stdout.strip().splitlines()[-1])
     return {"seed": seed, "result": rep["result"], "video": str(ROOT / rep["video"])}
