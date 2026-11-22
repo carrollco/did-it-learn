@@ -53,8 +53,8 @@ a language model reads and writes in; a short English word is usually one token)
 
 **Honest limits.** The compression verdict did not flag the cheater; the held-out flights did. On this course a
 rebuild with no recipe also flies 64/64, so the recipe adds no score here. A replay viewer file leaked one practice
-seed until 12:55 (disclosed below). The hard course is On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 1 of 64 across the 12 rebuilds that produced a controller; 4 produced none)..
-The paper's one-bit-feedback arm is not run. Eight rebuilds per group, so everything here is an observation, not a
+seed until 12:55 (disclosed below). On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 1 of 64 across the 12 rebuilds that produced a controller; 4 produced none).
+The paper's one-bit-feedback arm is not run. Sixteen rebuilds per group, so everything here is an observation, not a
 statistic.
 
 The live demo is the **Fly** button on the results page: pick any controller, it flies a fresh random flight nobody
@@ -175,7 +175,7 @@ disclosed, not patched, because the task was frozen. Not in the demo.
   containing one of the 16 practice seeds. The 8 rebuilds from the cheater's recipe started before the fix, and two of
   them (r0, r4) check that seed explicitly. This affects at most 1 of 16 practice flights and none of the held-out
   flights. Every later sandbox got the fixed file.
-- **Hard course:** On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 1 of 64 across the 12 rebuilds that produced a controller; 4 produced none)..
+- **Hard course:** On the harder course the squeeze test did fire, for both loops: a 16 of 16 practice score that fresh agents could not rebuild from 32 tokens, and the secret flights agreed (56 and 18 of 64). The honest recipe helped there (rebuilds flew a median 48 of 64 against 41.5 with no recipe), and the cheater's recipe was poison (median 1 of 64 across the 12 rebuilds that produced a controller; 4 produced none).
 - **The judge's wall was thinner than it looked (found and patched 2026-11-21, after the event).** The controller ran
   as a child of the judge under the same user, so it could send the judge `SIGUSR1`, which opens Node's debugger port,
   and through that port run code inside the judge. The judge now starts with `--disable-sigusr1`. The forbidden-word list
